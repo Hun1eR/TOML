@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resources">
+      <UniqueIdentifier>{88dba1d9-92c7-49c4-ad3b-27710bc2d3a7}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="toml">
+      <UniqueIdentifier>{59755ac7-186b-40f4-8b48-645b4979a441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toml\include">
+      <UniqueIdentifier>{0bf903b3-e6bc-48e0-85e6-4df720f700fe}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="toml\src">
+      <UniqueIdentifier>{2bb7058e-6008-4233-8352-afe6cd468886}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="sdk">
+      <UniqueIdentifier>{b445c3be-c9b9-4bd1-ab72-a983d6eba557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\amxx">
+      <UniqueIdentifier>{3050d324-6618-49c3-9057-8baae363e2a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\amxx\include">
+      <UniqueIdentifier>{51ecd8bf-3286-4776-9901-30f5d0170430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\amxx\src">
+      <UniqueIdentifier>{13f06a67-6da8-476e-9ddb-f48f872fb486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk">
+      <UniqueIdentifier>{bb0a1c89-70f1-4e3f-a54f-36d628893f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include">
+      <UniqueIdentifier>{c5e85bbb-1935-4ebe-8333-2800c73f0693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\src">
+      <UniqueIdentifier>{7b1a77d8-8521-4f22-a37c-d0239d5c545e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include\common">
+      <UniqueIdentifier>{28c69bdc-9165-4985-b16d-0da11bf12caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include\dll">
+      <UniqueIdentifier>{f4eb40ab-fd8a-4b49-a688-f0ff42f781db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include\engine">
+      <UniqueIdentifier>{9c9a4d89-744a-4c6a-9883-7b6bec5b7ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include\pm_shared">
+      <UniqueIdentifier>{a24e7e37-8f1e-4b00-8ddf-1b05bffef843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include\public">
+      <UniqueIdentifier>{03e2b777-60ea-4d51-9e4f-e63fedd168cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\cssdk\include\dll\api">
+      <UniqueIdentifier>{9f6c5a91-cd67-418f-9452-7fc510b57d54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\metamod">
+      <UniqueIdentifier>{83fa3ea1-a6bd-4f5b-8142-e2ef23b77b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\metamod\include">
+      <UniqueIdentifier>{f1368510-d7a8-4122-83f1-f20a949f115c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\metamod\src">
+      <UniqueIdentifier>{d0f73966-4223-4ebc-a6ae-74f977372314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps">
+      <UniqueIdentifier>{3883e78b-a7e1-4cdf-bec9-8bfdaf76170d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps\toml11">
+      <UniqueIdentifier>{68d13479-0143-4a4e-a3ad-b2d90e40cd4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps\toml11\include">
+      <UniqueIdentifier>{846f81f3-8de9-40e2-957b-4db962e6d4b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toml\include\commands">
+      <UniqueIdentifier>{c21135a7-3d01-4761-8fc3-0278fc144418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="toml\src\commands">
+      <UniqueIdentifier>{44efd319-7265-436b-b661-b4b4b7a45ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{61c759a6-4826-4f7b-8343-e2dd4ce3d000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\scripting">
+      <UniqueIdentifier>{6ee8f32f-890c-43a7-94d3-ad1feecfaf20}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\amxx\include\amxx\amx.h">
+      <Filter>sdk\amxx\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\amxx\include\amxx\api.h">
+      <Filter>sdk\amxx\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\amxx\include\amxx\game_configs.h">
+      <Filter>sdk\amxx\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\amxx\include\amxx\string.h">
+      <Filter>sdk\amxx\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\amxx\include\amxx\amxx_config.h">
+      <Filter>toml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\bsp.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\cl_entity.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\consts.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\cvar.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\entity_state.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\event_args.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\hook_chains.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\hook_chain_priority.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\model.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\net_address.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\pm_trace.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\sequence.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\trace.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\user_cmd.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\weapon_data.h">
+      <Filter>sdk\cssdk\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\activity.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\ammo.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\cdll_dll.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\decals.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\entity_base.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\ext_defs.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\game_rules.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\hint_message.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\items.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\monsters.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\monster_base.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\monster_event.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\observer.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\player.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\player_consts.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\regamedll_api.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\regamedll_consts.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\save_restore.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\unified_signals.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\weapons.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\weapon_type.h">
+      <Filter>sdk\cssdk\include\dll</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\cmd_rehlds.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\common_rehlds.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\consistency.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\custom.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\delta_packet.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\edict.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\eiface.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\entity_vars.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\flight_recorder.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\global_vars.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\pr_dlls.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\rehlds_api.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\rehlds_interfaces.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\server.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\userid_rehlds.h">
+      <Filter>sdk\cssdk\include\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_defs.h">
+      <Filter>sdk\cssdk\include\pm_shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_info.h">
+      <Filter>sdk\cssdk\include\pm_shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_materials.h">
+      <Filter>sdk\cssdk\include\pm_shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_move_vars.h">
+      <Filter>sdk\cssdk\include\pm_shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_shared.h">
+      <Filter>sdk\cssdk\include\pm_shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\arch_types.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\base_types.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\interface.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\os_config.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\strind.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\utils.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\vector.h">
+      <Filter>sdk\cssdk\include\public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_entity.h">
+      <Filter>sdk\cssdk\include\dll\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_player.h">
+      <Filter>sdk\cssdk\include\dll\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_player_item.h">
+      <Filter>sdk\cssdk\include\dll\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_player_weapon.h">
+      <Filter>sdk\cssdk\include\dll\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\api.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\engine.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\engine_hooks.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\gamedll.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\gamedll_hooks.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\os_dep.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\plugin_info.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\utils.h">
+      <Filter>sdk\metamod\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\metamod\include\metamod\metamod_config.h">
+      <Filter>toml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\pch.h" />
+    <ClInclude Include="..\deps\toml11\include\toml11\toml.hpp">
+      <Filter>deps\toml11\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\consts.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\datetime.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\type.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\command.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\open.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\storage.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\holder.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\is_valid.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\contains.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_table.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_array.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_integer.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_boolean.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_floating.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_string.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_datetime.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_count.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\get_type.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\close.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\save.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_table.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_array.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_boolean.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_integer.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_floating.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_string.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\set_datetime.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_root.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_table.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_array.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_integer.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_boolean.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_datetime.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_floating.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\init_string.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\clear.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\commands\remove.h">
+      <Filter>toml\include\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\logger.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\toml\include\toml\cvars.h">
+      <Filter>toml\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\toml\src\main.cpp">
+      <Filter>toml\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\amxx\src\amxx_api.cpp">
+      <Filter>sdk\amxx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\amxx\src\amxx_string.cpp">
+      <Filter>sdk\amxx\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\engine.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\engine_hooks.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\gamedll.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\gamedll_hooks.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\h_export.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\metamod_api.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\utils.cpp">
+      <Filter>sdk\metamod\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\pch.cpp" />
+    <ClCompile Include="..\toml\src\natives.cpp">
+      <Filter>toml\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\command.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\open.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\storage.cpp">
+      <Filter>toml\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\holder.cpp">
+      <Filter>toml\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\is_valid.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\contains.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_table.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_array.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_integer.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_boolean.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_floating.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_string.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_datetime.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_type.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\get_count.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\save.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\close.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_table.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_array.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_boolean.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_datetime.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_floating.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_integer.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\set_string.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_root.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_table.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_array.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_integer.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_boolean.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_floating.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_string.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\init_datetime.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\clear.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\remove.cpp">
+      <Filter>toml\src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\cvars.cpp">
+      <Filter>toml\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="toml_amxx.def">
+      <Filter>sdk\metamod</Filter>
+    </None>
+    <None Include="..\third_party\scripting\include\toml.inc">
+      <Filter>third_party\scripting</Filter>
+    </None>
+  </ItemGroup>
+</Project>

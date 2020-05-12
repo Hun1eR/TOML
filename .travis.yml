@@ -1,0 +1,19 @@
+dist: bionic
+language: cpp
+compiler: gcc
+
+before_install:
+  - sudo apt-get install -y g++-multilib
+
+install:
+  - WGET_DIR="${TRAVIS_BUILD_DIR}/wget"
+  - mkdir ${WGET_DIR} && cd ${WGET_DIR}
+  - travis_retry wget --no-check-certificate https://cmake.org/files/v3.17/cmake-3.17.2-Linux-x86_64.tar.gz
+  - tar -xvf cmake-3.17.2-Linux-x86_64.tar.gz > /dev/null
+  - mv cmake-3.17.2-Linux-x86_64 cmake-install
+  - PATH=${WGET_DIR}/cmake-install:${WGET_DIR}/cmake-install/bin:$PATH
+  - cd ${TRAVIS_BUILD_DIR}
+
+script:
+  - cmake .
+  - cmake --build . --parallel

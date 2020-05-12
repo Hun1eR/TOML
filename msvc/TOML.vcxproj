@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{c46ad78e-e5ca-4cd5-a38e-753b2478b701}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TOML</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheets\UserMacros.props" Condition="exists('$(ProjectDir)PropertySheets\UserMacros.props')" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheets\UserMacros.props" Condition="exists('$(ProjectDir)PropertySheets\UserMacros.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>toml_amxx</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>toml_amxx</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;TOML_EXPORTS;_WINDOWS;_USRDLL;REHLDS_FIXES;REGAMEDLL_FIXES;REGAMEDLL_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>toml/pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(DepsRoot)\toml11\include;$(CssdkRoot)\include;$(MetamodRoot)\include;$(AmxxRoot)\include;$(ProjectRoot)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ErrorReporting>None</ErrorReporting>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <LargeAddressAware>false</LargeAddressAware>
+      <LinkErrorReporting>NoErrorReport</LinkErrorReporting>
+      <ModuleDefinitionFile>toml_amxx.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;TOML_EXPORTS;_WINDOWS;_USRDLL;REHLDS_FIXES;REGAMEDLL_FIXES;REGAMEDLL_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>toml/pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(DepsRoot)\toml11\include;$(CssdkRoot)\include;$(MetamodRoot)\include;$(AmxxRoot)\include;$(ProjectRoot)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ErrorReporting>None</ErrorReporting>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <LargeAddressAware>false</LargeAddressAware>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <LinkErrorReporting>NoErrorReport</LinkErrorReporting>
+      <ModuleDefinitionFile>toml_amxx.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\deps\toml11\include\toml11\toml.hpp" />
+    <ClInclude Include="..\sdk\amxx\include\amxx\amx.h" />
+    <ClInclude Include="..\sdk\amxx\include\amxx\amxx_config.h" />
+    <ClInclude Include="..\sdk\amxx\include\amxx\api.h" />
+    <ClInclude Include="..\sdk\amxx\include\amxx\game_configs.h" />
+    <ClInclude Include="..\sdk\amxx\include\amxx\string.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\bsp.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\cl_entity.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\consts.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\cvar.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\entity_state.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\event_args.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\hook_chains.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\hook_chain_priority.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\model.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\net_address.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\pm_trace.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\sequence.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\trace.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\user_cmd.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\common\weapon_data.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\activity.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\ammo.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_entity.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_player.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_player_item.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\api\cs_player_weapon.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\cdll_dll.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\decals.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\entity_base.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\ext_defs.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\game_rules.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\hint_message.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\items.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\monsters.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\monster_base.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\monster_event.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\observer.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\player.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\player_consts.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\regamedll_api.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\regamedll_consts.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\save_restore.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\unified_signals.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\weapons.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\dll\weapon_type.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\cmd_rehlds.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\common_rehlds.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\consistency.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\custom.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\delta_packet.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\edict.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\eiface.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\entity_vars.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\flight_recorder.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\global_vars.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\pr_dlls.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\rehlds_api.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\rehlds_interfaces.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\server.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\engine\userid_rehlds.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_defs.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_info.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_materials.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_move_vars.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\pm_shared\pm_shared.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\arch_types.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\base_types.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\interface.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\os_config.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\strind.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\utils.h" />
+    <ClInclude Include="..\sdk\cssdk\include\cssdk\public\vector.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\api.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\engine.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\engine_hooks.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\gamedll.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\gamedll_hooks.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\metamod_config.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\os_dep.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\plugin_info.h" />
+    <ClInclude Include="..\sdk\metamod\include\metamod\utils.h" />
+    <ClInclude Include="..\toml\include\toml\commands\clear.h" />
+    <ClInclude Include="..\toml\include\toml\commands\close.h" />
+    <ClInclude Include="..\toml\include\toml\commands\command.h" />
+    <ClInclude Include="..\toml\include\toml\commands\contains.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_array.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_boolean.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_count.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_datetime.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_floating.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_integer.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_string.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_table.h" />
+    <ClInclude Include="..\toml\include\toml\commands\get_type.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_array.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_boolean.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_datetime.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_floating.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_integer.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_root.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_string.h" />
+    <ClInclude Include="..\toml\include\toml\commands\init_table.h" />
+    <ClInclude Include="..\toml\include\toml\commands\is_valid.h" />
+    <ClInclude Include="..\toml\include\toml\commands\open.h" />
+    <ClInclude Include="..\toml\include\toml\commands\remove.h" />
+    <ClInclude Include="..\toml\include\toml\commands\save.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_array.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_boolean.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_datetime.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_floating.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_integer.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_string.h" />
+    <ClInclude Include="..\toml\include\toml\commands\set_table.h" />
+    <ClInclude Include="..\toml\include\toml\consts.h" />
+    <ClInclude Include="..\toml\include\toml\cvars.h" />
+    <ClInclude Include="..\toml\include\toml\datetime.h" />
+    <ClInclude Include="..\toml\include\toml\holder.h" />
+    <ClInclude Include="..\toml\include\toml\logger.h" />
+    <ClInclude Include="..\toml\include\toml\pch.h" />
+    <ClInclude Include="..\toml\include\toml\storage.h" />
+    <ClInclude Include="..\toml\include\toml\type.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\sdk\amxx\src\amxx_api.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\amxx\src\amxx_string.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\engine.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\engine_hooks.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\gamedll.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\gamedll_hooks.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\h_export.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\metamod_api.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\sdk\metamod\src\utils.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\commands\clear.cpp" />
+    <ClCompile Include="..\toml\src\commands\close.cpp" />
+    <ClCompile Include="..\toml\src\commands\command.cpp" />
+    <ClCompile Include="..\toml\src\commands\contains.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_array.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_boolean.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_count.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_datetime.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_floating.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_integer.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_string.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_table.cpp" />
+    <ClCompile Include="..\toml\src\commands\get_type.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_array.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_boolean.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_datetime.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_floating.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_integer.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_root.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_string.cpp" />
+    <ClCompile Include="..\toml\src\commands\init_table.cpp" />
+    <ClCompile Include="..\toml\src\commands\is_valid.cpp" />
+    <ClCompile Include="..\toml\src\commands\open.cpp" />
+    <ClCompile Include="..\toml\src\commands\remove.cpp" />
+    <ClCompile Include="..\toml\src\commands\save.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_array.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_boolean.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_datetime.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_floating.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_integer.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_string.cpp" />
+    <ClCompile Include="..\toml\src\commands\set_table.cpp" />
+    <ClCompile Include="..\toml\src\cvars.cpp" />
+    <ClCompile Include="..\toml\src\holder.cpp" />
+    <ClCompile Include="..\toml\src\main.cpp" />
+    <ClCompile Include="..\toml\src\natives.cpp" />
+    <ClCompile Include="..\toml\src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\toml\src\storage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\third_party\scripting\include\toml.inc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
+    </None>
+    <None Include="toml_amxx.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
