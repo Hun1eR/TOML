@@ -11,6 +11,11 @@
 #include <amxx/api.h>
 #include <chrono>
 
+#ifdef __INTEL_COMPILER
+	#pragma warning(push)
+	#pragma warning(disable: 2017)
+#endif
+
 /// <summary>
 /// Class Logger.
 /// </summary>
@@ -29,7 +34,7 @@ public:
 	~Logger()
 	{
 		const auto finish = std::chrono::steady_clock::now();
-		auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start_);
+		const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - start_).count();
 
 		AmxxApi::log("[%s] Function \"%s\" is complete. Elapsed time: %u nanoseconds.",
 		             AMXX_MODULE_LOG_TAG, func_, elapsed);
@@ -74,3 +79,7 @@ private:
 		return plugin_id == -1 ? empty : AmxxApi::get_amx_script_name(plugin_id, true);
 	}
 };
+
+#ifdef __INTEL_COMPILER
+	#pragma warning(pop)
+#endif
