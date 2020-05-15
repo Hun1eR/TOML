@@ -16,4 +16,4 @@ install:
 
 script:
   - cmake .
-  - cmake --build . --parallel
+  - cmake --build .
