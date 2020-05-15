@@ -1,9 +1,9 @@
 #-------------------------------------------------------------------------------------------
 # Compile with GCC:
-#   rm -rf build && CC=gcc CXX=g++ cmake -B build && cmake --build build --parallel
+#   rm -rf build && CC=gcc CXX=g++ cmake -B build && cmake --build build
 #
 # Compile with Intel C++ Compiler:
-#   rm -rf build && CC=icc CXX=icpc cmake -B build && cmake --build build --parallel
+#   rm -rf build && CC=icc CXX=icpc cmake -B build && cmake --build build
 #-------------------------------------------------------------------------------------------
 
 
@@ -12,7 +12,7 @@
 #-------------------------------------------------------------------------------------------
 
 # Require a minimum version of cmake.
-cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.13.5 FATAL_ERROR)
 
 # Set the name of the project.
 project("toml")
@@ -44,7 +44,9 @@ cmake_policy(SET CMP0092 NEW)
 set(CMAKE_RULE_MESSAGES ON)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
+include(cmake/Cotire.cmake)
 include(cmake/Tools.cmake)
+
 set_build_type()
 set_output_binary_name()
 set_default_parallel_jobs()
@@ -62,11 +64,9 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     "toml/include"
 )
 
-# Precompile headers. Requires CMake version 3.16 or later.
-target_precompile_headers(${CMAKE_PROJECT_NAME} PRIVATE "toml/include/toml/pch.h")
-
 # Set the SYSTEM flag to suppress -Weffc++ warnings.
 target_include_directories(${CMAKE_PROJECT_NAME} SYSTEM PRIVATE "deps/toml11/include")
+
 
 #-------------------------------------------------------------------------------------------
 # Add source files.
@@ -111,6 +111,7 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
 
 if (${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
     include(cmake/GCC.cmake)
+    cotire(${CMAKE_PROJECT_NAME})
 elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "Intel")
     include(cmake/Intel.cmake)
 endif()
