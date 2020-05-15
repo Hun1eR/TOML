@@ -34,6 +34,9 @@ Compiler with C++17 support ([Visual Studio](https://visualstudio.microsoft.com)
 ```
 
 ## Release History
+* 1.0.1
+    * Code refactoring.
+    * Linux version compiled with new version of GCC (10.1).
 * 1.0.0
     * First release.
 

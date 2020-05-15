@@ -29,7 +29,7 @@
 constexpr auto AMXX_MODULE_NAME = "TOML";
 /// <summary>
 /// </summary>
-constexpr auto AMXX_MODULE_VERSION = "1.0.0";
+constexpr auto AMXX_MODULE_VERSION = "1.0.1";
 /// <summary>
 /// </summary>
 constexpr auto AMXX_MODULE_AUTHOR = "the_hunter";
