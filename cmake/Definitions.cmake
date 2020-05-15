@@ -16,7 +16,7 @@ if (UNIX)
 )
 elseif(WIN32)
     target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
-        WIN32 _WINDOWS _USRDLL _WINDLL _MBCS
+        WIN32 _WINDOWS _USRDLL _WINDLL _MBCS NOMINMAX
 
         # Build type Debug
         $<$<CONFIG:Debug>:
