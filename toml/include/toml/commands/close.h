@@ -23,6 +23,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~CloseCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	CloseCommand(CloseCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	CloseCommand(const CloseCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	CloseCommand& operator=(CloseCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	CloseCommand& operator=(const CloseCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

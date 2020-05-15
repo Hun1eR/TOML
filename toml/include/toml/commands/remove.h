@@ -28,6 +28,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~RemoveCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	RemoveCommand(RemoveCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	RemoveCommand(const RemoveCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	RemoveCommand& operator=(RemoveCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	RemoveCommand& operator=(const RemoveCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

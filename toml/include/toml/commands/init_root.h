@@ -17,7 +17,35 @@ class InitRootCommand final : public ITomlCommand {
 public:
 	/// <summary>
 	/// </summary>
+	InitRootCommand() = default;
+	
+	/// <summary>
+	/// </summary>
 	cell execute() override;
+
+	/// <summary>
+	/// </summary>
+	~InitRootCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	InitRootCommand(InitRootCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	InitRootCommand(const InitRootCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	InitRootCommand& operator=(InitRootCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	InitRootCommand& operator=(const InitRootCommand&) = delete;
 };
 
 /// <summary>

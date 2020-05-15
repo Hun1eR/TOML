@@ -23,6 +23,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~IsValidCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	IsValidCommand(IsValidCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	IsValidCommand(const IsValidCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	IsValidCommand& operator=(IsValidCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	IsValidCommand& operator=(const IsValidCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

@@ -106,6 +106,30 @@ public:
 		return handle_ != rhs.handle_;
 	}
 
+	/// <summary>
+	/// </summary>
+	~TomlHolder() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	TomlHolder(TomlHolder&&) = default;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	TomlHolder(const TomlHolder&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	TomlHolder& operator=(TomlHolder&&) = default;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	TomlHolder& operator=(const TomlHolder&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

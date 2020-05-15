@@ -44,6 +44,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~InitDateTimeCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	InitDateTimeCommand(InitDateTimeCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	InitDateTimeCommand(const InitDateTimeCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	InitDateTimeCommand& operator=(InitDateTimeCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	InitDateTimeCommand& operator=(const InitDateTimeCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

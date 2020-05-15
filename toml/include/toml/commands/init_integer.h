@@ -28,6 +28,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~InitIntegerCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	InitIntegerCommand(InitIntegerCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	InitIntegerCommand(const InitIntegerCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	InitIntegerCommand& operator=(InitIntegerCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	InitIntegerCommand& operator=(const InitIntegerCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

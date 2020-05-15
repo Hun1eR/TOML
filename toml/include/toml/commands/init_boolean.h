@@ -28,6 +28,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~InitBooleanCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	InitBooleanCommand(InitBooleanCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	InitBooleanCommand(const InitBooleanCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	InitBooleanCommand& operator=(InitBooleanCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	InitBooleanCommand& operator=(const InitBooleanCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

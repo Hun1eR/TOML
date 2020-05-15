@@ -28,6 +28,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~SetFloatingCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	SetFloatingCommand(SetFloatingCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	SetFloatingCommand(const SetFloatingCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	SetFloatingCommand& operator=(SetFloatingCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	SetFloatingCommand& operator=(const SetFloatingCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>

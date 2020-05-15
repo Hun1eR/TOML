@@ -36,6 +36,30 @@ public:
 	/// </summary>
 	cell execute() override;
 
+	/// <summary>
+	/// </summary>
+	~GetDateTimeCommand() = default;
+
+	/// <summary>
+	/// <para>Move constructor.</para>
+	/// </summary>
+	GetDateTimeCommand(GetDateTimeCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy constructor.</para>
+	/// </summary>
+	GetDateTimeCommand(const GetDateTimeCommand&) = delete;
+
+	/// <summary>
+	/// <para>Move assignment operator.</para>
+	/// </summary>
+	GetDateTimeCommand& operator=(GetDateTimeCommand&&) = delete;
+
+	/// <summary>
+	/// <para>Copy assignment operator.</para>
+	/// </summary>
+	GetDateTimeCommand& operator=(const GetDateTimeCommand&) = delete;
+
 private:
 	/// <summary>
 	/// </summary>
