@@ -29,8 +29,9 @@ AmxxApiFuncPointers AmxxApi::amxx_api_funcs_;
 extern "C" AmxxStatus DLLEXPORT AMXX_Query(int* interface_version, AmxxModuleInfo* module_info)
 {
 	// Check parameters.
-	if (!interface_version || !module_info)
+	if (!interface_version || !module_info) {
 		return AmxxStatus::InvalidParameter;
+	}
 
 	// Check interface version.
 	if (*interface_version != AMXX_INTERFACE_VERSION) {
@@ -75,8 +76,9 @@ extern "C" AmxxGameStatus DLLEXPORT AMXX_CheckGame([[maybe_unused]] const char* 
 /// </summary>
 extern "C" AmxxStatus DLLEXPORT AMXX_Attach(const std::add_pointer_t<void*(const char*)> request_function)
 {
-	if (!request_function)
+	if (!request_function) {
 		return AmxxStatus::InvalidParameter;
+	}
 
 	auto* const func = &AmxxApi::amxx_api_funcs_;
 
@@ -125,7 +127,7 @@ extern "C" AmxxStatus DLLEXPORT AMXX_Attach(const std::add_pointer_t<void*(const
 	REQUEST_FUNCTION(func->is_player_alive, "IsPlayerAlive");
 	REQUEST_FUNCTION(func->is_player_authorized, "IsPlayerAuthorized");
 	REQUEST_FUNCTION(func->is_player_bot, "IsPlayerBot");
-	REQUEST_FUNCTION(func->is_player_connecting, "IsPlayerConnecting");
+	REQUEST_FUNCTION(func->is_player_connected, "IsPlayerConnecting");
 	REQUEST_FUNCTION(func->is_player_hltv, "IsPlayerHLTV");
 	REQUEST_FUNCTION(func->is_player_in_game, "IsPlayerInGame");
 	REQUEST_FUNCTION(func->is_player_valid, "IsPlayerValid");
@@ -216,20 +218,23 @@ extern "C" void DLLEXPORT AMXX_PluginsUnloading()
 /// </summary>
 const char* filename_from_path(const char* const path)
 {
-	if (!path)
+	if (!path) {
 		return path;
+	}
 
 	std::size_t index = 0;
 
 #ifdef _WIN32
 	for (std::size_t i = 0; path[i]; ++i) {
-		if (path[i] == '\\')
+		if (path[i] == '\\') {
 			index = i;
+		}
 	}
 #else
 	for (std::size_t i = 0; path[i]; ++i) {
-		if (path[i] == '/')
+		if (path[i] == '/') {
 			index = i;
+		}
 	}
 #endif
 

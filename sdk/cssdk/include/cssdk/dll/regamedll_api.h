@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -11,6 +11,7 @@
 
 #include <cssdk/common/hook_chains.h>
 #include <cssdk/dll/game_rules.h>
+#include <cssdk/dll/gib.h>
 
 /// <summary>
 /// </summary>
@@ -18,439 +19,459 @@ constexpr auto REGAMEDLL_API_VERSION_MAJOR = 5;
 
 /// <summary>
 /// </summary>
-constexpr auto REGAMEDLL_API_VERSION_MINOR = 16;
+constexpr auto REGAMEDLL_API_VERSION_MINOR = 18;
 
 /// <summary>
 /// </summary>
 constexpr auto VREGAMEDLL_API_VERSION = "VRE_GAMEDLL_API_VERSION001";
 
 // PlayerBase::Spawn hook
-using ReHookPlayerSpawn = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerSpawn = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerSpawn = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerSpawn = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::Precache hook
-using ReHookPlayerPrecache = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerPrecache = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerPrecache = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerPrecache = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::ObjectCaps hook
-using ReHookPlayerObjectCaps = HookChainClass<int, PlayerBase>;
-using ReHookRegistryPlayerObjectCaps = HookChainClassRegistry<int, PlayerBase>;
+using ReHookPlayerObjectCaps = IHookChainClass<int, PlayerBase>;
+using ReHookRegistryPlayerObjectCaps = IHookChainClassRegistry<int, PlayerBase>;
 
 // PlayerBase::Classify hook
-using ReHookPlayerClassify = HookChainClass<int, PlayerBase>;
-using ReHookRegistryPlayerClassify = HookChainClassRegistry<int, PlayerBase>;
+using ReHookPlayerClassify = IHookChainClass<int, PlayerBase>;
+using ReHookRegistryPlayerClassify = IHookChainClassRegistry<int, PlayerBase>;
 
 // PlayerBase::TraceAttack hook
-using ReHookPlayerTraceAttack = HookChainClass<void, PlayerBase, EntityVars*, float, Vector&, TraceResult*, int>;
-using ReHookRegistryPlayerTraceAttack = HookChainClassRegistry<void, PlayerBase, EntityVars*, float, Vector&, TraceResult*, int>;
+using ReHookPlayerTraceAttack = IHookChainClass<void, PlayerBase, EntityVars*, float, Vector&, TraceResult*, int>;
+using ReHookRegistryPlayerTraceAttack = IHookChainClassRegistry<void, PlayerBase, EntityVars*, float, Vector&, TraceResult*, int>;
 
 // PlayerBase::TakeDamage hook
-using ReHookPlayerTakeDamage = HookChainClass<qboolean, PlayerBase, EntityVars*, EntityVars*, float&, int>;
-using ReHookRegistryPlayerTakeDamage = HookChainClassRegistry<qboolean, PlayerBase, EntityVars*, EntityVars*, float&, int>;
+using ReHookPlayerTakeDamage = IHookChainClass<qboolean, PlayerBase, EntityVars*, EntityVars*, float&, int>;
+using ReHookRegistryPlayerTakeDamage = IHookChainClassRegistry<qboolean, PlayerBase, EntityVars*, EntityVars*, float&, int>;
 
 // PlayerBase::TakeHealth hook
-using ReHookPlayerTakeHealth = HookChainClass<qboolean, PlayerBase, float, int>;
-using ReHookRegistryPlayerTakeHealth = HookChainClassRegistry<qboolean, PlayerBase, float, int>;
+using ReHookPlayerTakeHealth = IHookChainClass<qboolean, PlayerBase, float, int>;
+using ReHookRegistryPlayerTakeHealth = IHookChainClassRegistry<qboolean, PlayerBase, float, int>;
 
 // PlayerBase::Killed hook
-using ReHookPlayerKilled = HookChainClass<void, PlayerBase, EntityVars*, int>;
-using ReHookRegistryPlayerKilled = HookChainClassRegistry<void, PlayerBase, EntityVars*, int>;
+using ReHookPlayerKilled = IHookChainClass<void, PlayerBase, EntityVars*, int>;
+using ReHookRegistryPlayerKilled = IHookChainClassRegistry<void, PlayerBase, EntityVars*, int>;
 
 // PlayerBase::AddPoints hook
-using ReHookPlayerAddPoints = HookChainClass<void, PlayerBase, int, qboolean>;
-using ReHookRegistryPlayerAddPoints = HookChainClassRegistry<void, PlayerBase, int, qboolean>;
+using ReHookPlayerAddPoints = IHookChainClass<void, PlayerBase, int, qboolean>;
+using ReHookRegistryPlayerAddPoints = IHookChainClassRegistry<void, PlayerBase, int, qboolean>;
 
 // PlayerBase::AddPointsToTeam hook
-using ReHookPlayerAddPointsToTeam = HookChainClass<void, PlayerBase, int, qboolean>;
-using ReHookRegistryPlayerAddPointsToTeam = HookChainClassRegistry<void, PlayerBase, int, qboolean>;
+using ReHookPlayerAddPointsToTeam = IHookChainClass<void, PlayerBase, int, qboolean>;
+using ReHookRegistryPlayerAddPointsToTeam = IHookChainClassRegistry<void, PlayerBase, int, qboolean>;
 
 // PlayerBase::AddPlayerItem hook
-using ReHookPlayerAddPlayerItem = HookChainClass<qboolean, PlayerBase, PlayerItemBase*>;
-using ReHookRegistryPlayerAddPlayerItem = HookChainClassRegistry<qboolean, PlayerBase, PlayerItemBase*>;
+using ReHookPlayerAddPlayerItem = IHookChainClass<qboolean, PlayerBase, PlayerItemBase*>;
+using ReHookRegistryPlayerAddPlayerItem = IHookChainClassRegistry<qboolean, PlayerBase, PlayerItemBase*>;
 
 // PlayerBase::RemovePlayerItem hook
-using ReHookPlayerRemovePlayerItem = HookChainClass<qboolean, PlayerBase, PlayerItemBase*>;
-using ReHookRegistryPlayerRemovePlayerItem = HookChainClassRegistry<qboolean, PlayerBase, PlayerItemBase*>;
+using ReHookPlayerRemovePlayerItem = IHookChainClass<qboolean, PlayerBase, PlayerItemBase*>;
+using ReHookRegistryPlayerRemovePlayerItem = IHookChainClassRegistry<qboolean, PlayerBase, PlayerItemBase*>;
 
 // PlayerBase::GiveAmmo hook
-using ReHookPlayerGiveAmmo = HookChainClass<int, PlayerBase, int, const char*, int>;
-using ReHookRegistryPlayerGiveAmmo = HookChainClassRegistry<int, PlayerBase, int, const char*, int>;
+using ReHookPlayerGiveAmmo = IHookChainClass<int, PlayerBase, int, const char*, int>;
+using ReHookRegistryPlayerGiveAmmo = IHookChainClassRegistry<int, PlayerBase, int, const char*, int>;
 
 // PlayerBase::ResetMaxSpeed hook
-using ReHookPlayerResetMaxSpeed = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerResetMaxSpeed = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerResetMaxSpeed = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerResetMaxSpeed = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::Jump hook
-using ReHookPlayerJump = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerJump = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerJump = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerJump = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::Duck hook
-using ReHookPlayerDuck = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerDuck = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerDuck = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerDuck = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::PreThink hook
-using ReHookPlayerPreThink = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerPreThink = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerPreThink = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerPreThink = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::PostThink hook
-using ReHookPlayerPostThink = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerPostThink = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerPostThink = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerPostThink = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::UpdateClientData hook
-using ReHookPlayerUpdateClientData = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerUpdateClientData = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerUpdateClientData = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerUpdateClientData = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::ImpulseCommands hook
-using ReHookPlayerImpulseCommands = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerImpulseCommands = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerImpulseCommands = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerImpulseCommands = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::RoundRespawn hook
-using ReHookPlayerRoundRespawn = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerRoundRespawn = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerRoundRespawn = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerRoundRespawn = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::Blind hook
-using ReHookPlayerBaseBlind = HookChainClass<void, PlayerBase, float, float, float, int>;
-using ReHookRegistryPlayerBaseBlind = HookChainClassRegistry<void, PlayerBase, float, float, float, int>;
+using ReHookPlayerBaseBlind = IHookChainClass<void, PlayerBase, float, float, float, int>;
+using ReHookRegistryPlayerBaseBlind = IHookChainClassRegistry<void, PlayerBase, float, float, float, int>;
 
 // PlayerBase::Observer_IsValidTarget hook
-using ReHookPlayerObserverIsValidTarget = HookChainClass<PlayerBase*, PlayerBase, int, bool>;
-using ReHookRegistryPlayerObserverIsValidTarget = HookChainClassRegistry<PlayerBase*, PlayerBase, int, bool>;
+using ReHookPlayerObserverIsValidTarget = IHookChainClass<PlayerBase*, PlayerBase, int, bool>;
+using ReHookRegistryPlayerObserverIsValidTarget = IHookChainClassRegistry<PlayerBase*, PlayerBase, int, bool>;
 
 // PlayerBase::SetAnimation hook
-using ReHookPlayerSetAnimation = HookChainClass<void, PlayerBase, PlayerAnim>;
-using ReHookRegistryPlayerSetAnimation = HookChainClassRegistry<void, PlayerBase, PlayerAnim>;
+using ReHookPlayerSetAnimation = IHookChainClass<void, PlayerBase, PlayerAnim>;
+using ReHookRegistryPlayerSetAnimation = IHookChainClassRegistry<void, PlayerBase, PlayerAnim>;
 
 // PlayerBase::GiveDefaultItems hook
-using ReHookPlayerGiveDefaultItems = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerGiveDefaultItems = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerGiveDefaultItems = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerGiveDefaultItems = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::GiveNamedItem hook
-using ReHookPlayerGiveNamedItem = HookChainClass<EntityBase*, PlayerBase, const char*>;
-using ReHookRegistryPlayerGiveNamedItem = HookChainClassRegistry<EntityBase*, PlayerBase, const char*>;
+using ReHookPlayerGiveNamedItem = IHookChainClass<EntityBase*, PlayerBase, const char*>;
+using ReHookRegistryPlayerGiveNamedItem = IHookChainClassRegistry<EntityBase*, PlayerBase, const char*>;
 
 // PlayerBase::AddAccount hook
-using ReHookPlayerAddAccount = HookChainClass<void, PlayerBase, int, RewardType, bool>;
-using ReHookRegistryPlayerAddAccount = HookChainClassRegistry<void, PlayerBase, int, RewardType, bool>;
+using ReHookPlayerAddAccount = IHookChainClass<void, PlayerBase, int, RewardType, bool>;
+using ReHookRegistryPlayerAddAccount = IHookChainClassRegistry<void, PlayerBase, int, RewardType, bool>;
 
 // PlayerBase::GiveShield hook
-using ReHookPlayerGiveShield = HookChainClass<void, PlayerBase, bool>;
-using ReHookRegistryPlayerGiveShield = HookChainClassRegistry<void, PlayerBase, bool>;
+using ReHookPlayerGiveShield = IHookChainClass<void, PlayerBase, bool>;
+using ReHookRegistryPlayerGiveShield = IHookChainClassRegistry<void, PlayerBase, bool>;
 
 // PlayerBase:SetClientUserInfoModel hook
-using ReHookPlayerSetClientUserInfoModel = HookChainClass<void, PlayerBase, char*, char*>;
-using ReHookRegistryPlayerSetClientUserInfoModel = HookChainClassRegistry<void, PlayerBase, char*, char*>;
+using ReHookPlayerSetClientUserInfoModel = IHookChainClass<void, PlayerBase, char*, char*>;
+using ReHookRegistryPlayerSetClientUserInfoModel = IHookChainClassRegistry<void, PlayerBase, char*, char*>;
 
 // PlayerBase:SetClientUserInfoName hook
-using ReHookPlayerSetClientUserInfoName = HookChainClass<bool, PlayerBase, char*, char*>;
-using ReHookRegistryPlayerSetClientUserInfoName = HookChainClassRegistry<bool, PlayerBase, char*, char*>;
+using ReHookPlayerSetClientUserInfoName = IHookChainClass<bool, PlayerBase, char*, char*>;
+using ReHookRegistryPlayerSetClientUserInfoName = IHookChainClassRegistry<bool, PlayerBase, char*, char*>;
 
 // PlayerBase::HasRestrictItem hook
-using ReHookPlayerHasRestrictItem = HookChainClass<bool, PlayerBase, ItemId, ItemRestType>;
-using ReHookRegistryPlayerHasRestrictItem = HookChainClassRegistry<bool, PlayerBase, ItemId, ItemRestType>;
+using ReHookPlayerHasRestrictItem = IHookChainClass<bool, PlayerBase, ItemId, ItemRestType>;
+using ReHookRegistryPlayerHasRestrictItem = IHookChainClassRegistry<bool, PlayerBase, ItemId, ItemRestType>;
 
 // PlayerBase::DropPlayerItem hook
-using ReHookPlayerDropPlayerItem = HookChainClass<EntityBase*, PlayerBase, const char*>;
-using ReHookRegistryPlayerDropPlayerItem = HookChainClassRegistry<EntityBase*, PlayerBase, const char*>;
+using ReHookPlayerDropPlayerItem = IHookChainClass<EntityBase*, PlayerBase, const char*>;
+using ReHookRegistryPlayerDropPlayerItem = IHookChainClassRegistry<EntityBase*, PlayerBase, const char*>;
 
 // PlayerBase::DropShield hook
-using ReHookPlayerDropShield = HookChainClass<EntityBase*, PlayerBase, bool>;
-using ReHookRegistryPlayerDropShield = HookChainClassRegistry<EntityBase*, PlayerBase, bool>;
+using ReHookPlayerDropShield = IHookChainClass<EntityBase*, PlayerBase, bool>;
+using ReHookRegistryPlayerDropShield = IHookChainClassRegistry<EntityBase*, PlayerBase, bool>;
 
 // PlayerBase::OnSpawnEquip hook
-using ReHookPlayerOnSpawnEquip = HookChainClass<void, PlayerBase, bool, bool>;
-using ReHookRegistryPlayerOnSpawnEquip = HookChainClassRegistry<void, PlayerBase, bool, bool>;
+using ReHookPlayerOnSpawnEquip = IHookChainClass<void, PlayerBase, bool, bool>;
+using ReHookRegistryPlayerOnSpawnEquip = IHookChainClassRegistry<void, PlayerBase, bool, bool>;
 
 // PlayerBase::Radio hook
-using ReHookPlayerRadio = HookChainClass<void, PlayerBase, const char*, const char*, short, bool>;
-using ReHookRegistryPlayerRadio = HookChainClassRegistry<void, PlayerBase, const char*, const char*, short, bool>;
+using ReHookPlayerRadio = IHookChainClass<void, PlayerBase, const char*, const char*, short, bool>;
+using ReHookRegistryPlayerRadio = IHookChainClassRegistry<void, PlayerBase, const char*, const char*, short, bool>;
 
 // PlayerBase::Disappear hook
-using ReHookPlayerDisappear = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerDisappear = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerDisappear = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerDisappear = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::MakeVIP hook
-using ReHookPlayerMakeVip = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerMakeVip = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerMakeVip = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerMakeVip = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::MakeBomber hook
-using ReHookPlayerMakeBomber = HookChainClass<bool, PlayerBase>;
-using ReHookRegistryPlayerMakeBomber = HookChainClassRegistry<bool, PlayerBase>;
+using ReHookPlayerMakeBomber = IHookChainClass<bool, PlayerBase>;
+using ReHookRegistryPlayerMakeBomber = IHookChainClassRegistry<bool, PlayerBase>;
 
 // PlayerBase::StartObserver hook
-using ReHookPlayerStartObserver = HookChainClass<void, PlayerBase, Vector&, Vector&>;
-using ReHookRegistryPlayerStartObserver = HookChainClassRegistry<void, PlayerBase, Vector&, Vector&>;
+using ReHookPlayerStartObserver = IHookChainClass<void, PlayerBase, Vector&, Vector&>;
+using ReHookRegistryPlayerStartObserver = IHookChainClassRegistry<void, PlayerBase, Vector&, Vector&>;
 
 // PlayerBase::GetIntoGame hook
-using ReHookPlayerGetIntoGame = HookChainClass<bool, PlayerBase>;
-using ReHookRegistryPlayerGetIntoGame = HookChainClassRegistry<bool, PlayerBase>;
+using ReHookPlayerGetIntoGame = IHookChainClass<bool, PlayerBase>;
+using ReHookRegistryPlayerGetIntoGame = IHookChainClassRegistry<bool, PlayerBase>;
 
 // AnimatingBase::ResetSequenceInfo hook
-using ReHookAnimatingResetSequenceInfo = HookChainClass<void, AnimatingBase>;
-using ReHookRegistryAnimatingResetSequenceInfo = HookChainClassRegistry<void, AnimatingBase>;
+using ReHookAnimatingResetSequenceInfo = IHookChainClass<void, AnimatingBase>;
+using ReHookRegistryAnimatingResetSequenceInfo = IHookChainClassRegistry<void, AnimatingBase>;
 
 // GetForceCamera hook
-using ReHookGetForceCamera = HookChain<int, PlayerBase*>;
-using ReHookRegistryGetForceCamera = HookChainRegistry<int, PlayerBase*>;
+using ReHookGetForceCamera = IHookChain<int, PlayerBase*>;
+using ReHookRegistryGetForceCamera = IHookChainRegistry<int, PlayerBase*>;
 
 // PlayerBlind hook
-using ReHookPlayerBlind = HookChain<void, PlayerBase*, EntityVars*, EntityVars*, float, float, int, Vector&>;
-using ReHookRegistryPlayerBlind = HookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*, float, float, int, Vector&>;
+using ReHookPlayerBlind = IHookChain<void, PlayerBase*, EntityVars*, EntityVars*, float, float, int, Vector&>;
+using ReHookRegistryPlayerBlind = IHookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*, float, float, int, Vector&>;
 
 // RadiusFlash_TraceLine hook
-using ReHookRadiusFlashTraceLine = HookChain<void, PlayerBase*, EntityVars*, EntityVars*, Vector&, Vector&, TraceResult*>;
-using ReHookRegistryRadiusFlashTraceLine = HookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*, Vector&, Vector&, TraceResult*>;
+using ReHookRadiusFlashTraceLine = IHookChain<void, PlayerBase*, EntityVars*, EntityVars*, Vector&, Vector&, TraceResult*>;
+using ReHookRegistryRadiusFlashTraceLine = IHookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*, Vector&, Vector&, TraceResult*>;
 
 // RoundEnd hook
-using ReHookRoundEnd = HookChain<bool, int, ScenarioEventEndRound, float>;
-using ReHookRegistryRoundEnd = HookChainRegistry<bool, int, ScenarioEventEndRound, float>;
+using ReHookRoundEnd = IHookChain<bool, int, ScenarioEventEndRound, float>;
+using ReHookRegistryRoundEnd = IHookChainRegistry<bool, int, ScenarioEventEndRound, float>;
 
 // InstallGameRules hook
-using ReHookInstallGameRules = HookChain<GameRules*>;
-using ReHookRegistryInstallGameRules = HookChainRegistry<GameRules*>;
+using ReHookInstallGameRules = IHookChain<GameRules*>;
+using ReHookRegistryInstallGameRules = IHookChainRegistry<GameRules*>;
 
 // PM_Init hook
-using ReHookPmInit = HookChain<void, PlayerMove*>;
-using ReHookRegistryPmInit = HookChainRegistry<void, PlayerMove*>;
+using ReHookPmInit = IHookChain<void, PlayerMove*>;
+using ReHookRegistryPmInit = IHookChainRegistry<void, PlayerMove*>;
 
 // PM_Move hook
-using ReHookPmMove = HookChain<void, PlayerMove*, int>;
-using ReHookRegistryPmMove = HookChainRegistry<void, PlayerMove*, int>;
+using ReHookPmMove = IHookChain<void, PlayerMove*, int>;
+using ReHookRegistryPmMove = IHookChainRegistry<void, PlayerMove*, int>;
 
 // PM_AirMove hook
-using ReHookPmAirMove = HookChain<void, int>;
-using ReHookRegistryPmAirMove = HookChainRegistry<void, int>;
+using ReHookPmAirMove = IHookChain<void, int>;
+using ReHookRegistryPmAirMove = IHookChainRegistry<void, int>;
 
 // HandleMenu_ChooseAppearance hook
-using ReHookHandleMenuChooseAppearance = HookChain<void, PlayerBase*, int>;
-using ReHookRegistryHandleMenuChooseAppearance = HookChainRegistry<void, PlayerBase*, int>;
+using ReHookHandleMenuChooseAppearance = IHookChain<void, PlayerBase*, int>;
+using ReHookRegistryHandleMenuChooseAppearance = IHookChainRegistry<void, PlayerBase*, int>;
 
 // HandleMenu_ChooseTeam hook
-using ReHookHandleMenuChooseTeam = HookChain<qboolean, PlayerBase*, int>;
-using ReHookRegistryHandleMenuChooseTeam = HookChainRegistry<qboolean, PlayerBase*, int>;
+using ReHookHandleMenuChooseTeam = IHookChain<qboolean, PlayerBase*, ChooseTeamMenuSlot>;
+using ReHookRegistryHandleMenuChooseTeam = IHookChainRegistry<qboolean, PlayerBase*, ChooseTeamMenuSlot>;
 
 // ShowMenu hook
-using ReHookShowMenu = HookChain<void, PlayerBase*, int, int, qboolean, char*>;
-using ReHookRegistryShowMenu = HookChainRegistry<void, PlayerBase*, int, int, qboolean, char*>;
+using ReHookShowMenu = IHookChain<void, PlayerBase*, int, int, qboolean, char*>;
+using ReHookRegistryShowMenu = IHookChainRegistry<void, PlayerBase*, int, int, qboolean, char*>;
 
 // ShowVGUIMenu hook
-using ReHookShowVguiMenu = HookChain<void, PlayerBase*, int, int, char*>;
-using ReHookRegistryShowVguiMenu = HookChainRegistry<void, PlayerBase*, int, int, char*>;
+using ReHookShowVguiMenu = IHookChain<void, PlayerBase*, VguiMenu, int, char*>;
+using ReHookRegistryShowVguiMenu = IHookChainRegistry<void, PlayerBase*, VguiMenu, int, char*>;
 
 // BuyGunAmmo hook
-using ReHookBuyGunAmmo = HookChain<bool, PlayerBase*, PlayerItemBase*, bool>;
-using ReHookRegistryBuyGunAmmo = HookChainRegistry<bool, PlayerBase*, PlayerItemBase*, bool>;
+using ReHookBuyGunAmmo = IHookChain<bool, PlayerBase*, PlayerItemBase*, bool>;
+using ReHookRegistryBuyGunAmmo = IHookChainRegistry<bool, PlayerBase*, PlayerItemBase*, bool>;
 
 // BuyWeaponByWeaponID hook
-using ReHookBuyWeaponByWeaponId = HookChain<EntityBase*, PlayerBase*, WeaponId>;
-using ReHookRegistryBuyWeaponByWeaponId = HookChainRegistry<EntityBase*, PlayerBase*, WeaponId>;
+using ReHookBuyWeaponByWeaponId = IHookChain<EntityBase*, PlayerBase*, WeaponId>;
+using ReHookRegistryBuyWeaponByWeaponId = IHookChainRegistry<EntityBase*, PlayerBase*, WeaponId>;
 
 // InternalCommand hook
-using ReHookInternalCommand = HookChain<void, Edict*, const char*, const char*>;
-using ReHookRegistryInternalCommand = HookChainRegistry<void, Edict*, const char*, const char*>;
+using ReHookInternalCommand = IHookChain<void, Edict*, const char*, const char*>;
+using ReHookRegistryInternalCommand = IHookChainRegistry<void, Edict*, const char*, const char*>;
 
 // CHalfLifeMultiplay::FShouldSwitchWeapon hook
-using ReHookGameRulesShouldSwitchWeapon = HookChain<qboolean, PlayerBase*, PlayerItemBase*>;
-using ReHookRegistryGameRulesShouldSwitchWeapon = HookChainRegistry<qboolean, PlayerBase*, PlayerItemBase*>;
+using ReHookGameRulesShouldSwitchWeapon = IHookChain<qboolean, PlayerBase*, PlayerItemBase*>;
+using ReHookRegistryGameRulesShouldSwitchWeapon = IHookChainRegistry<qboolean, PlayerBase*, PlayerItemBase*>;
 
 // CHalfLifeMultiplay::GetNextBestWeapon hook
-using ReHookGameRulesGetNextBestWeapon = HookChain<qboolean, PlayerBase*, PlayerItemBase*>;
-using ReHookRegistryGameRulesGetNextBestWeapon = HookChainRegistry<qboolean, PlayerBase*, PlayerItemBase*>;
+using ReHookGameRulesGetNextBestWeapon = IHookChain<qboolean, PlayerBase*, PlayerItemBase*>;
+using ReHookRegistryGameRulesGetNextBestWeapon = IHookChainRegistry<qboolean, PlayerBase*, PlayerItemBase*>;
 
 // CHalfLifeMultiplay::FlPlayerFallDamage hook
-using ReHookGameRulesPlayerFallDamage = HookChain<float, PlayerBase*>;
-using ReHookRegistryGameRulesPlayerFallDamage = HookChainRegistry<float, PlayerBase*>;
+using ReHookGameRulesPlayerFallDamage = IHookChain<float, PlayerBase*>;
+using ReHookRegistryGameRulesPlayerFallDamage = IHookChainRegistry<float, PlayerBase*>;
 
 // CHalfLifeMultiplay::FPlayerCanTakeDamage hook
-using ReHookGameRulesPlayerCanTakeDamage = HookChain<qboolean, PlayerBase*, EntityBase*>;
-using ReHookRegistryGameRulesPlayerCanTakeDamage = HookChainRegistry<qboolean, PlayerBase*, EntityBase*>;
+using ReHookGameRulesPlayerCanTakeDamage = IHookChain<qboolean, PlayerBase*, EntityBase*>;
+using ReHookRegistryGameRulesPlayerCanTakeDamage = IHookChainRegistry<qboolean, PlayerBase*, EntityBase*>;
 
 // CHalfLifeMultiplay::PlayerSpawn hook
-using ReHookGameRulesPlayerSpawn = HookChain<void, PlayerBase*>;
-using ReHookRegistryGameRulesPlayerSpawn = HookChainRegistry<void, PlayerBase*>;
+using ReHookGameRulesPlayerSpawn = IHookChain<void, PlayerBase*>;
+using ReHookRegistryGameRulesPlayerSpawn = IHookChainRegistry<void, PlayerBase*>;
 
 // CHalfLifeMultiplay::FPlayerCanRespawn hook
-using ReHookGameRulesPlayerCanRespawn = HookChain<qboolean, PlayerBase*>;
-using ReHookRegistryGameRulesPlayerCanRespawn = HookChainRegistry<qboolean, PlayerBase*>;
+using ReHookGameRulesPlayerCanRespawn = IHookChain<qboolean, PlayerBase*>;
+using ReHookRegistryGameRulesPlayerCanRespawn = IHookChainRegistry<qboolean, PlayerBase*>;
 
 // CHalfLifeMultiplay::GetPlayerSpawnSpot hook
-using ReHookGameRulesGetPlayerSpawnSpot = HookChain<Edict*, PlayerBase*>;
-using ReHookRegistryGameRulesGetPlayerSpawnSpot = HookChainRegistry<Edict*, PlayerBase*>;
+using ReHookGameRulesGetPlayerSpawnSpot = IHookChain<Edict*, PlayerBase*>;
+using ReHookRegistryGameRulesGetPlayerSpawnSpot = IHookChainRegistry<Edict*, PlayerBase*>;
 
 // CHalfLifeMultiplay::ClientUserInfoChanged hook
-using ReHookGameRulesClientUserInfoChanged = HookChain<void, PlayerBase*, char*>;
-using ReHookRegistryGameRulesClientUserInfoChanged = HookChainRegistry<void, PlayerBase*, char*>;
+using ReHookGameRulesClientUserInfoChanged = IHookChain<void, PlayerBase*, char*>;
+using ReHookRegistryGameRulesClientUserInfoChanged = IHookChainRegistry<void, PlayerBase*, char*>;
 
 // CHalfLifeMultiplay::PlayerKilled hook
-using ReHookGameRulesPlayerKilled = HookChain<void, PlayerBase*, EntityVars*, EntityVars*>;
-using ReHookRegistryGameRulesPlayerKilled = HookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*>;
+using ReHookGameRulesPlayerKilled = IHookChain<void, PlayerBase*, EntityVars*, EntityVars*>;
+using ReHookRegistryGameRulesPlayerKilled = IHookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*>;
 
 // CHalfLifeMultiplay::DeathNotice hook
-using ReHookGameRulesDeathNotice = HookChain<void, PlayerBase*, EntityVars*, EntityVars*>;
-using ReHookRegistryGameRulesDeathNotice = HookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*>;
+using ReHookGameRulesDeathNotice = IHookChain<void, PlayerBase*, EntityVars*, EntityVars*>;
+using ReHookRegistryGameRulesDeathNotice = IHookChainRegistry<void, PlayerBase*, EntityVars*, EntityVars*>;
 
 // CHalfLifeMultiplay::CanHavePlayerItem hook
-using ReHookGameRulesCanHavePlayerItem = HookChain<qboolean, PlayerBase*, PlayerItemBase*>;
-using ReHookRegistryGameRulesCanHavePlayerItem = HookChainRegistry<qboolean, PlayerBase*, PlayerItemBase*>;
+using ReHookGameRulesCanHavePlayerItem = IHookChain<qboolean, PlayerBase*, PlayerItemBase*>;
+using ReHookRegistryGameRulesCanHavePlayerItem = IHookChainRegistry<qboolean, PlayerBase*, PlayerItemBase*>;
 
 // CHalfLifeMultiplay::DeadPlayerWeapons hook
-using ReHookGameRulesDeadPlayerWeapons = HookChain<int, PlayerBase*>;
-using ReHookRegistryGameRulesDeadPlayerWeapons = HookChainRegistry<int, PlayerBase*>;
+using ReHookGameRulesDeadPlayerWeapons = IHookChain<int, PlayerBase*>;
+using ReHookRegistryGameRulesDeadPlayerWeapons = IHookChainRegistry<int, PlayerBase*>;
 
 // CHalfLifeMultiplay::ServerDeactivate hook
-using ReHookGameRulesServerDeactivate = HookChain<void>;
-using ReHookRegistryGameRulesServerDeactivate = HookChainRegistry<void>;
+using ReHookGameRulesServerDeactivate = IHookChain<void>;
+using ReHookRegistryGameRulesServerDeactivate = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::CheckMapConditions hook
-using ReHookGameRulesCheckMapConditions = HookChain<void>;
-using ReHookRegistryGameRulesCheckMapConditions = HookChainRegistry<void>;
+using ReHookGameRulesCheckMapConditions = IHookChain<void>;
+using ReHookRegistryGameRulesCheckMapConditions = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::CleanUpMap hook
-using ReHookGameRulesCleanUpMap = HookChain<void>;
-using ReHookRegistryGameRulesCleanUpMap = HookChainRegistry<void>;
+using ReHookGameRulesCleanUpMap = IHookChain<void>;
+using ReHookRegistryGameRulesCleanUpMap = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::RestartRound hook
-using ReHookGameRulesRestartRound = HookChain<void>;
-using ReHookRegistryGameRulesRestartRound = HookChainRegistry<void>;
+using ReHookGameRulesRestartRound = IHookChain<void>;
+using ReHookRegistryGameRulesRestartRound = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::CheckWinConditions hook
-using ReHookGameRulesCheckWinConditions = HookChain<void>;
-using ReHookRegistryGameRulesCheckWinConditions = HookChainRegistry<void>;
+using ReHookGameRulesCheckWinConditions = IHookChain<void>;
+using ReHookRegistryGameRulesCheckWinConditions = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::RemoveGuns hook
-using ReHookGameRulesRemoveGuns = HookChain<void>;
-using ReHookRegistryGameRulesRemoveGuns = HookChainRegistry<void>;
+using ReHookGameRulesRemoveGuns = IHookChain<void>;
+using ReHookRegistryGameRulesRemoveGuns = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::GiveC4 hook
-using ReHookGameRulesGiveC4 = HookChain<void>;
-using ReHookRegistryGameRulesGiveC4 = HookChainRegistry<void>;
+using ReHookGameRulesGiveC4 = IHookChain<void>;
+using ReHookRegistryGameRulesGiveC4 = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::ChangeLevel hook
-using ReHookGameRulesChangeLevel = HookChain<void>;
-using ReHookRegistryGameRulesChangeLevel = HookChainRegistry<void>;
+using ReHookGameRulesChangeLevel = IHookChain<void>;
+using ReHookRegistryGameRulesChangeLevel = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::GoToIntermission hook
-using ReHookGameRulesGoToIntermission = HookChain<void>;
-using ReHookRegistryGameRulesGoToIntermission = HookChainRegistry<void>;
+using ReHookGameRulesGoToIntermission = IHookChain<void>;
+using ReHookRegistryGameRulesGoToIntermission = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::BalanceTeams hook
-using ReHookGameRulesBalanceTeams = HookChain<void>;
-using ReHookRegistryGameRulesBalanceTeams = HookChainRegistry<void>;
+using ReHookGameRulesBalanceTeams = IHookChain<void>;
+using ReHookRegistryGameRulesBalanceTeams = IHookChainRegistry<void>;
 
 // CHalfLifeMultiplay::OnRoundFreezeEnd hook
-using ReHookGameRulesOnRoundFreezeEnd = HookChain<void>;
-using ReHookRegistryGameRulesOnRoundFreezeEnd = HookChainRegistry<void>;
+using ReHookGameRulesOnRoundFreezeEnd = IHookChain<void>;
+using ReHookRegistryGameRulesOnRoundFreezeEnd = IHookChainRegistry<void>;
 
 // GameRules::CanPlayerHearPlayer hook
-using ReHookGameRulesCanPlayerHearPlayer = HookChain<bool, PlayerBase*, PlayerBase*>;
-using ReHookRegistryGameRulesCanPlayerHearPlayer = HookChainRegistry<bool, PlayerBase*, PlayerBase*>;
+using ReHookGameRulesCanPlayerHearPlayer = IHookChain<bool, PlayerBase*, PlayerBase*>;
+using ReHookRegistryGameRulesCanPlayerHearPlayer = IHookChainRegistry<bool, PlayerBase*, PlayerBase*>;
 
 // PM_UpdateStepSound hook
-using ReHookPmUpdateStepSound = HookChain<void>;
-using ReHookRegistryPmUpdateStepSound = HookChainRegistry<void>;
+using ReHookPmUpdateStepSound = IHookChain<void>;
+using ReHookRegistryPmUpdateStepSound = IHookChainRegistry<void>;
 
 // PlayerBase::StartDeathCam hook
-using ReHookPlayerStartDeathCam = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerStartDeathCam = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerStartDeathCam = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerStartDeathCam = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::SwitchTeam hook
-using ReHookPlayerSwitchTeam = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerSwitchTeam = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerSwitchTeam = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerSwitchTeam = IHookChainClassRegistry<void, PlayerBase>;
 
 // PlayerBase::CanSwitchTeam hook
-using ReHookPlayerCanSwitchTeam = HookChainClass<bool, PlayerBase, TeamName>;
-using ReHookRegistryPlayerCanSwitchTeam = HookChainClassRegistry<bool, PlayerBase, TeamName>;
+using ReHookPlayerCanSwitchTeam = IHookChainClass<bool, PlayerBase, TeamName>;
+using ReHookRegistryPlayerCanSwitchTeam = IHookChainClassRegistry<bool, PlayerBase, TeamName>;
 
 // PlayerBase::ThrowGrenade hook
-using ReHookPlayerThrowGrenade = HookChainClass<Grenade*, PlayerBase, PlayerWeaponBase*, Vector&, Vector&, float, unsigned short>;
-using ReHookRegistryPlayerThrowGrenade = HookChainClassRegistry<Grenade*, PlayerBase, PlayerWeaponBase*, Vector&, Vector&, float, unsigned short>;
+using ReHookPlayerThrowGrenade = IHookChainClass<Grenade*, PlayerBase, PlayerWeaponBase*, Vector&, Vector&, float, unsigned short>;
+using ReHookRegistryPlayerThrowGrenade = IHookChainClassRegistry<Grenade*, PlayerBase, PlayerWeaponBase*, Vector&, Vector&, float, unsigned short>;
 
 // WeaponBox::SetModel hook
-using ReHookWeaponBoxSetModel = HookChainClass<void, WeaponBox, const char*>;
-using ReHookRegistryWeaponBoxSetModel = HookChainClassRegistry<void, WeaponBox, const char*>;
+using ReHookWeaponBoxSetModel = IHookChainClass<void, WeaponBox, const char*>;
+using ReHookRegistryWeaponBoxSetModel = IHookChainClassRegistry<void, WeaponBox, const char*>;
 
 // Grenade::DefuseBombStart hook
-using ReHookGrenadeDefuseBombStart = HookChainClass<void, Grenade, PlayerBase*>;
-using ReHookRegistryGrenadeDefuseBombStart = HookChainClassRegistry<void, Grenade, PlayerBase*>;
+using ReHookGrenadeDefuseBombStart = IHookChainClass<void, Grenade, PlayerBase*>;
+using ReHookRegistryGrenadeDefuseBombStart = IHookChainClassRegistry<void, Grenade, PlayerBase*>;
 
 // Grenade::DefuseBombEnd hook
-using ReHookGrenadeDefuseBombEnd = HookChainClass<void, Grenade, PlayerBase*, bool>;
-using ReHookRegistryGrenadeDefuseBombEnd = HookChainClassRegistry<void, Grenade, PlayerBase*, bool>;
+using ReHookGrenadeDefuseBombEnd = IHookChainClass<void, Grenade, PlayerBase*, bool>;
+using ReHookRegistryGrenadeDefuseBombEnd = IHookChainClassRegistry<void, Grenade, PlayerBase*, bool>;
 
 // Grenade::ExplodeHeGrenade hook
-using ReHookGrenadeExplodeHeGrenade = HookChainClass<void, Grenade, TraceResult*, int>;
-using ReHookRegistryGrenadeExplodeHeGrenade = HookChainClassRegistry<void, Grenade, TraceResult*, int>;
+using ReHookGrenadeExplodeHeGrenade = IHookChainClass<void, Grenade, TraceResult*, int>;
+using ReHookRegistryGrenadeExplodeHeGrenade = IHookChainClassRegistry<void, Grenade, TraceResult*, int>;
 
 // Grenade::Explodeflash_bang hook
-using ReHookGrenadeExplodeFlashBang = HookChainClass<void, Grenade, TraceResult*, int>;
-using ReHookRegistryGrenadeExplodeFlashBang = HookChainClassRegistry<void, Grenade, TraceResult*, int>;
+using ReHookGrenadeExplodeFlashBang = IHookChainClass<void, Grenade, TraceResult*, int>;
+using ReHookRegistryGrenadeExplodeFlashBang = IHookChainClassRegistry<void, Grenade, TraceResult*, int>;
 
 // Grenade::ExplodeSmokeGrenade hook
-using ReHookGrenadeExplodeSmokeGrenade = HookChainClass<void, Grenade>;
-using ReHookRegistryGrenadeExplodeSmokeGrenade = HookChainClassRegistry<void, Grenade>;
+using ReHookGrenadeExplodeSmokeGrenade = IHookChainClass<void, Grenade>;
+using ReHookRegistryGrenadeExplodeSmokeGrenade = IHookChainClassRegistry<void, Grenade>;
 
 // Grenade::ExplodeBomb hook
-using ReHookGrenadeExplodeBomb = HookChainClass<void, Grenade, TraceResult*, int>;
-using ReHookRegistryGrenadeExplodeBomb = HookChainClassRegistry<void, Grenade, TraceResult*, int>;
+using ReHookGrenadeExplodeBomb = IHookChainClass<void, Grenade, TraceResult*, int>;
+using ReHookRegistryGrenadeExplodeBomb = IHookChainClassRegistry<void, Grenade, TraceResult*, int>;
 
 // ThrowHeGrenade hook
-using ReHookThrowHeGrenade = HookChain<Grenade*, EntityVars*, Vector&, Vector&, float, int, unsigned short>;
-using ReHookRegistryThrowHeGrenade = HookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&, float, int, unsigned short>;
+using ReHookThrowHeGrenade = IHookChain<Grenade*, EntityVars*, Vector&, Vector&, float, int, unsigned short>;
+using ReHookRegistryThrowHeGrenade = IHookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&, float, int, unsigned short>;
 
 // Throw_flash_bang hook
-using ReHookThrowFlashBang = HookChain<Grenade*, EntityVars*, Vector&, Vector&, float>;
-using ReHookRegistryThrowFlashBang = HookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&, float>;
+using ReHookThrowFlashBang = IHookChain<Grenade*, EntityVars*, Vector&, Vector&, float>;
+using ReHookRegistryThrowFlashBang = IHookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&, float>;
 
 // ThrowSmokeGrenade hook
-using ReHookThrowSmokeGrenade = HookChain<Grenade*, EntityVars*, Vector&, Vector&, float, unsigned short>;
-using ReHookRegistryThrowSmokeGrenade = HookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&, float, unsigned short>;
+using ReHookThrowSmokeGrenade = IHookChain<Grenade*, EntityVars*, Vector&, Vector&, float, unsigned short>;
+using ReHookRegistryThrowSmokeGrenade = IHookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&, float, unsigned short>;
 
 // PlantBomb hook
-using ReHookPlantBomb = HookChain<Grenade*, EntityVars*, Vector&, Vector&>;
-using ReHookRegistryPlantBomb = HookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&>;
+using ReHookPlantBomb = IHookChain<Grenade*, EntityVars*, Vector&, Vector&>;
+using ReHookRegistryPlantBomb = IHookChainRegistry<Grenade*, EntityVars*, Vector&, Vector&>;
 
 // PlayerBase::SetSpawnProtection hook
-using ReHookPlayerSetSpawnProtection = HookChainClass<void, PlayerBase, float>;
-using ReHookRegistryPlayerSetSpawnProtection = HookChainClassRegistry<void, PlayerBase, float>;
+using ReHookPlayerSetSpawnProtection = IHookChainClass<void, PlayerBase, float>;
+using ReHookRegistryPlayerSetSpawnProtection = IHookChainClassRegistry<void, PlayerBase, float>;
 
 // PlayerBase::RemoveSpawnProtection hook
-using ReHookPlayerRemoveSpawnProtection = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerRemoveSpawnProtection = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerRemoveSpawnProtection = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerRemoveSpawnProtection = IHookChainClassRegistry<void, PlayerBase>;
 
 // IsPenetrableEntity hook
-using ReHookIsPenetrableEntity = HookChain<bool, Vector&, Vector&, EntityVars*, Edict*>;
-using ReHookRegistryIsPenetrableEntity = HookChainRegistry<bool, Vector&, Vector&, EntityVars*, Edict*>;
+using ReHookIsPenetrableEntity = IHookChain<bool, Vector&, Vector&, EntityVars*, Edict*>;
+using ReHookRegistryIsPenetrableEntity = IHookChainRegistry<bool, Vector&, Vector&, EntityVars*, Edict*>;
 
 // PlayerBase::HintMessageEx hook
-using ReHookPlayerHintMessageEx = HookChainClass<bool, PlayerBase, const char*, float, bool, bool>;
-using ReHookRegistryPlayerHintMessageEx = HookChainClassRegistry<bool, PlayerBase, const char*, float, bool, bool>;
+using ReHookPlayerHintMessageEx = IHookChainClass<bool, PlayerBase, const char*, float, bool, bool>;
+using ReHookRegistryPlayerHintMessageEx = IHookChainClassRegistry<bool, PlayerBase, const char*, float, bool, bool>;
 
 // PlayerBase::UseEmpty hook
-using ReHookPlayerUseEmpty = HookChainClass<void, PlayerBase>;
-using ReHookRegistryPlayerUseEmpty = HookChainClassRegistry<void, PlayerBase>;
+using ReHookPlayerUseEmpty = IHookChainClass<void, PlayerBase>;
+using ReHookRegistryPlayerUseEmpty = IHookChainClassRegistry<void, PlayerBase>;
 
 // player_baseWeapon::CanDeploy hook
-using ReHookPlayerWeaponCanDeploy = HookChainClass<qboolean, PlayerWeaponBase>;
-using ReHookRegistryPlayerWeaponCanDeploy = HookChainClassRegistry<qboolean, PlayerWeaponBase>;
+using ReHookPlayerWeaponCanDeploy = IHookChainClass<qboolean, PlayerWeaponBase>;
+using ReHookRegistryPlayerWeaponCanDeploy = IHookChainClassRegistry<qboolean, PlayerWeaponBase>;
 
 // player_baseWeapon::DefaultDeploy hook
-using ReHookPlayerWeaponDefaultDeploy = HookChainClass<qboolean, PlayerWeaponBase, char*, char*, int, char*, int>;
-using ReHookRegistryPlayerWeaponDefaultDeploy = HookChainClassRegistry<qboolean, PlayerWeaponBase, char*, char*, int, char*, int>;
+using ReHookPlayerWeaponDefaultDeploy = IHookChainClass<qboolean, PlayerWeaponBase, char*, char*, int, char*, int>;
+using ReHookRegistryPlayerWeaponDefaultDeploy = IHookChainClassRegistry<qboolean, PlayerWeaponBase, char*, char*, int, char*, int>;
 
 // player_baseWeapon::DefaultReload hook
-using ReHookPlayerWeaponDefaultReload = HookChainClass<int, PlayerWeaponBase, int, int, float>;
-using ReHookRegistryPlayerWeaponDefaultReload = HookChainClassRegistry<int, PlayerWeaponBase, int, int, float>;
+using ReHookPlayerWeaponDefaultReload = IHookChainClass<int, PlayerWeaponBase, int, int, float>;
+using ReHookRegistryPlayerWeaponDefaultReload = IHookChainClassRegistry<int, PlayerWeaponBase, int, int, float>;
 
 // player_baseWeapon::DefaultShotgunReload hook
-using ReHookPlayerWeaponDefaultShotgunReload = HookChainClass<bool, PlayerWeaponBase, int, int, float, float, const char*, const char*>;
-using ReHookRegistryPlayerWeaponDefaultShotgunReload = HookChainClassRegistry<bool, PlayerWeaponBase, int, int, float, float, const char*, const char*>;
+using ReHookPlayerWeaponDefaultShotgunReload = IHookChainClass<bool, PlayerWeaponBase, int, int, float, float, const char*, const char*>;
+using ReHookRegistryPlayerWeaponDefaultShotgunReload = IHookChainClassRegistry<bool, PlayerWeaponBase, int, int, float, float, const char*, const char*>;
 
 // PlayerBase::DropIdlePlayer hook
-using ReHookPlayerDropIdlePlayer = HookChainClass<void, PlayerBase, const char*>;
-using ReHookRegistryPlayerDropIdlePlayer = HookChainClassRegistry<void, PlayerBase, const char*>;
+using ReHookPlayerDropIdlePlayer = IHookChainClass<void, PlayerBase, const char*>;
+using ReHookRegistryPlayerDropIdlePlayer = IHookChainClassRegistry<void, PlayerBase, const char*>;
 
 // CreateWeaponBox hook
-using ReHookCreateWeaponBox = HookChain<WeaponBox*, PlayerItemBase*, PlayerBase*, const char*, Vector&, Vector&, Vector&, float, bool>;
-using ReHookRegistryCreateWeaponBox = HookChainRegistry<WeaponBox*, PlayerItemBase*, PlayerBase*, const char*, Vector&, Vector&, Vector&, float, bool>;
+using ReHookCreateWeaponBox = IHookChain<WeaponBox*, PlayerItemBase*, PlayerBase*, const char*, Vector&, Vector&, Vector&, float, bool>;
+using ReHookRegistryCreateWeaponBox = IHookChainRegistry<WeaponBox*, PlayerItemBase*, PlayerBase*, const char*, Vector&, Vector&, Vector&, float, bool>;
+
+// SpawnHeadGib hook
+using ReHookSpawnHeadGib = IHookChain<Gib, EntityVars*>;
+using ReHookRegistrySpawnHeadGib = IHookChainRegistry<Gib, EntityVars*>;
+
+// SpawnRandomGibs hook
+using ReHookSpawnRandomGibs = IHookChain<void, EntityVars*, int, int>;
+using ReHookRegistrySpawnRandomGibs = IHookChainRegistry<void, EntityVars*, int, int>;
+
+// Gib::Spawn hook
+using ReHookGibSpawn = IHookChainClass<void, Gib, const char*>;
+using ReHookRegistryGibSpawn = IHookChainClassRegistry<void, Gib, const char*>;
+
+// Gib::BounceGibTouch hook
+using ReHookGibBounceGibTouch = IHookChainClass<void, Gib, EntityBase*>;
+using ReHookRegistryGibBounceGibTouch = IHookChainClassRegistry<void, Gib, EntityBase*>;
+
+// Gib::WaitTillLand hook
+using ReHookGibWaitTillLand = IHookChainClass<void, Gib>;
+using ReHookRegistryGibWaitTillLand = IHookChainClassRegistry<void, Gib>;
 
 /// <summary>
 /// Class RegamedllHookChains.
@@ -888,6 +909,26 @@ public:
 	/// <summary>
 	/// </summary>
 	virtual ReHookRegistryCreateWeaponBox* create_weapon_box() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual ReHookRegistrySpawnHeadGib* spawn_head_gib() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual ReHookRegistrySpawnRandomGibs* spawn_random_gibs() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual ReHookRegistryGibSpawn* gib_spawn() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual ReHookRegistryGibBounceGibTouch* gib_bounce_gib_touch() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual ReHookRegistryGibWaitTillLand* gib_wait_till_land() = 0;
 };
 
 /// <summary>

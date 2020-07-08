@@ -44,7 +44,9 @@ int export_engine_hooks(EngineFuncPointers* function_table, int* interface_versi
 		return false;
 	}
 
-	std::memcpy(function_table, EngineHooks::engine_hooks_, sizeof(EngineFuncPointers));
+	if (EngineHooks::engine_hooks_) {
+		std::memcpy(function_table, EngineHooks::engine_hooks_, sizeof(EngineFuncPointers));
+	}
 
 	delete EngineHooks::engine_hooks_;
 	EngineHooks::engine_hooks_ = function_table;
@@ -77,7 +79,9 @@ int export_engine_post_hooks(EngineFuncPointers* function_table, int* interface_
 		return false;
 	}
 
-	std::memcpy(function_table, EngineHooks::engine_post_hooks_, sizeof(EngineFuncPointers));
+	if (EngineHooks::engine_post_hooks_) {
+		std::memcpy(function_table, EngineHooks::engine_post_hooks_, sizeof(EngineFuncPointers));
+	}
 
 	delete EngineHooks::engine_post_hooks_;
 	EngineHooks::engine_post_hooks_ = function_table;

@@ -45,7 +45,7 @@ struct Edict {
 	/// <summary>
 	/// <para>Linked to a division node or leaf.</para>
 	/// </summary>
-	Link area;
+	Link area{};
 
 	/// <summary>
 	/// <para>-1 to use normal leaf check.</para>
@@ -73,7 +73,7 @@ struct Edict {
 	/// <summary>
 	/// <para>C exported fields from progs.</para>
 	/// </summary>
-	EntityVars vars;
+	EntityVars vars{};
 
 	// Other fields from progs come immediately after.
 };

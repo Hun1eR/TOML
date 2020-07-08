@@ -232,7 +232,7 @@ struct DHeader {
 
 	/// <summary>
 	/// </summary>
-	Lump lumps[HEADER_LUMPS];
+	Lump lumps[HEADER_LUMPS]{};
 };
 
 /// <summary>

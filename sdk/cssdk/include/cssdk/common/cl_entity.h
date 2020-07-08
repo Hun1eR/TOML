@@ -97,11 +97,11 @@ struct LatchedVars {
 
 	/// <summary>
 	/// </summary>
-	Vector prev_origin;
+	Vector prev_origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector prev_angles;
+	Vector prev_angles{};
 
 	/// <summary>
 	/// </summary>
@@ -131,11 +131,11 @@ struct PositionHistory {
 
 	/// <summary>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 };
 
 /// <summary>
@@ -155,17 +155,17 @@ struct ClEntity {
 	/// <summary>
 	/// <para>The original state from which to delta during an uncompressed message.</para>
 	/// </summary>
-	EntityState baseline;
+	EntityState baseline{};
 
 	/// <summary>
 	/// <para>The state information from the penultimate message received from the server.</para>
 	/// </summary>
-	EntityState prev_state;
+	EntityState prev_state{};
 
 	/// <summary>
 	/// <para>The state information from the last message received from server.</para>
 	/// </summary>
-	EntityState cur_state;
+	EntityState cur_state{};
 
 	/// <summary>
 	/// <para>Last received history update index.</para>
@@ -175,17 +175,17 @@ struct ClEntity {
 	/// <summary>
 	/// <para>History of position and angle updates for this player.</para>
 	/// </summary>
-	PositionHistory position_history[HISTORY_MAX];
+	PositionHistory position_history[HISTORY_MAX]{};
 
 	/// <summary>
 	/// <para>For synchronizing mouth movements.</para>
 	/// </summary>
-	Mouth mouth;
+	Mouth mouth{};
 
 	/// <summary>
 	/// <para>Variables used by studio model rendering routines.</para>
 	/// </summary>
-	LatchedVars latched;
+	LatchedVars latched{};
 
 	/// <summary>
 	/// <para>Information based on interplocation, extrapolation, prediction, or just copied from last msg received.</para>
@@ -195,16 +195,16 @@ struct ClEntity {
 	/// <summary>
 	/// <para>Actual render position and angles.</para>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 
 	/// <summary>
 	/// <para>Attachment points.</para>
 	/// </summary>
-	Vector attachment[4];
+	Vector attachment[4]{};
 
 	/// <summary>
 	/// <para>Other entity local information.</para>
@@ -238,5 +238,5 @@ struct ClEntity {
 
 	/// <summary>
 	/// </summary>
-	ColorVec floor_color;
+	ColorVec floor_color{};
 };

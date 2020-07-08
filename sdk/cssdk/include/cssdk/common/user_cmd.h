@@ -26,7 +26,7 @@ struct UserCmd {
 
 	/// <summary>
 	/// </summary>
-	Vector view_angles;
+	Vector view_angles{};
 
 	/// <summary>
 	/// </summary>
@@ -62,5 +62,5 @@ struct UserCmd {
 
 	/// <summary>
 	/// </summary>
-	Vector impact_position;
+	Vector impact_position{};
 };

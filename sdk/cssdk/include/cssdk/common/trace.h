@@ -20,7 +20,7 @@
 struct Plane {
 	/// <summary>
 	/// </summary>
-	Vector normal;
+	Vector normal{};
 
 	/// <summary>
 	/// </summary>
@@ -59,12 +59,12 @@ struct Trace {
 	/// <summary>
 	/// <para>final position.</para>
 	/// </summary>
-	Vector end_pos;
+	Vector end_pos{};
 
 	/// <summary>
 	/// <para>surface normal at impact.</para>
 	/// </summary>
-	Plane plane;
+	Plane plane{};
 
 	/// <summary>
 	/// <para>entity the surface is on.</para>

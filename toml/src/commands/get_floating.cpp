@@ -37,13 +37,13 @@ cell GetFloatingCommand::execute()
 
 	switch (value.type()) {
 	case toml::value_t::integer:
-		return amx_ftoc(real(value.as_integer()));
+		return amx_ftoc(static_cast<real>(value.as_integer()));
 
 	case toml::value_t::boolean:
-		return amx_ftoc(real(value.as_boolean()));
+		return amx_ftoc(static_cast<real>(value.as_boolean()));
 
 	default:
-		return amx_ftoc(real(value.as_floating()));
+		return amx_ftoc(static_cast<real>(value.as_floating()));
 	}
 }
 

@@ -16,7 +16,7 @@ OpenCommand::OpenCommand(const char* filepath) : filepath_(filepath) {}
 /// </summary>
 cell OpenCommand::execute()
 {
-	auto&& toml = toml::parse<toml::preserve_comments>(filepath_);
+	auto&& toml = toml::parse<toml::preserve_comments>(std::string(filepath_));
 	return Storage::add(std::move(toml));
 }
 

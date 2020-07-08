@@ -37,7 +37,7 @@ RemoveCommand::RemoveCommand(const cell handle, cell index) : handle_(handle)
 		holder->remove(toml::find(*toml, index));
 		array.erase(array.begin() + index);
 
-		return cell(array.size());
+		return static_cast<cell>(array.size());
 	};
 }
 
@@ -64,7 +64,7 @@ cell AMX_NATIVE_CALL toml_remove(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_remove(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_remove(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Index };
 

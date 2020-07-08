@@ -15,13 +15,13 @@
 /// <summary>
 /// <para>Receive engine function table from engine.</para>
 /// </summary>
-extern "C" void DLLEXPORT WINAPI GiveFnptrsToDll(EngineFuncPointers*, GlobalVars*);
+extern "C" void DLLEXPORT WINAPI GiveFnptrsToDll(const EngineFuncPointers*, GlobalVars*);
 
 /// <summary>
 /// Class Engine.
 /// </summary>
 class Engine {
-	friend void WINAPI GiveFnptrsToDll(EngineFuncPointers*, GlobalVars*);
+	friend void WINAPI GiveFnptrsToDll(const EngineFuncPointers*, GlobalVars*);
 
 	/// <summary>
 	/// <para>Engine functions table.</para>
@@ -32,15 +32,15 @@ public:
 	/// <summary>
 	/// <para>Precaches a model.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="path">Model path. Starts in the game directory.<br/>
 	///		This string must live for at least as long as the map itself.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the model.<br/>
 	/// </returns>
-	/// 
+	///
 	/// <remarks>
 	///		If path is null, is empty or contains an invalid value in the first character, triggers a host error.<br/>
 	///		If the maximum number of model precacheable resources has been reached, triggers a host error.<br/>
@@ -54,15 +54,15 @@ public:
 	/// <summary>
 	/// <para>Precaches a sound.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="path">Sound path. Starts in the sound/ directory.<br/>
 	///		This string must live for at least as long as the map itself.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the sound.<br/>
 	/// </returns>
-	/// 
+	///
 	/// <remarks>
 	///		If path is null, is empty or contains an invalid value in the first character, triggers a host error.<br/>
 	///		If the maximum number of sound precacheable resources has been reached, triggers a host error.<br/>
@@ -76,7 +76,7 @@ public:
 	/// <summary>
 	/// <para>Sets the model of the given entity. Also changes the entity bounds based on the model.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to set the model on.
 	/// </param>
@@ -92,15 +92,15 @@ public:
 	/// <summary>
 	/// <para>Gets the index of the given model.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="model">
 	///		Path to the model whose index is to be returned.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the model.<br/>
 	/// </returns>
-	/// 
+	///
 	/// <remarks>
 	///		If the given model was not precached, shuts the game down.<br/>
 	/// </remarks>
@@ -112,15 +112,15 @@ public:
 	/// <summary>
 	/// <para>Gets the number of frames in the given model.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="model_index">
 	///		Index of the model whose frame count is to be returned.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Frame count of the model.<br/>
 	/// </returns>
-	/// 
+	///
 	/// <remarks>
 	///		If this is a sprite, returns the number of sprite frames.<br/>
 	///		If this is a studio model, this is all of the submodels in each body part multiplied with each-other.
@@ -136,7 +136,7 @@ public:
 	/// <para>Sets the entity bounds. Also relinks the entity:<br>
 	/// <c>EntityVars::min_size</c>, <c>EntityVars::max_size</c> and <c>EntityVars::size</c> are changed.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose bounds are to be changed.
 	/// </param>
@@ -146,7 +146,7 @@ public:
 	/// <param name="max">
 	///		Maximum relative bounds.<br/>
 	/// </param>
-	/// 
+	///
 	/// <remarks>
 	///		If the bounds are backwards (max smaller than min), a host error is triggered.<br/>
 	/// </remarks>
@@ -158,7 +158,7 @@ public:
 	/// <summary>
 	///		<para>Changes the level. This will append a changelevel command to the server command buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="level_name">
 	///		Name of the level to change to.
 	/// </param>
@@ -195,11 +195,11 @@ public:
 	/// <summary>
 	/// <para>Converts a direction vector to a yaw angle.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="direction">
 	///		Direction vector.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Yaw angle.<br/>
 	/// </returns>
@@ -211,7 +211,7 @@ public:
 	/// <summary>
 	/// <para>Converts a direction vector to angles.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="direction_in">
 	///		Direction vector.
 	/// </param>
@@ -226,7 +226,7 @@ public:
 	/// <summary>
 	/// <para>Moves the given entity to the given destination.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to move.
 	/// </param>
@@ -248,7 +248,7 @@ public:
 	/// <para>Changes the entity's yaw angle to approach its ideal yaw.<br/>
 	/// Yaw is updated at <c>EntityVars::yaw_speed</c> speed to match <c>EntityVars::ideal_yaw</c>.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose yaw is to be changed.<br/>
 	/// </param>
@@ -261,7 +261,7 @@ public:
 	/// <para>Changes the entity's pitch angle to approach its ideal pitch.<br/>
 	/// Pitch is updated at <c>EntityVars::pitch_speed</c> speed to match <c>EntityVars::ideal_pitch</c>.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose pitch is to be changed.<br/>
 	/// </param>
@@ -273,7 +273,7 @@ public:
 	/// <summary>
 	/// <para>Finds an entity by comparing strings.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="edict_start_search_after">
 	///		Edict to start searching after.
 	///	</param>
@@ -283,7 +283,7 @@ public:
 	/// <param name="value">
 	///		Value to compare to.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		If the given field exists, and the given value is not null, and an entity has a matching value, returns the edict of that entity.<br/>
 	///		Otherwise, returns null.<br/>
@@ -295,11 +295,11 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose light value is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		If the given entity is null, returns -1.<br/>
 	///		If the given entity is a client or the world, returns <c>EntityVars::light_level</c>.<br/>
@@ -313,7 +313,7 @@ public:
 	/// <summary>
 	/// <para>Finds an entity in a sphere.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="edict_start_search_after">
 	///		Edict to start searching after.
 	/// </param>
@@ -323,7 +323,7 @@ public:
 	/// <param name="radius">
 	///		Sphere radius.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		The first valid entity in the sphere's radius, or null if no entity can be found.
 	/// </returns>
@@ -335,15 +335,15 @@ public:
 	/// <summary>
 	/// <para>Finds a client in the Potentially Visible Set.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose origin and view offset should be used to determine which client is visible.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Client, or null if no client could be found.<br/>
 	/// </returns>
-	/// 
+	///
 	/// <remarks>
 	///		This function's behavior is unexpected: it will get the next client every 0.1 seconds, and check if the entity can see it.<br/>
 	///		If so, the client is returned. Otherwise, the world is returned.<br/>
@@ -356,11 +356,11 @@ public:
 	/// <summary>
 	/// <para>Find entities in Potentially Visible Set.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose origin and view offset should be used to determine which entities are visible.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		First entity in the chain of entities that are visible, or worldspawn if no entities are visible.<br/>
 	/// </returns>
@@ -378,7 +378,7 @@ public:
 	/// <summary>
 	/// <para>Make direction vectors from angles.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="angles">
 	///		Angles to convert to direction vectors.<br/>
 	/// </param>
@@ -394,7 +394,7 @@ public:
 	/// <summary>
 	/// <para>Make direction vectors from angles.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="angles">
 	///		Angles to convert to direction vectors.
 	/// </param>
@@ -415,7 +415,7 @@ public:
 	/// <summary>
 	/// <para>Allocates an edict for use with an entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		Newly allocated edict.<br/>
 	/// </returns>
@@ -433,7 +433,7 @@ public:
 	/// <para>Immediately removes the given entity.<br/>
 	/// Increments the edict serial number.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to remove.<br/>
 	/// </param>
@@ -443,13 +443,13 @@ public:
 	}
 
 	/// <summary>
-	/// <para>Creates an entity of the class <c>class_name</c>.<br/></para>
+	/// <para>Creates an entity of the class <c>classname</c>.<br/></para>
 	/// </summary>
-	/// 
-	/// <param name="class_name">
+	///
+	/// <param name="classname">
 	///		Name of the class to instantiate.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Edict of the entity that was instantiated, or null if no such entity exists.<br/>
 	/// </returns>
@@ -457,15 +457,15 @@ public:
 	/// <remarks>
 	///		This will not fall back to invoking the custom entity handler if the given class does not exist.<br/>
 	/// </remarks>
-	static Edict* create_named_entity(const Strind class_name)
+	static Edict* create_named_entity(const Strind& classname)
 	{
-		return engine_funcs_->create_named_entity(class_name);
+		return engine_funcs_->create_named_entity(classname);
 	}
 
 	/// <summary>
 	/// <para>Makes an entity static.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to make static.<br/>
 	/// </param>
@@ -482,11 +482,11 @@ public:
 	/// <summary>
 	/// <para>Returns whether the given entity is on the floor.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to check.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		1 if the entity is on the floor, 0 otherwise.<br/>
 	/// </returns>
@@ -499,11 +499,11 @@ public:
 	/// <para>Drops the entity to the floor.<br/>
 	/// The entity will be moved down to the floor, effectively being teleported.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to drop.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		-1 if the entity is stuck inside a solid object.<br/>
 	///		0 if the floor is further than 256 units away.<br/>
@@ -522,7 +522,7 @@ public:
 	/// <summary>
 	/// <para>Makes the entity walk.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to move.
 	/// </param>
@@ -535,7 +535,7 @@ public:
 	/// <param name="mode">
 	///		Movement type.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		1 if the move succeeded (no obstacles in the way), 0 otherwise.<br/>
 	/// </returns>
@@ -551,7 +551,7 @@ public:
 	/// <summary>
 	/// <para>Sets the origin of the given entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose origin is to be set.
 	/// </param>
@@ -566,7 +566,7 @@ public:
 	/// <summary>
 	/// <para>Emits a sounds from the given entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity that is emitting the sound.
 	/// </param>
@@ -589,7 +589,7 @@ public:
 	///		Sound pitch. Must be a value in the range 0 - 255.<br/>
 	/// </param>
 	static void emit_sound(Edict* entity, const SoundChannel channel, const char* sample, const float volume,
-		const float attenuation, const int flags, const int pitch)
+	                       const float attenuation, const int flags, const int pitch)
 	{
 		engine_funcs_->emit_sound(entity, channel, sample, volume, attenuation, flags, pitch);
 	}
@@ -597,7 +597,7 @@ public:
 	/// <summary>
 	/// <para>Emits a sounds from the given entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity that is emitting the sound.
 	/// </param>
@@ -620,7 +620,7 @@ public:
 	///		Sound pitch. Must be a value in the range 0 - 255.<br/>
 	/// </param>
 	static void emit_ambient_sound(Edict* entity, Vector& origin, const char* sample, const float volume,
-		const float attenuation, const int flags, const int pitch)
+	                               const float attenuation, const int flags, const int pitch)
 	{
 		engine_funcs_->emit_ambient_sound(entity, origin, sample, volume, attenuation, flags, pitch);
 	}
@@ -628,7 +628,7 @@ public:
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="start_pos">
 	///		Start position.
 	/// </param>
@@ -645,7 +645,7 @@ public:
 	///		Trace result instance.<br/>
 	/// </param>
 	static void trace_line(const Vector& start_pos, const Vector& end_pos, const int trace_ignore_flags,
-		Edict* entity_to_ignore, TraceResult* result)
+	                       Edict* entity_to_ignore, TraceResult* result)
 	{
 		engine_funcs_->trace_line(start_pos, end_pos, trace_ignore_flags, entity_to_ignore, result);
 	}
@@ -654,7 +654,7 @@ public:
 	/// <para>Traces a toss.<br/>
 	/// This simulates tossing the entity using its current origin, velocity, angular velocity, angles and gravity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to toss.
 	/// </param>
@@ -676,7 +676,7 @@ public:
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position, using the given entity's min_size and max_size.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose hull will be used.
 	/// </param>
@@ -695,7 +695,7 @@ public:
 	/// <param name="result">
 	///		Trace result instance.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		1 if the trace was entirely in a solid object, or if it hit something.<br/>
 	/// </returns>
@@ -704,7 +704,7 @@ public:
 	///		This can be any entity, not just monsters.
 	/// </remarks>
 	static qboolean trace_monster_hull(Edict* entity, const Vector& start_pos, const Vector& end_pos, const int trace_ignore_flags,
-		Edict* entity_to_ignore, TraceResult* result)
+	                                   Edict* entity_to_ignore, TraceResult* result)
 	{
 		return engine_funcs_->trace_monster_hull(entity, start_pos, end_pos, trace_ignore_flags, entity_to_ignore, result);
 	}
@@ -712,7 +712,7 @@ public:
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position, using the specified hull.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="start_pos">
 	///		Start position.
 	/// </param>
@@ -732,7 +732,7 @@ public:
 	///		Trace result instance.<br/>
 	/// </param>
 	static void trace_hull(const Vector& start_pos, const Vector& end_pos, const int trace_ignore_flags,
-		const int hull_number, Edict* entity_to_ignore, TraceResult* result)
+	                       const int hull_number, Edict* entity_to_ignore, TraceResult* result)
 	{
 		engine_funcs_->trace_hull(start_pos, end_pos, trace_ignore_flags, hull_number, entity_to_ignore, result);
 	}
@@ -742,7 +742,7 @@ public:
 	/// Similar to <c>trace_hull</c>, but will instead perform a trace in the given world hull using the given entity's model's hulls.<br/>
 	/// For studio models this will use the model's hit boxes.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="start_pos">
 	///		Start position.
 	/// </param>
@@ -773,7 +773,7 @@ public:
 	/// <para>Used to get texture info.<br/>
 	/// The given entity must have a brush model set.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="texture_entity">
 	///		Entity whose texture is to be retrieved.
 	/// </param>
@@ -783,7 +783,7 @@ public:
 	/// <param name="end_pos">
 	///		End position.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Texture instance, or null if no texture could be found.<br/>
 	/// </returns>
@@ -801,7 +801,7 @@ public:
 	/// <para>Not implemented. Triggers a sys error.<br/></para>
 	/// </summary>
 	static void trace_sphere(const Vector& start_pos, const Vector& end_pos, const int trace_ignore_flags,
-		const float radius, Edict* entity_to_ignore, TraceResult* result)
+	                         const float radius, Edict* entity_to_ignore, TraceResult* result)
 	{
 		engine_funcs_->trace_sphere(start_pos, end_pos, trace_ignore_flags, radius, entity_to_ignore, result);
 	}
@@ -810,7 +810,7 @@ public:
 	/// <para>Get the aim vector for the given entity.<br/>
 	/// Assumes <c>make_vectors</c> was called with <c>entity->vars.angles</c> beforehand.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to retrieve the aim vector for.
 	/// </param>
@@ -833,7 +833,7 @@ public:
 	/// <summary>
 	/// <para>Issues a command to the server.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="command">
 	///		Command to execute.<br/>
 	/// </param>
@@ -862,7 +862,7 @@ public:
 	/// <summary>
 	/// <para>Sends a client command to the given client.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Edict of the client that should execute the command.
 	/// </param>
@@ -881,7 +881,7 @@ public:
 	/// <summary>
 	/// <para>Creates a particle effect.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="origin">
 	///		Origin in the world.
 	/// </param>
@@ -902,7 +902,7 @@ public:
 	/// <summary>
 	/// <para>Sets the given light style to the given value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="style">
 	///		Style index.
 	/// </param>
@@ -917,11 +917,11 @@ public:
 	/// <summary>
 	/// <para>Gets the index of the given decal.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="name">
 	///		Name of the decal.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the decal, or -1 if the decal couldn't be found.<br/>
 	/// </returns>
@@ -933,11 +933,11 @@ public:
 	/// <summary>
 	/// <para>Gets the contents of the given location in the world.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="origin">
 	///		Location in the world.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Contents of the location in the world (see <c>CONTENTS_*</c> constants).<br/>
 	/// </returns>
@@ -949,7 +949,7 @@ public:
 	/// <summary>
 	/// <para>Begins a new network message.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="msg_type">
 	///		Message type.
 	/// </param>
@@ -976,7 +976,7 @@ public:
 	/// <summary>
 	/// <para>Begins a new network message.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="msg_type">
 	///		Message type.
 	/// </param>
@@ -1019,7 +1019,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single unsigned byte.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1031,7 +1031,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single character.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1043,7 +1043,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single unsigned short.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1055,7 +1055,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single unsigned int.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1067,7 +1067,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single angle value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1079,7 +1079,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single coordinate value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1091,7 +1091,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single null terminated string.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1103,7 +1103,7 @@ public:
 	/// <summary>
 	/// <para>Writes a single entity index.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <remarks>
 	///		If no message had been started, triggers a sys error.<br/>
 	/// </remarks>
@@ -1116,7 +1116,7 @@ public:
 	/// <para>Registers a cvar.<br/>
 	/// Sets the flag <c>FCVAR_EXT_DLL</c> on the cvar.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar">
 	///		Cvar to register.<br/>
 	/// </param>
@@ -1128,11 +1128,11 @@ public:
 	/// <summary>
 	/// <para>Gets the value of a cvar as a float.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar_name">
 	///		Name of the cvar whose value is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Value of the cvar, or 0 if the cvar doesn't exist.<br/>
 	/// </returns>
@@ -1144,11 +1144,11 @@ public:
 	/// <summary>
 	/// <para>Gets the value of a cvar as a string.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar_name">
 	///		Name of the cvar whose value is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Value of the cvar, or an empty string if the cvar doesn't exist.<br/>
 	/// </returns>
@@ -1160,7 +1160,7 @@ public:
 	/// <summary>
 	/// <para>Sets the value of a cvar as a float.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar_name">
 	///		Name of the cvar whose value to set.
 	/// </param>
@@ -1175,7 +1175,7 @@ public:
 	/// <summary>
 	/// <para>Sets the value of a cvar as a string.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar_name">
 	///		Name of the cvar whose value to set.
 	/// </param>
@@ -1190,7 +1190,7 @@ public:
 	/// <summary>
 	/// <para>Outputs a message to the server console.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="type">
 	///		Type of message.
 	/// </param>
@@ -1224,14 +1224,14 @@ public:
 	/// <para>Allocates memory for <c>EntityBase</c> instances.<br/>
 	/// The memory will be zeroed out.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to allocate memory for.
 	/// </param>
 	/// <param name="size">
 	///		Number of bytes to allocate.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Pointer to <c>EntityBase</c> memory, or null if it could not be allocated.<br/>
 	/// </returns>
@@ -1242,11 +1242,11 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose entity memory is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Pointer to entity <c>EntityBase</c> instance, or null if edict is null or there is no entity assigned to it.<br/>
 	/// </returns>
@@ -1258,7 +1258,7 @@ public:
 	/// <summary>
 	/// <para>Frees the <c>EntityBase</c> memory assigned to entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose memory should be freed.<br/>
 	/// </param>
@@ -1270,11 +1270,11 @@ public:
 	/// <summary>
 	/// <para>Gets the string assigned to the index.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="string">
 	///		String index whose string should be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		String.<br/>
 	/// </returns>
@@ -1282,7 +1282,7 @@ public:
 	/// <remarks>
 	///		If the index is invalid, returns a pointer to invalid memory.<br/>
 	/// </remarks>
-	static const char* sz_from_index(const Strind string)
+	static const char* sz_from_index(const unsigned int string)
 	{
 		return engine_funcs_->sz_from_index(string);
 	}
@@ -1290,11 +1290,11 @@ public:
 	/// <summary>
 	/// <para>Allocates a string in the string pool.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="value">
 	///		String to allocate.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index assigned to the string.<br/>
 	/// </returns>
@@ -1305,17 +1305,17 @@ public:
 	/// </remarks>
 	static Strind alloc_string(const char* value)
 	{
-		return engine_funcs_->alloc_string(value);
+		return Strind(engine_funcs_->alloc_string(value));
 	}
 
 	/// <summary>
 	/// <para>Gets the <c>EntityVars</c> instance assigned to the given <c>Edict</c> instance.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose <c>EntityVars</c> is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		<c>EntityVars</c><br/>
 	/// </returns>
@@ -1332,11 +1332,11 @@ public:
 	/// <summary>
 	/// <para>Gets an edict by offset.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity_offset">
 	///		Entity offset.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Edict at the given offset.<br/>
 	/// </returns>
@@ -1353,11 +1353,11 @@ public:
 	/// <summary>
 	/// <para>Gets the entity offset of the edict.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Edict whose offset is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Entity offset.<br/>
 	/// </returns>
@@ -1373,11 +1373,11 @@ public:
 	/// <summary>
 	/// <para>Gets the entity index of the edict.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="edict">
 	///		Edict whose entity index is to be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		If <c>edict</c> is null, returns 0.<br/>
 	///		If <c>edict</c> is not managed by the engine, triggers a sys error.<br/>
@@ -1391,11 +1391,11 @@ public:
 	/// <summary>
 	/// <para>Gets the edict at the given entity index.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity_index">
 	///		Entity index.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		If the given index is not valid, returns null.<br/>
 	///		Otherwise, if the entity at the given index is not in use, returns null.<br/>
@@ -1410,11 +1410,11 @@ public:
 	/// <summary>
 	/// <para>Gets the edict of an <c>EntityVars</c>.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="vars">
 	///		EntityVars.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Edict.<br/>
 	/// </returns>
@@ -1431,11 +1431,11 @@ public:
 	/// <summary>
 	/// <para>Gets the model pointer of the given entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Pointer to the model, or null if the entity doesn't have one.<br/>
 	///		Triggers a sys error if the model wasn't loaded and couldn't be loaded.<br/>
@@ -1448,14 +1448,14 @@ public:
 	/// <summary>
 	/// <para>Registers a user message.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="name">
 	///		Name of the message. Maximum length is 12, excluding null terminator. Can be a temporary string.
 	/// </param>
 	/// <param name="size">
 	///		Size of the message, in bytes. Maximum size is 192 bytes. Specify -1 for variable length messages.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Message ID, or 0 if the message could not be registered.<br/>
 	/// </returns>
@@ -1480,7 +1480,7 @@ public:
 	/// <summary>
 	/// <para>Gets the bone position and angles for the given entity and bone.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose model should be queried.
 	/// </param>
@@ -1506,11 +1506,11 @@ public:
 	/// <summary>
 	/// <para>Gets the index of an exported function.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="name">
 	///		Name of the function.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the function, or 0 if the function couldn't be found.<br/>
 	/// </returns>
@@ -1522,11 +1522,11 @@ public:
 	/// <summary>
 	/// <para>Gets the name of an exported function.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="function">
 	///		Function index.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Function name, or null if no function exists at that index.<br/>
 	/// </returns>
@@ -1538,7 +1538,7 @@ public:
 	/// <summary>
 	/// <para>Sends a message to the client console.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Client to send the message to.
 	/// </param>
@@ -1560,7 +1560,7 @@ public:
 	/// <summary>
 	/// <para>Sends a message to the server console.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="message">
 	///		Message to send.<br/>
 	/// </param>
@@ -1575,7 +1575,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	/// String containing all of the command arguments, not including the command name.
 	/// </returns>
@@ -1587,11 +1587,11 @@ public:
 	/// <summary>
 	/// <para>Gets the command argument at the given index.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="argc">
 	///		Argument index.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Command argument.<br/>
 	/// </returns>
@@ -1606,7 +1606,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		The number of command arguments. This includes the command name.
 	/// </returns>
@@ -1618,7 +1618,7 @@ public:
 	/// <summary>
 	/// <para>Gets the attachment origin and angles.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity whose model will be queried for the attachment data.
 	/// </param>
@@ -1651,7 +1651,7 @@ public:
 	/// <summary>
 	/// <para>Processes a buffer and updates the CRC.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="pul_crc">
 	///		CRC instance.
 	/// </param>
@@ -1669,7 +1669,7 @@ public:
 	/// <summary>
 	/// <para>Processes a single byte.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="pul_crc">
 	///		CRC instance.
 	/// </param>
@@ -1684,11 +1684,11 @@ public:
 	/// <summary>
 	/// <para>Finalizes the CRC instance.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="pul_crc">
 	///		CRC instance.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		CRC value.<br/>
 	/// </returns>
@@ -1700,14 +1700,14 @@ public:
 	/// <summary>
 	/// <para>Generates a random long number in the range <c>low</c> - <c>high</c>.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="low">
 	///		Lower bound.
 	/// </param>
 	/// <param name="high">
 	///		Higher bound.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Random number, or <c>low</c> if <c>high</c> is smaller than or equal to <c>low</c>.<br/>
 	/// </returns>
@@ -1719,14 +1719,14 @@ public:
 	/// <summary>
 	/// <para>Generates a random long number in the range <c>low</c> - <c>high</c>.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="low">
 	///		Lower bound.
 	/// </param>
 	/// <param name="high">
 	///		Higher bound.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Random number, or <c>low</c> if <c>high</c> is smaller than or equal to <c>low</c>.<br/>
 	/// </returns>
@@ -1738,7 +1738,7 @@ public:
 	/// <summary>
 	/// <para>Sets the view of a client to the given entity.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client whose view is to be set.
 	/// </param>
@@ -1757,7 +1757,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		The time since the first call to Time.<br/>
 	/// </returns>
@@ -1774,7 +1774,7 @@ public:
 	/// <summary>
 	/// <para>Sets the angles of the given player's crosshairs to the given settings.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client whose crosshair settings should be set.
 	/// </param>
@@ -1796,14 +1796,14 @@ public:
 	/// <summary>
 	/// <para>Loads a file from disk.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="file_name">
 	///		Name of the file. Path starts in the game directory.
 	/// </param>
 	/// <param name="length">
 	///		If not null, is set to the size of the file, in bytes.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Pointer to the file buffer, or null if the file could not be loaded.<br/>
 	/// </returns>
@@ -1815,7 +1815,7 @@ public:
 	/// <summary>
 	/// <para>Frees the buffer provided by <c>load_file_for_me</c>.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="buffer">
 	///		Pointer to buffer.<br/>
 	/// </param>
@@ -1827,7 +1827,7 @@ public:
 	/// <summary>
 	/// <para>Signals the engine that a section has ended.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="section_name">
 	///		Possible values:<br/>
 	///		_oem_end_training<br/>
@@ -1846,7 +1846,7 @@ public:
 	/// <summary>
 	/// <para>Compares file times.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="file_name1">
 	///		First file to compare.
 	/// </param>
@@ -1859,7 +1859,7 @@ public:
 	///		If the first file is older, -1.<br/>
 	///		If the second file is older, 1.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		True if both file names are non-null, false otherwise.<br/>
 	/// </returns>
@@ -1871,7 +1871,7 @@ public:
 	/// <summary>
 	/// <para>Gets the game directory name.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="game_dir">
 	///		Buffer to store the game directory name in. Must be at least MAX_PATH bytes large.<br/>
 	/// </param>
@@ -1892,7 +1892,7 @@ public:
 	/// <summary>
 	/// <para>Fades the given client's volume.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client.
 	/// </param>
@@ -1909,7 +1909,7 @@ public:
 	///		How long it takes to fade in, in seconds.<br/>
 	/// </param>
 	static void fade_client_volume(const Edict* client, const int fade_percent, const int fade_out_seconds,
-		const int hold_time, const int fade_in_seconds)
+	                               const int hold_time, const int fade_in_seconds)
 	{
 		engine_funcs_->fade_client_volume(client, fade_percent, fade_out_seconds, hold_time, fade_in_seconds);
 	}
@@ -1917,7 +1917,7 @@ public:
 	/// <summary>
 	/// <para>Sets the client's maximum speed value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client to set.
 	/// </param>
@@ -1936,11 +1936,11 @@ public:
 	/// <summary>
 	/// <para>Creates a fake client (bot).<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="name">
 	///		Name of the client to show.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		The fake client, or null if it can't be created.<br/>
 	/// </returns>
@@ -1952,7 +1952,7 @@ public:
 	/// <summary>
 	/// <para>Runs player movement for a fake client.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="fake_client">
 	///		Client to move. Must be a fake client.
 	/// </param>
@@ -1978,7 +1978,7 @@ public:
 	///		Time between now and previous <c>run_player_move</c> call.<br/>
 	/// </param>
 	static void run_player_move(Edict* fake_client, const Vector& view_angles, const float forward_move, const float side_move, const float up_move,
-		const unsigned short buttons, const byte impulse, const byte msec)
+	                            const unsigned short buttons, const byte impulse, const byte msec)
 	{
 		engine_funcs_->run_player_move(fake_client, view_angles, forward_move, side_move, up_move, buttons, impulse, msec);
 	}
@@ -1986,7 +1986,7 @@ public:
 	/// <summary>
 	/// <para>Computes the total number of entities currently in existence.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		Number of entities.<br/>
 	/// </returns>
@@ -2002,11 +2002,11 @@ public:
 	/// <summary>
 	/// <para>Gets the given client's info key buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Info key buffer.<br/>
 	/// </returns>
@@ -2024,14 +2024,14 @@ public:
 	/// <summary>
 	/// <para>Gets the value of the given key from the given buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="info_buffer">
 	///		Buffer to query.
 	/// </param>
 	/// <param name="key">
 	///		Key whose value to retrieve.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		The requested value, or an empty string.<br/>
 	/// </returns>
@@ -2043,7 +2043,7 @@ public:
 	/// <summary>
 	/// <para>Sets the value of the given key in the given buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="info_buffer">
 	///		Buffer to modify.
 	/// </param>
@@ -2066,7 +2066,7 @@ public:
 	/// <para>Sets the value of the given key in the given buffer.<br/>
 	/// This only works for client buffers.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client_index">
 	///		Entity index of the client.
 	/// </param>
@@ -2087,11 +2087,11 @@ public:
 	/// <summary>
 	/// <para>Checks if the given filename is a valid map.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="file_name">
 	///		Name of the map to check.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		True if the map is valid, false otherwise.
 	/// </returns>
@@ -2103,7 +2103,7 @@ public:
 	/// <summary>
 	/// <para>Projects a static decal in the world.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="origin">
 	///		Origin in the world to project the decal at.
 	/// </param>
@@ -2124,12 +2124,12 @@ public:
 	/// <summary>
 	/// <para>Precaches a file.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="path">
 	///		Name of the file to precache. Starts in the game directory.<br/>
 	///		This string must live for at least as long as the map itself.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the file.<br/>
 	/// </returns>
@@ -2147,11 +2147,11 @@ public:
 	/// <summary>
 	/// <para>Returns the server assigned userid for this player.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client.<br/>
 	///	</param>
-	/// 
+	///
 	/// <returns>
 	///		 User ID or -1 if the edict couldn't be found in the list of clients.<br/>
 	/// </returns>
@@ -2163,7 +2163,7 @@ public:
 	/// <summary>
 	/// <para>Builds a sound message to send to a client.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity that is playing the sound.
 	/// </param>
@@ -2198,14 +2198,14 @@ public:
 	///		Client to send the message to for message types that target one client.<br/>
 	/// </param>
 	static void build_sound_msg(Edict* entity, const int channel, const char* sample, const float volume, const float attenuation, const int flags,
-		const int pitch, const MessageType msg_type, const int msg_id, const Vector& origin, Edict* client)
+	                            const int pitch, const MessageType msg_type, const int msg_id, const Vector& origin, Edict* client)
 	{
 		engine_funcs_->build_sound_msg(entity, channel, sample, volume, attenuation, flags, pitch, msg_type, msg_id, origin, client);
 	}
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		Whether this is a dedicated server.<br/>
 	/// </returns>
@@ -2216,11 +2216,11 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar_name">
 	///		Name of the CVar to retrieve.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		CVar pointer, or null if the cvar doesn't exist.<br/>
 	/// </returns>
@@ -2232,11 +2232,11 @@ public:
 	/// <summary>
 	/// <para>Returns the server assigned WONid for this player.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		WON ID, or -1 if the edict couldn't be found in the list of clients.<br/>
 	/// </returns>
@@ -2252,7 +2252,7 @@ public:
 	/// <summary>
 	/// <para>Removes a key from the info buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="info_buffer">
 	///		Buffer to modify.
 	/// </param>
@@ -2267,14 +2267,14 @@ public:
 	/// <summary>
 	/// <para>Gets the given physics key-value from the given client's buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client whose buffer will be queried.
 	/// </param>
 	/// <param name="key">
 	///		Key whose value will be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		The value, or an empty string if the key does not exist.<br/>
 	/// </returns>
@@ -2286,7 +2286,7 @@ public:
 	/// <summary>
 	/// <para>Sets the given physics key-value in the given client's buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client whose buffer will be modified.
 	/// </param>
@@ -2304,11 +2304,11 @@ public:
 	/// <summary>
 	/// <para>Gets the physics info string for the given client.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client whose buffer will be retrieved.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Buffer, or an empty string if the client is invalid.<br/>
 	/// </returns>
@@ -2320,14 +2320,14 @@ public:
 	/// <summary>
 	/// <para>Precaches an event.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="type">
 	///		Should always be 1.
 	/// </param>
 	/// <param name="path">
 	///		Name of the event. Format should be events/<name>.sc, including the directory and extension.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Event index. Used with <c>playback_event</c>.<br/>
 	/// </returns>
@@ -2338,7 +2338,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <param name="flags">
 	///		Event flags.
 	/// </param>
@@ -2376,7 +2376,8 @@ public:
 	///		Boolean parameter 2.<br/>
 	/// </param>
 	static void playback_event(const int flags, const Edict* invoker, const unsigned short event_index, const float delay, Vector& origin,
-		Vector& angles, const float f_param1, const float f_param2, const int i_param1, const int i_param2, const qboolean b_param1, const qboolean b_param2)
+	                           Vector& angles, const float f_param1, const float f_param2, const int i_param1, const int i_param2,
+	                           const qboolean b_param1, const qboolean b_param2)
 	{
 		engine_funcs_->playback_event(flags, invoker, event_index, delay, origin, angles, f_param1, f_param2, i_param1, i_param2, b_param1, b_param2);
 	}
@@ -2384,11 +2385,11 @@ public:
 	/// <summary>
 	/// <para>Sets the Fat Potentially Visible Set buffer to contain data based on the given origin.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="origin">
 	///		Origin.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		PVS data.<br/>
 	/// </returns>
@@ -2400,11 +2401,11 @@ public:
 	/// <summary>
 	/// <para>Sets the Fat Potentially Audible Set buffer to contain data based on the given origin.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="origin">
 	///		Origin.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		PAS data.<br/>
 	/// </returns>
@@ -2416,14 +2417,14 @@ public:
 	/// <summary>
 	/// <para>Checks if the given entity is visible in the given visible set.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="entity">
 	///		Entity to check.
 	/// </param>
 	/// <param name="set">
 	///		Buffer detailing the current visible set.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Whether the given entity is visible in the given visible set.<br/>
 	/// </returns>
@@ -2435,7 +2436,7 @@ public:
 	/// <summary>
 	/// <para>Marks the given field in the given list as set.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="fields">
 	///		List of fields.
 	/// </param>
@@ -2450,7 +2451,7 @@ public:
 	/// <summary>
 	/// <para>Marks the given field in the given list as not set.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="fields">
 	///		List of fields.
 	/// </param>
@@ -2465,14 +2466,15 @@ public:
 	/// <summary>
 	/// <para>Adds a delta encoder.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="name">
 	///		Name of the delta.lst entry to add the encoder for.
 	/// </param>
 	/// <param name="conditional_encode">
 	///		Encoder function.<br/>
 	/// </param>
-	static void delta_add_encoder(const char* name, void (*conditional_encode)(struct delta* fields, const unsigned char* from, const unsigned char* to))
+	static void delta_add_encoder(const char* name,
+	                              void (*conditional_encode)(struct delta* fields, const unsigned char* from, const unsigned char* to))
 	{
 		engine_funcs_->delta_add_encoder(name, conditional_encode);
 	}
@@ -2480,7 +2482,7 @@ public:
 	/// <summary>
 	/// <para>Returns the client index of the client that is currently being handled by an engine callback.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		-1 if no client is currently being handled.<br/>
 	/// </returns>
@@ -2491,11 +2493,11 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		True if the given client has cl_lw (weapon prediction) enabled.
 	/// </returns>
@@ -2507,14 +2509,14 @@ public:
 	/// <summary>
 	/// <para>Finds the index of a delta field.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="fields">
 	///		List of fields.
 	/// </param>
 	/// <param name="field_name">
 	///		Name of the field to find.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Index of the delta field, or -1 if the field couldn't be found.
 	/// </returns>
@@ -2526,7 +2528,7 @@ public:
 	/// <summary>
 	/// <para>Marks a delta field as set by index.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="fields">
 	///		List of fields.
 	/// </param>
@@ -2545,7 +2547,7 @@ public:
 	/// <summary>
 	/// <para>Marks a delta field as not set by index.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="fields">
 	///		List of fields.
 	/// </param>
@@ -2564,7 +2566,7 @@ public:
 	/// <summary>
 	/// <para>Used to filter contents checks.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="mask">
 	///		Mask to check.
 	/// </param>
@@ -2579,25 +2581,25 @@ public:
 	/// <summary>
 	/// <para>Creates an instanced baseline. Used to define a baseline for a particular entity type.<br/></para>
 	/// </summary>
-	/// 
-	/// <param name="class_name">
+	///
+	/// <param name="classname">
 	///		Name of the entity class.
 	/// </param>
 	/// <param name="baseline">
 	///		Baseline to set.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	/// </returns>
-	static int create_instanced_baseline(const Strind class_name, EntityState* baseline)
+	static int create_instanced_baseline(const Strind& classname, EntityState* baseline)
 	{
-		return engine_funcs_->create_instanced_baseline(class_name, baseline);
+		return engine_funcs_->create_instanced_baseline(classname, baseline);
 	}
 
 	/// <summary>
 	/// <para>Directly sets a CVar value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cvar">
 	///		CVar.
 	/// </param>
@@ -2612,7 +2614,7 @@ public:
 	/// <summary>
 	/// <para>Forces the client and server to be running with the same version of the specified file (e.g., a player model).<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="type">
 	///		Force type.
 	/// </param>
@@ -2637,7 +2639,7 @@ public:
 	/// <summary>
 	/// <para>Get player statistics.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client to query.
 	/// </param>
@@ -2655,7 +2657,7 @@ public:
 	/// <summary>
 	/// <para>Adds a server command.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cmd_name">
 	///		Name of the command to add. This string must live for the rest of the server's lifetime.
 	/// </param>
@@ -2670,14 +2672,14 @@ public:
 	/// <summary>
 	/// <para>Gets whether the given receiver can hear the given sender.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="receiver">
 	///		Receiver. This is an entity index.
 	/// </param>
 	/// <param name="sender">
 	///		Sender. This is an entity index.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Whether the given receiver can hear the given sender.<br/>
 	/// </returns>
@@ -2689,7 +2691,7 @@ public:
 	/// <summary>
 	/// <para>Sets whether the given receiver can hear the given sender.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="receiver">
 	///		Receiver. This is an entity index.
 	/// </param>
@@ -2699,7 +2701,7 @@ public:
 	/// <param name="listen">
 	///		Whether the given receiver can hear the given sender.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Whether the setting was changed.<br/>
 	/// </returns>
@@ -2711,11 +2713,11 @@ public:
 	/// <summary>
 	/// <para>Gets the player's auth ID.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Client.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		The player's auth ID, or an empty string. This points to a temporary buffer, copy the results.<br/>
 	/// </returns>
@@ -2727,14 +2729,14 @@ public:
 	/// <summary>
 	/// <para>Gets the sequence that has the given entry name.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="file_name">
 	///		Ignored.
 	/// </param>
 	/// <param name="entry_name">
 	///		Entry name.<br/>
 	///	</param>
-	///	
+	///
 	/// <returns>
 	///		Sequence, or null if no such sequence exists.<br/>
 	/// </returns>
@@ -2746,7 +2748,7 @@ public:
 	/// <summary>
 	/// <para>Picks a sentence from the given group.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="group_name">
 	///		Group from which to select a sentence.
 	/// </param>
@@ -2756,7 +2758,7 @@ public:
 	/// <param name="picked">
 	///		If not null, this is set to the index of the sentence that was picked.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Sentence that was picked, or null if there is no group by that name, or no sentences in the group.<br/>
 	/// </returns>
@@ -2768,11 +2770,11 @@ public:
 	/// <summary>
 	/// <para>LH: Give access to file size via filesystem.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="file_name">
 	///		Name of the file whose size is to be queried.<br/>
 	///	</param>
-	///	
+	///
 	/// <returns>
 	///		File size, or -1 if the file doesn't exist.<br/>
 	/// </returns>
@@ -2784,11 +2786,11 @@ public:
 	/// <summary>
 	/// <para>Gets the average wave length in seconds.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="file_path">
 	///		Name of the sound.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Length of the sound file, in seconds.<br/>
 	/// </returns>
@@ -2800,7 +2802,7 @@ public:
 	/// <summary>
 	/// <para>MDC: Added for CZ career-mode.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <returns>
 	///		Whether this is a Condition Zero Career match.<br/>
 	/// </returns>
@@ -2811,11 +2813,11 @@ public:
 
 	/// <summary>
 	/// </summary>
-	/// 
+	///
 	/// <param name="label">
 	///		Label.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Number of characters of the localized string referenced by using label.<br/>
 	/// </returns>
@@ -2827,7 +2829,7 @@ public:
 	/// <summary>
 	/// <para>Marks the message with the given ID as having been shown.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="message_id">
 	///		Message ID.<br/>
 	/// </param>
@@ -2839,11 +2841,11 @@ public:
 	/// <summary>
 	/// <para>Gets the number of times the message with the given ID has been shown.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="message_id">
 	///		Message ID.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Number of times the message with the given ID has been shown.<br/>
 	/// </returns>
@@ -2855,7 +2857,7 @@ public:
 	/// <summary>
 	/// <para>Processes the tutor message decay buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="buffer">
 	///		Buffer.
 	/// </param>
@@ -2870,7 +2872,7 @@ public:
 	/// <summary>
 	/// <para>Constructs the tutor message decay buffer.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="buffer">
 	///		Buffer.
 	/// </param>
@@ -2893,7 +2895,7 @@ public:
 	/// <summary>
 	/// <para>Queries the given client for a cvar value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Player to query.
 	/// </param>
@@ -2912,7 +2914,7 @@ public:
 	/// <summary>
 	/// <para>Queries the given client for a cvar value.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="client">
 	///		Player to query.
 	/// </param>
@@ -2934,14 +2936,14 @@ public:
 	/// <summary>
 	/// <para>Checks if a command line parameter was provided.<br/></para>
 	/// </summary>
-	/// 
+	///
 	/// <param name="cmd_line_token">
 	///		Command key to look for.
 	/// </param>
 	/// <param name="next">
 	///		If the key was found, this is set to the value.<br/>
 	/// </param>
-	/// 
+	///
 	/// <returns>
 	///		Key index in the command line buffer, or 0 if it wasn't found.<br/>
 	/// </returns>

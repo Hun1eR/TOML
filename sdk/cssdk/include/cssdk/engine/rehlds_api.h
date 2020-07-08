@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -35,168 +35,168 @@ constexpr auto REHLDS_API_VERSION_MINOR = 7;
 constexpr auto VREHLDS_HLDS_API_VERSION = "VREHLDS_HLDS_API_VERSION001";
 
 // Steam_NotifyClientConnect hook
-using ReHookSteamNotifyClientConnect = HookChain<qboolean, GameClient*, const void*, unsigned int>;
-using ReHookRegistrySteamNotifyClientConnect = HookChainRegistry<qboolean, GameClient*, const void*, unsigned int>;
+using ReHookSteamNotifyClientConnect = IHookChain<qboolean, GameClient*, const void*, unsigned int>;
+using ReHookRegistrySteamNotifyClientConnect = IHookChainRegistry<qboolean, GameClient*, const void*, unsigned int>;
 
 // SV_ConnectClient hook
-using ReHookSvConnectClient = HookChainVoid<>;
-using ReHookRegistrySvConnectClient = HookChainVoidRegistry<>;
+using ReHookSvConnectClient = IHookChainVoid<>;
+using ReHookRegistrySvConnectClient = IHookChainVoidRegistry<>;
 
 // SV_GetIDString hook
-using ReHookSvGetIdString = HookChain<char*, UserId*>;
-using ReHookRegistrySvGetIdString = HookChainRegistry<char*, UserId*>;
+using ReHookSvGetIdString = IHookChain<char*, UserId*>;
+using ReHookRegistrySvGetIdString = IHookChainRegistry<char*, UserId*>;
 
 // SV_SendServerinfo hook
-using ReHookSvSendServerInfo = HookChainVoid<SizeBuf*, GameClient*>;
-using ReHookRegistrySvSendServerInfo = HookChainVoidRegistry<SizeBuf*, GameClient*>;
+using ReHookSvSendServerInfo = IHookChainVoid<SizeBuf*, GameClient*>;
+using ReHookRegistrySvSendServerInfo = IHookChainVoidRegistry<SizeBuf*, GameClient*>;
 
 // SV_CheckProtocol hook
-using ReHookSvCheckProtocol = HookChain<int, NetAddress*, int>;
-using ReHookRegistrySvCheckProtocol = HookChainRegistry<int, NetAddress*, int>;
+using ReHookSvCheckProtocol = IHookChain<int, NetAddress*, int>;
+using ReHookRegistrySvCheckProtocol = IHookChainRegistry<int, NetAddress*, int>;
 
 // SVC_GetChallenge_mod hook
-using ReHookSvcGetChallengeMod = HookChainVoid<char*, int>;
-using ReHookRegistrySvcGetChallengeMod = HookChainVoidRegistry<char*, int>;
+using ReHookSvcGetChallengeMod = IHookChainVoid<char*, int>;
+using ReHookRegistrySvcGetChallengeMod = IHookChainVoidRegistry<char*, int>;
 
 // SV_CheckKeyInfo hook
-using ReHookSvCheckKeyInfo = HookChain<int, NetAddress*, char*, uint16*, int*, char*, char*>;
-using ReHookRegistrySvCheckKeyInfo = HookChainRegistry<int, NetAddress*, char*, uint16*, int*, char*, char*>;
+using ReHookSvCheckKeyInfo = IHookChain<int, NetAddress*, char*, uint16*, int*, char*, char*>;
+using ReHookRegistrySvCheckKeyInfo = IHookChainRegistry<int, NetAddress*, char*, uint16*, int*, char*, char*>;
 
 // SV_CheckIPRestrictions hook
-using ReHookSvCheckIpRestrictions = HookChain<int, NetAddress*, int>;
-using ReHookRegistrySvCheckIpRestrictions = HookChainRegistry<int, NetAddress*, int>;
+using ReHookSvCheckIpRestrictions = IHookChain<int, NetAddress*, int>;
+using ReHookRegistrySvCheckIpRestrictions = IHookChainRegistry<int, NetAddress*, int>;
 
 // SV_FinishCertificateCheck hook
-using ReHookSvFinishCertificateCheck = HookChain<int, NetAddress*, int, char*, char*>;
-using ReHookRegistrySvFinishCertificateCheck = HookChainRegistry<int, NetAddress*, int, char*, char*>;
+using ReHookSvFinishCertificateCheck = IHookChain<int, NetAddress*, int, char*, char*>;
+using ReHookRegistrySvFinishCertificateCheck = IHookChainRegistry<int, NetAddress*, int, char*, char*>;
 
 // Steam_NotifyBotConnect hook
-using ReHookSteamNotifyBotConnect = HookChain<qboolean, GameClient*>;
-using ReHookRegistrySteamNotifyBotConnect = HookChainRegistry<qboolean, GameClient*>;
+using ReHookSteamNotifyBotConnect = IHookChain<qboolean, GameClient*>;
+using ReHookRegistrySteamNotifyBotConnect = IHookChainRegistry<qboolean, GameClient*>;
 
 // SerializeSteamId
-using ReHookSerializeSteamId = HookChainVoid<UserId*, UserId*>;
-using ReHookRegistrySerializeSteamId = HookChainVoidRegistry<UserId*, UserId*>;
+using ReHookSerializeSteamId = IHookChainVoid<UserId*, UserId*>;
+using ReHookRegistrySerializeSteamId = IHookChainVoidRegistry<UserId*, UserId*>;
 
 // SV_CompareUserID hook
-using ReHookSvCompareUserId = HookChain<qboolean, UserId*, UserId*>;
-using ReHookRegistrySvCompareUserId = HookChainRegistry<qboolean, UserId*, UserId*>;
+using ReHookSvCompareUserId = IHookChain<qboolean, UserId*, UserId*>;
+using ReHookRegistrySvCompareUserId = IHookChainRegistry<qboolean, UserId*, UserId*>;
 
 // Steam_NotifyClientDisconnect
-using ReHookSteamNotifyClientDisconnect = HookChainVoid<GameClient*>;
-using ReHookRegistrySteamNotifyClientDisconnect = HookChainVoidRegistry<GameClient*>;
+using ReHookSteamNotifyClientDisconnect = IHookChainVoid<GameClient*>;
+using ReHookRegistrySteamNotifyClientDisconnect = IHookChainVoidRegistry<GameClient*>;
 
 // PreProcessPacket
-using ReHookPreprocessPacket = HookChain<bool, uint8*, unsigned int, const NetAddress&>;
-using ReHookRegistryPreprocessPacket = HookChainRegistry<bool, uint8*, unsigned int, const NetAddress&>;
+using ReHookPreprocessPacket = IHookChain<bool, uint8*, unsigned int, const NetAddress&>;
+using ReHookRegistryPreprocessPacket = IHookChainRegistry<bool, uint8*, unsigned int, const NetAddress&>;
 
 // ValidateCommand
-using ReHookValidateCommand = HookChain<bool, const char*, CmdSource, GameClient*>;
-using ReHookRegistryValidateCommand = HookChainRegistry<bool, const char*, CmdSource, GameClient*>;
+using ReHookValidateCommand = IHookChain<bool, const char*, CmdSource, GameClient*>;
+using ReHookRegistryValidateCommand = IHookChainRegistry<bool, const char*, CmdSource, GameClient*>;
 
 // ExecuteServerStringCmd
-using ReHookExecuteServerStringCmd = HookChainVoid<const char*, CmdSource, GameClient*>;
-using ReHookRegistryExecuteServerStringCmd = HookChainVoidRegistry<const char*, CmdSource, GameClient*>;
+using ReHookExecuteServerStringCmd = IHookChainVoid<const char*, CmdSource, GameClient*>;
+using ReHookRegistryExecuteServerStringCmd = IHookChainVoidRegistry<const char*, CmdSource, GameClient*>;
 
 // ClientConnected
-using ReHookClientConnected = HookChainVoid<GameClient*>;
-using ReHookRegistryClientConnected = HookChainVoidRegistry<GameClient*>;
+using ReHookClientConnected = IHookChainVoid<GameClient*>;
+using ReHookRegistryClientConnected = IHookChainVoidRegistry<GameClient*>;
 
 // HandleNetCommand
-using ReHookHandleNetCommand = HookChainVoid<GameClient*, int8>;
-using ReHookRegistryHandleNetCommand = HookChainVoidRegistry<GameClient*, int8>;
+using ReHookHandleNetCommand = IHookChainVoid<GameClient*, int8>;
+using ReHookRegistryHandleNetCommand = IHookChainVoidRegistry<GameClient*, int8>;
 
 // Mod_LoadBrushModel
-using ReHookModLoadBrushModel = HookChainVoid<Model*, void*>;
-using ReHookRegistryModLoadBrushModel = HookChainVoidRegistry<Model*, void*>;
+using ReHookModLoadBrushModel = IHookChainVoid<Model*, void*>;
+using ReHookRegistryModLoadBrushModel = IHookChainVoidRegistry<Model*, void*>;
 
 // Mod_LoadStudioModel
-using ReHookModLoadStudioModel = HookChainVoid<Model*, void*>;
-using ReHookRegistryModLoadStudioModel = HookChainVoidRegistry<Model*, void*>;
+using ReHookModLoadStudioModel = IHookChainVoid<Model*, void*>;
+using ReHookRegistryModLoadStudioModel = IHookChainVoidRegistry<Model*, void*>;
 
 // SV_EmitEvents hook
-using ReHookSvEmitEvents = HookChainVoid<GameClient*, PacketEntities*, SizeBuf*>;
-using ReHookRegistrySvEmitEvents = HookChainVoidRegistry<GameClient*, PacketEntities*, SizeBuf*>;
+using ReHookSvEmitEvents = IHookChainVoid<GameClient*, PacketEntities*, SizeBuf*>;
+using ReHookRegistrySvEmitEvents = IHookChainVoidRegistry<GameClient*, PacketEntities*, SizeBuf*>;
 
 // EV_PlayReliableEvent hook
-using ReHookEvPlayReliableEvent = HookChainVoid<GameClient*, int, unsigned short, float, EventArgs*>;
-using ReHookRegistryEvPlayReliableEvent = HookChainVoidRegistry<GameClient*, int, unsigned short, float, EventArgs*>;
+using ReHookEvPlayReliableEvent = IHookChainVoid<GameClient*, int, unsigned short, float, EventArgs*>;
+using ReHookRegistryEvPlayReliableEvent = IHookChainVoidRegistry<GameClient*, int, unsigned short, float, EventArgs*>;
 
 // SV_StartSound hook
-using ReHookSvStartSound = HookChainVoid<int, Edict*, int, const char*, int, float, int, int>;
-using ReHookRegistrySvStartSound = HookChainVoidRegistry<int, Edict*, int, const char*, int, float, int, int>;
+using ReHookSvStartSound = IHookChainVoid<int, Edict*, int, const char*, int, float, int, int>;
+using ReHookRegistrySvStartSound = IHookChainVoidRegistry<int, Edict*, int, const char*, int, float, int, int>;
 
 // PF_Remove_I hook
-using ReHookPfRemoveI = HookChainVoid<Edict*>;
-using ReHookRegistryPfRemoveI = HookChainVoidRegistry<Edict*>;
+using ReHookPfRemoveI = IHookChainVoid<Edict*>;
+using ReHookRegistryPfRemoveI = IHookChainVoidRegistry<Edict*>;
 
 // PF_BuildSoundMsg_I hook
-using ReHookPfBuildSoundMsgI = HookChainVoid<Edict*, int, const char*, float, float, int, int, int, int, const float*, Edict*>;
-using ReHookRegistryPfBuildSoundMsgI = HookChainVoidRegistry<Edict*, int, const char*, float, float, int, int, int, int, const float*, Edict*>;
+using ReHookPfBuildSoundMsgI = IHookChainVoid<Edict*, int, const char*, float, float, int, int, int, int, const float*, Edict*>;
+using ReHookRegistryPfBuildSoundMsgI = IHookChainVoidRegistry<Edict*, int, const char*, float, float, int, int, int, int, const float*, Edict*>;
 
 // SV_WriteFullClientUpdate hook
-using ReHookSvWriteFullClientUpdate = HookChainVoid<GameClient*, char*, std::size_t, SizeBuf*, GameClient*>;
-using ReHookRegistrySvWriteFullClientUpdate = HookChainVoidRegistry<GameClient*, char*, std::size_t, SizeBuf*, GameClient*>;
+using ReHookSvWriteFullClientUpdate = IHookChainVoid<GameClient*, char*, std::size_t, SizeBuf*, GameClient*>;
+using ReHookRegistrySvWriteFullClientUpdate = IHookChainVoidRegistry<GameClient*, char*, std::size_t, SizeBuf*, GameClient*>;
 
 // SV_CheckConsistencyResponse hook
-using ReHookSvCheckConsistencyResponse = HookChain<bool, GameClient*, Resource*, uint32>;
-using ReHookRegistrySvCheckConsistencyResponse = HookChainRegistry<bool, GameClient*, Resource*, uint32>;
+using ReHookSvCheckConsistencyResponse = IHookChain<bool, GameClient*, Resource*, uint32>;
+using ReHookRegistrySvCheckConsistencyResponse = IHookChainRegistry<bool, GameClient*, Resource*, uint32>;
 
 // SV_DropClient hook
-using ReHookSvDropClient = HookChainVoid<GameClient*, bool, const char*>;
-using ReHookRegistrySvDropClient = HookChainVoidRegistry<GameClient*, bool, const char*>;
+using ReHookSvDropClient = IHookChainVoid<GameClient*, bool, const char*>;
+using ReHookRegistrySvDropClient = IHookChainVoidRegistry<GameClient*, bool, const char*>;
 
 // SV_ActivateServer hook
-using ReHookSvActivateServer = HookChainVoid<int>;
-using ReHookRegistrySvActivateServer = HookChainVoidRegistry<int>;
+using ReHookSvActivateServer = IHookChainVoid<int>;
+using ReHookRegistrySvActivateServer = IHookChainVoidRegistry<int>;
 
 // SV_WriteVoiceCodec hook
-using ReHookSvWriteVoiceCodec = HookChainVoid<SizeBuf*>;
-using ReHookRegistrySvWriteVoiceCodec = HookChainVoidRegistry<SizeBuf*>;
+using ReHookSvWriteVoiceCodec = IHookChainVoid<SizeBuf*>;
+using ReHookRegistrySvWriteVoiceCodec = IHookChainVoidRegistry<SizeBuf*>;
 
 // Steam_GSGetSteamID hook
-using ReHookSteamGsGetSteamId = HookChain<uint64>;
-using ReHookRegistrySteamGsGetSteamId = HookChainRegistry<uint64>;
+using ReHookSteamGsGetSteamId = IHookChain<uint64>;
+using ReHookRegistrySteamGsGetSteamId = IHookChainRegistry<uint64>;
 
 // SV_TransferConsistencyInfo hook
-using ReHookSvTransferConsistencyInfo = HookChain<int>;
-using ReHookRegistrySvTransferConsistencyInfo = HookChainRegistry<int>;
+using ReHookSvTransferConsistencyInfo = IHookChain<int>;
+using ReHookRegistrySvTransferConsistencyInfo = IHookChainRegistry<int>;
 
 // Steam_GSBUpdateUserData hook
-using ReHookSteamGsbUpdateUserData = HookChain<bool, uint64, const char*, uint32>;
-using ReHookRegistrySteamGsbUpdateUserData = HookChainRegistry<bool, uint64, const char*, uint32>;
+using ReHookSteamGsbUpdateUserData = IHookChain<bool, uint64, const char*, uint32>;
+using ReHookRegistrySteamGsbUpdateUserData = IHookChainRegistry<bool, uint64, const char*, uint32>;
 
 // Cvar_DirectSet hook
-using ReHookCvarDirectSet = HookChainVoid<CVar*, const char*>;
-using ReHookRegistryCvarDirectSet = HookChainVoidRegistry<CVar*, const char*>;
+using ReHookCvarDirectSet = IHookChainVoid<CVar*, const char*>;
+using ReHookRegistryCvarDirectSet = IHookChainVoidRegistry<CVar*, const char*>;
 
 // SV_EstablishTimeBase hook
-using ReHookSvEstablishTimeBase = HookChainVoid<GameClient*, UserCmd*, int, int, int>;
-using ReHookRegistrySvEstablishTimeBase = HookChainVoidRegistry<GameClient*, UserCmd*, int, int, int>;
+using ReHookSvEstablishTimeBase = IHookChainVoid<GameClient*, UserCmd*, int, int, int>;
+using ReHookRegistrySvEstablishTimeBase = IHookChainVoidRegistry<GameClient*, UserCmd*, int, int, int>;
 
 // SV_Spawn_f hook
-using ReHookSvSpawnF = HookChainVoid<>;
-using ReHookRegistrySvSpawnF = HookChainVoidRegistry<>;
+using ReHookSvSpawnF = IHookChainVoid<>;
+using ReHookRegistrySvSpawnF = IHookChainVoidRegistry<>;
 
 // SV_CreatePacketEntities hook
-using ReHookSvCreatePacketEntities = HookChain<int, SvDelta, GameClient*, PacketEntities*, SizeBuf*>;
-using ReHookRegistrySvCreatePacketEntities = HookChainRegistry<int, SvDelta, GameClient*, PacketEntities*, SizeBuf*>;
+using ReHookSvCreatePacketEntities = IHookChain<int, SvDelta, GameClient*, PacketEntities*, SizeBuf*>;
+using ReHookRegistrySvCreatePacketEntities = IHookChainRegistry<int, SvDelta, GameClient*, PacketEntities*, SizeBuf*>;
 
 // SV_EmitSound2 hook
-using ReHookSvEmitSound2 = HookChain<bool, Edict*, GameClient*, int, const char*, float, float, int, int, int, const float*>;
-using ReHookRegistrySvEmitSound2 = HookChainRegistry<bool, Edict*, GameClient*, int, const char*, float, float, int, int, int, const float*>;
+using ReHookSvEmitSound2 = IHookChain<bool, Edict*, GameClient*, int, const char*, float, float, int, int, int, const float*>;
+using ReHookRegistrySvEmitSound2 = IHookChainRegistry<bool, Edict*, GameClient*, int, const char*, float, float, int, int, int, const float*>;
 
 // CreateFakeClient hook
-using ReHookCreateFakeClient = HookChain<Edict*, const char*>;
-using ReHookRegistryCreateFakeClient = HookChainRegistry<Edict*, const char*>;
+using ReHookCreateFakeClient = IHookChain<Edict*, const char*>;
+using ReHookRegistryCreateFakeClient = IHookChainRegistry<Edict*, const char*>;
 
 // SV_CheckConnectionLessRateLimits
-using ReHookSvCheckConnectionLessRateLimits = HookChain<bool, NetAddress&, const uint8*, int>;
-using ReHookRegistrySvCheckConnectionLessRateLimits = HookChainRegistry<bool, NetAddress&, const uint8*, int>;
+using ReHookSvCheckConnectionLessRateLimits = IHookChain<bool, NetAddress&, const uint8*, int>;
+using ReHookRegistrySvCheckConnectionLessRateLimits = IHookChainRegistry<bool, NetAddress&, const uint8*, int>;
 
 // SV_Frame hook
-using ReHookSvFrame = HookChainVoid<>;
-using ReHookRegistrySvFrame = HookChainVoidRegistry<>;
+using ReHookSvFrame = IHookChainVoid<>;
+using ReHookRegistrySvFrame = IHookChainVoidRegistry<>;
 
 /// <summary>
 /// Class RehldsHookChains.
@@ -559,7 +559,7 @@ struct RehldsFuncs {
 	/// <summary>
 	/// </summary>
 	bool (*sv_emit_sound2)(Edict* entity, GameClient* receiver, int channel, const char* sample, float volume,
-		float attenuation, int flags, int pitch, int emit_flags, const Vector& origin){};
+	                       float attenuation, int flags, int pitch, int emit_flags, const Vector& origin){};
 
 	/// <summary>
 	/// </summary>

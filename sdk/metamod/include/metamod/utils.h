@@ -76,7 +76,7 @@ struct MetaUtilFuncPointers {
 	const char* (*is_querying_client_cvar)(MetaPluginInfo* plugin, const Edict* edict){};
 	int (*make_request_id)(MetaPluginInfo* plugin){};
 	void (*get_hook_tables)(MetaPluginInfo* plugin, EngineFuncPointers** engine_funcs, DllFuncPointers** dll_funcs,
-		DllNewFuncPointers** new_dll_funcs){};
+	                        DllNewFuncPointers** new_dll_funcs){};
 };
 
 /// <summary>
@@ -158,7 +158,7 @@ public:
 	/// <para>Print a center-message, with given text parameters.</para>
 	/// </summary>
 	template <typename ...Args>
-	static void center_say_params(const HudTextParams params, const char* format, Args&&... args)
+	static void center_say_params(const HudTextParams& params, const char* format, Args&&... args)
 	{
 		util_funcs_->center_say_params(plugin_info_, params, format, std::forward<Args>(args)...);
 	}
@@ -166,7 +166,7 @@ public:
 	/// <summary>
 	/// <para>Print a center-message, with text parameters and varargs.</para>
 	/// </summary>
-	static void center_say_varargs(const HudTextParams params, const char* format, std::va_list&& arg_list)
+	static void center_say_varargs(const HudTextParams& params, const char* format, std::va_list&& arg_list)
 	{
 		util_funcs_->center_say_varargs(plugin_info_, params, format, std::forward<va_list>(arg_list));
 	}
@@ -184,7 +184,7 @@ public:
 	/// <para>Find a user message, registered by the gamedll, with the corresponding message name,
 	/// and return remaining info about it (message id, size).</para>
 	/// </summary>
-	static int get_user_msg_id(const char* message_name, int* size)
+	static int get_user_msg_id(const char* message_name, int* size = nullptr)
 	{
 		return util_funcs_->get_user_msg_id(plugin_info_, message_name, size);
 	}
@@ -193,7 +193,7 @@ public:
 	/// <para>Find a user message, registered by the gamedll, with the corresponding message id,
 	/// and return remaining info about it (message name, size).</para>
 	/// </summary>
-	static const char* get_user_msg_name(const int message_id, int* size)
+	static const char* get_user_msg_name(const int message_id, int* size = nullptr)
 	{
 		return util_funcs_->get_user_msg_name(plugin_info_, message_id, size);
 	}
@@ -231,7 +231,7 @@ public:
 	/// <summary>
 	/// </summary>
 	static int unload_plugin_by_handle(MetaPluginInfo* plugin_id, void* plugin_handle, const MetaPluginLoadTime load_time,
-		const MetaPluginUnloadReason reason)
+	                                   const MetaPluginUnloadReason reason)
 	{
 		return util_funcs_->unload_plugin_by_handle(plugin_id, plugin_handle, load_time, reason);
 	}
@@ -253,7 +253,7 @@ public:
 	/// <summary>
 	/// </summary>
 	static void get_hook_tables(MetaPluginInfo* plugin_id, EngineFuncPointers** engine_funcs, DllFuncPointers** dll_funcs,
-		DllNewFuncPointers** new_dll_funcs)
+	                            DllNewFuncPointers** new_dll_funcs)
 	{
 		util_funcs_->get_hook_tables(plugin_id, engine_funcs, dll_funcs, new_dll_funcs);
 	}

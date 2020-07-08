@@ -33,7 +33,7 @@ cell ClearCommand::execute()
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_clear(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_clear(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle };
 

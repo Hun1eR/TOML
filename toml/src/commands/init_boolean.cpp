@@ -32,7 +32,7 @@ InitBooleanCommand::InitBooleanCommand(const cell handle, const cell value) : ha
 		array.emplace_back(toml::boolean{static_cast<bool>(value)});
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 
@@ -60,7 +60,7 @@ cell AMX_NATIVE_CALL toml_init_bool(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_init_bool(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_init_bool(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Value };
 

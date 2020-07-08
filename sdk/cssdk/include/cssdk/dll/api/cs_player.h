@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -245,7 +245,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	Vector old_viewing_angle;
+	Vector old_viewing_angle{};
 
 	/// <summary>
 	/// </summary>
@@ -261,6 +261,10 @@ public:
 
 	/// <summary>
 	/// </summary>
+	bool game_forcing_respawn{};
+
+	/// <summary>
+	/// </summary>
 	[[nodiscard]] PlayerBase* player_base() const
 	{
 		return reinterpret_cast<PlayerBase*>(this->containing_entity);
@@ -271,12 +275,14 @@ public:
 	[[nodiscard]] ProtectionState protection_state() const
 	{
 		// No protection set.
-		if (spawn_protection_end_time <= 0.0f)
+		if (spawn_protection_end_time <= 0.0f) {
 			return ProtectionState::NoSet;
+		}
 
 		// Check if end time of protection isn't expired yet.
-		if (spawn_protection_end_time >= g_global_vars->time)
+		if (spawn_protection_end_time >= g_global_vars->time) {
 			return ProtectionState::Active;
+		}
 
 		// Has expired.
 		return ProtectionState::Expired;

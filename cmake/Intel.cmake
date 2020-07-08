@@ -13,19 +13,20 @@ set(CMAKE_CXX_COMPILE_OPTIONS_IPO ${CMAKE_CXX_COMPILE_OPTIONS_IPO} -fno-fat-lto-
 # Diagnostic flags
 option(ALL_DIAGNOSTIC_GROUPS "Enable all diagnostic groups." OFF)
 
-target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
+# TODO: Add diagnostic flags for COMPILE_LANGUAGE:C
+target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:
     -w3 -Wall -Wremarks -Wcheck -Weffc++
     -Wuninitialized -Wdeprecated -Wpointer-arith
     -diag-disable=383,1418,1419,1572,2012,2015
 
     # Build type Release, MinSizeRel, RelWithDebInfo
     $<$<OR:$<CONFIG:Release>,$<CONFIG:MinSizeRel>,$<CONFIG:RelWithDebInfo>>:
-    -Werror -Werror-all -Wfatal-errors>
+    -Werror -Werror-all -Wfatal-errors>>
 )
 
 if (${ALL_DIAGNOSTIC_GROUPS})
-    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
-        -diag-enable=thread,power,port-win,openmp,warn,error,remark,vec,par,cpu-dispatch)
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:
+        -diag-enable=thread,power,port-win,openmp,warn,error,remark,vec,par,cpu-dispatch>)
 endif()
 
 # Debug flags
@@ -42,7 +43,7 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO ${CMAKE_C_FLAGS_RELWITHDEBINFO})
 
 # Compiler flags
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
-    -no-intel-extensions -m32 -mtune=generic -march=x86-64 -msse -msse2 -msse3 -mssse3 -mmmx
+    -no-intel-extensions -m32 -mtune=generic -msse -msse2 -msse3 -mssse3 -mmmx
     -ffunction-sections -fdata-sections
 
     # Build type Release, MinSizeRel
@@ -52,11 +53,11 @@ target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Optional flags
 if (${OPT_NO_RTTI})
-    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE -fno-rtti)
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
 endif()
 
 if (${OPT_NO_EXCEPTIONS})
-    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE -fno-exceptions)
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>)
 endif()
 
 

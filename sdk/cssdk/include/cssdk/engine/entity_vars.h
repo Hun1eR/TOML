@@ -24,37 +24,37 @@ struct EntityVars {
 	/// <summary>
 	/// <para>The class name of the entity.</para>
 	/// </summary>
-	Strind class_name;
+	Strind class_name{};
 
 	/// <summary>
 	/// <para>Global entity name.<br/>
 	/// Used for entities that carry their state across level transitions in single player.</para>
 	/// </summary>
-	Strind global_name;
+	Strind global_name{};
 
 	/// <summary>
 	/// <para>Absolute origin in the world.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// <para>Old entity origin.<br/>
 	/// Used in the engine to store the player's old origin when no clip is turned off.</para>
 	/// </summary>
-	Vector old_origin;
+	Vector old_origin{};
 
 	/// <summary>
 	/// <para>The entity's absolute velocity.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector velocity;
+	Vector velocity{};
 
 	/// <summary>
 	/// <para>Base velocity to apply when standing on conveyors or swimming in water with current contents set.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector base_velocity;
+	Vector base_velocity{};
 
 	/// <summary>
 	/// <para>Base velocity that was passed in to server physics so client can predict conveyors correctly.<br/>
@@ -62,47 +62,47 @@ struct EntityVars {
 	/// Zeroed out prior to <c>DllFuncPointers::pre_think</c> being called,
 	/// set to the player's basevelocity after the player's think has been called, before <c>DllFuncPointers::post_think</c> is called.</para>
 	/// </summary>
-	Vector cl_base_velocity;
+	Vector cl_base_velocity{};
 
 	/// <summary>
 	/// <para>Movement direction and speed.</para>
 	/// </summary>
-	Vector move_direction;
+	Vector move_direction{};
 
 	/// <summary>
 	/// <para>Model angles.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 
 	/// <summary>
 	/// <para>Angle velocity (degrees per second).</para>
 	/// </summary>
-	Vector angle_velocity;
+	Vector angle_velocity{};
 
 	/// <summary>
 	/// <para>Auto-decaying view angle adjustment.<br/>
 	/// Decayed in <c>PM_CheckParameters</c>.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector punch_angle;
+	Vector punch_angle{};
 
 	/// <summary>
 	/// <para>Viewing angle (player only).</para>
 	/// </summary>
-	Vector viewing_angle;
+	Vector viewing_angle{};
 
 	/// <summary>
 	/// <para>Parametric end position.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector end_pos;
+	Vector end_pos{};
 
 	/// <summary>
 	/// <para>Parametric start position.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector start_pos;
+	Vector start_pos{};
 
 	/// <summary>
 	/// <para>Time at which the entity will have traversed the distance between start pos and end pos.<br/>
@@ -151,7 +151,7 @@ struct EntityVars {
 	/// <summary>
 	/// <para>If this entity has a model, this is the name of that model. Otherwise, is 0.</para>
 	/// </summary>
-	Strind model;
+	Strind model{};
 
 	/// <summary>
 	/// <para>The player's viewmodel (v_*.mdl).<br/>
@@ -169,28 +169,28 @@ struct EntityVars {
 	/// <para>Bounding box max translated to world coord.<br/>
 	/// Set by the engine whenever the entity moves, set by game code to adjust the size.</para>
 	/// </summary>
-	Vector abs_min;
+	Vector abs_min{};
 
 	/// <summary>
 	/// <para>Bounding box max translated to world coord.<br/>
 	/// Set by the engine whenever the entity moves, set by game code to adjust the size.</para>
 	/// </summary>
-	Vector abs_max;
+	Vector abs_max{};
 
 	/// <summary>
 	/// <para>Local bounding box min.</para>
 	/// </summary>
-	Vector min_size;
+	Vector min_size{};
 
 	/// <summary>
 	/// <para>Local bounding box max.</para>
 	/// </summary>
-	Vector max_size;
+	Vector max_size{};
 
 	/// <summary>
 	/// <para>max_size - min_size.</para>
 	/// </summary>
-	Vector size;
+	Vector size{};
 
 	/// <summary>
 	/// <para>Last think time for brush entities (<c>MoveTypeEntity::Push</c>).</para>
@@ -315,7 +315,7 @@ struct EntityVars {
 	/// <para>Render color. Each component is in the range [0, 255].<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector render_color;
+	Vector render_color{};
 
 	/// <summary>
 	/// <para>Render FX.<br/>
@@ -355,7 +355,7 @@ struct EntityVars {
 	/// <para>Eye position.<br/>
 	/// Networked.</para>
 	/// </summary>
-	Vector view_ofs;
+	Vector view_ofs{};
 
 	/// <summary>
 	/// <para>Buttons that the player currently has pressed in.<br/>
@@ -462,23 +462,23 @@ struct EntityVars {
 	/// <summary>
 	/// <para>Target name of the entity to trigger when this entity fires its targets.</para>
 	/// </summary>
-	Strind target;
+	Strind target{};
 
 	/// <summary>
 	/// <para>Target name of this entity.</para>
 	/// </summary>
-	Strind target_name;
+	Strind target_name{};
 
 	/// <summary>
 	/// <para>Name of this player. Set by players using the "name" command.<br/>
 	/// Also used by other entities for various purposes.</para>
 	/// </summary>
-	Strind net_name;
+	Strind net_name{};
 
 	/// <summary>
 	/// <para>Generic string member used by various entities. game_text stores its message here.</para>
 	/// </summary>
-	Strind message;
+	Strind message{};
 
 	/// <summary>
 	/// <para>Tracks the amount of damage that the player took since the last time CBasePlayer::UpdateClientData was called, or since they spawned.<br/>
@@ -508,22 +508,22 @@ struct EntityVars {
 	/// <summary>
 	/// <para>Generic string 1.</para>
 	/// </summary>
-	Strind noise;
+	Strind noise{};
 
 	/// <summary>
 	/// <para>Generic string 2.</para>
 	/// </summary>
-	Strind noise1;
+	Strind noise1{};
 
 	/// <summary>
 	/// <para>Generic string 3.</para>
 	/// </summary>
-	Strind noise2;
+	Strind noise2{};
 
 	/// <summary>
 	/// <para>Generic string 4.</para>
 	/// </summary>
-	Strind noise3;
+	Strind noise3{};
 
 	/// <summary>
 	/// <para>The entity's movement speed, in units/second.</para>
@@ -676,19 +676,19 @@ struct EntityVars {
 
 	/// <summary>
 	/// </summary>
-	Vector v_user1;
+	Vector v_user1{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user2;
+	Vector v_user2{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user3;
+	Vector v_user3{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user4;
+	Vector v_user4{};
 
 	/// <summary>
 	/// </summary>

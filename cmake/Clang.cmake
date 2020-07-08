@@ -5,9 +5,8 @@
 # Diagnostic flags
 # TODO: Add diagnostic flags for COMPILE_LANGUAGE:C
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:
-    -Wall -Wextra -Wpedantic -Weffc++
-    -Wunused -Wuseless-cast -Wold-style-cast -Wcast-align -Wlogical-op -Wnull-dereference
-    -Wredundant-decls -Wdouble-promotion -Wimplicit-fallthrough=5
+    -Wall -Wextra -Wpedantic -Weffc++ -Wunused -Wold-style-cast
+    -Wcast-align -Wnull-dereference -Wredundant-decls -Wdouble-promotion
     -Wno-non-virtual-dtor
 
     # Build type Release, MinSizeRel, RelWithDebInfo
@@ -29,7 +28,7 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO ${CMAKE_C_FLAGS_RELWITHDEBINFO})
 
 # Compiler flags
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
-    -pipe -m32 -mtune=generic -march=x86-64 -msse -msse2 -msse3 -mssse3 -mmmx
+    -m32 -mtune=generic -march=x86-64 -msse -msse2 -msse3 -mssse3 -mmmx
     -ffunction-sections -fdata-sections
 
     # Build type Release, MinSizeRel

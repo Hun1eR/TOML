@@ -29,7 +29,7 @@
 constexpr auto AMXX_MODULE_NAME = "TOML";
 /// <summary>
 /// </summary>
-constexpr auto AMXX_MODULE_VERSION = "1.0.1";
+constexpr auto AMXX_MODULE_VERSION = "1.1.0";
 /// <summary>
 /// </summary>
 constexpr auto AMXX_MODULE_AUTHOR = "the_hunter";
@@ -87,5 +87,5 @@ constexpr auto AMXX_MODULE_RELOAD_ON_MAP_CHANGE = false;
 #define AMXX_ATTACH					on_amxx_attach				// AmxxStatus ()                        // NOLINT(cppcoreguidelines-macro-usage)
 #define AMXX_DETACH					on_amxx_detach				// void ()                              // NOLINT(cppcoreguidelines-macro-usage)
 //#define AMXX_PLUGINS_LOADED		on_amxx_plugins_loaded		// void ()                              // NOLINT(cppcoreguidelines-macro-usage)
-#define AMXX_PLUGINS_UNLOADED       on_amxx_plugins_unloaded	// void ()                              // NOLINT(cppcoreguidelines-macro-usage)
+#define AMXX_PLUGINS_UNLOADED		on_amxx_plugins_unloaded	// void ()                              // NOLINT(cppcoreguidelines-macro-usage)
 //#define AMXX_PLUGINS_UNLOADING	on_amxx_plugins_unloading	// void ()                              // NOLINT(cppcoreguidelines-macro-usage)

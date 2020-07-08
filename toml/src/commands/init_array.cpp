@@ -60,7 +60,7 @@ cell AMX_NATIVE_CALL toml_init_array(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_init_array(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_init_array(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle };
 

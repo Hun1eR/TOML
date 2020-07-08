@@ -16,7 +16,6 @@
 #include <cssdk/dll/unified_signals.h>
 #include <cssdk/dll/weapons.h>
 #include <cssdk/pm_shared/pm_materials.h>
-#include <cssdk/pm_shared/pm_shared.h>
 
 #ifdef REGAMEDLL_API
 /// <summary>
@@ -54,7 +53,7 @@ public:
 	/// <summary>
 	/// <para>Which sequence to display -- temporary, don't need to save.</para>
 	/// </summary>
-	int pose;
+	int pose{};
 };
 
 /// <summary>
@@ -77,7 +76,7 @@ public:
 struct RebuyStruct {
 	/// <summary>
 	/// </summary>
-	WeaponId primary_weapon;
+	WeaponId primary_weapon{};
 
 	/// <summary>
 	/// </summary>
@@ -85,7 +84,7 @@ struct RebuyStruct {
 
 	/// <summary>
 	/// </summary>
-	WeaponId secondary_weapon;
+	WeaponId secondary_weapon{};
 
 	/// <summary>
 	/// </summary>
@@ -113,7 +112,7 @@ struct RebuyStruct {
 
 	/// <summary>
 	/// </summary>
-	ArmorType armor;
+	ArmorType armor{};
 };
 
 /// <summary>
@@ -290,767 +289,767 @@ public:
 
 	/// <summary>
 	/// </summary>
-	int random_seed;
+	int random_seed{};
 
 	/// <summary>
 	/// </summary>
-	unsigned short event_player_bleed;
+	unsigned short event_player_bleed{};
 
 	/// <summary>
 	/// </summary>
-	EntityHandle<PlayerBase> observer_target;
+	EntityHandle<PlayerBase> observer_target{};
 
 	/// <summary>
 	/// </summary>
-	float next_observer_input;
+	float next_observer_input{};
 
 	/// <summary>
 	/// </summary>
-	WeaponId observer_weapon;
+	WeaponId observer_weapon{};
 
 	/// <summary>
 	/// </summary>
-	int observer_c4_state;
+	int observer_c4_state{};
 
 	/// <summary>
 	/// </summary>
-	bool observer_has_defuser;
+	bool observer_has_defuser{};
 
 	/// <summary>
 	/// </summary>
-	ObserverMode observer_last_mode;
+	ObserverMode observer_last_mode{};
 
 	/// <summary>
 	/// </summary>
-	float flinch_time;
+	float flinch_time{};
 
 	/// <summary>
 	/// </summary>
-	float anim_time;
+	float anim_time{};
 
 	/// <summary>
 	/// </summary>
-	bool high_damage;
+	bool high_damage{};
 
 	/// <summary>
 	/// </summary>
-	float velocity_modifier;
+	float velocity_modifier{};
 
 	/// <summary>
 	/// </summary>
-	int last_zoom;
+	int last_zoom{};
 
 	/// <summary>
 	/// </summary>
-	bool resume_zoom;
+	bool resume_zoom{};
 
 	/// <summary>
 	/// </summary>
-	float eject_brass;
+	float eject_brass{};
 
 	/// <summary>
 	/// </summary>
-	ArmorType kevlar;
+	ArmorType kevlar{};
 
 	/// <summary>
 	/// </summary>
-	bool not_killed;
+	bool not_killed{};
 
 	/// <summary>
 	/// </summary>
-	TeamName team;
+	TeamName team{};
 
 	/// <summary>
 	/// </summary>
-	int account;
+	int account{};
 
 	/// <summary>
 	/// </summary>
-	bool has_primary;
+	bool has_primary{};
 
 	/// <summary>
 	/// </summary>
-	float death_throw_time;
+	float death_throw_time{};
 
 	/// <summary>
 	/// </summary>
-	ThrowDirection throw_direction;
+	ThrowDirection throw_direction{};
 
 	/// <summary>
 	/// </summary>
-	float last_talk;
+	float last_talk{};
 
 	/// <summary>
 	/// </summary>
-	bool just_connected;
+	bool just_connected{};
 
 	/// <summary>
 	/// </summary>
-	bool context_help;
+	bool context_help{};
 
 	/// <summary>
 	/// </summary>
-	JoinState joining_state;
+	JoinState joining_state{};
 
 	/// <summary>
 	/// </summary>
-	EntityBase* intro_camera;
+	EntityBase* intro_camera{};
 
 	/// <summary>
 	/// </summary>
-	float intro_cam_time;
+	float intro_cam_time{};
 
 	/// <summary>
 	/// </summary>
-	float last_movement;
+	float last_movement{};
 
 	/// <summary>
 	/// </summary>
-	bool mission_briefing;
+	bool mission_briefing{};
 
 	/// <summary>
 	/// </summary>
-	bool team_changed;
+	bool team_changed{};
 
 	/// <summary>
 	/// </summary>
-	ModelName model_name;
+	ModelName model_name{};
 
 	/// <summary>
 	/// </summary>
-	int team_kills;
+	int team_kills{};
 
 	/// <summary>
 	/// </summary>
-	IgnoreChatMsg ignore_global_chat;
+	IgnoreChatMsg ignore_global_chat{};
 
 	/// <summary>
 	/// </summary>
-	bool has_night_vision;
+	bool has_night_vision{};
 
 	/// <summary>
 	/// </summary>
-	bool night_vision_on;
+	bool night_vision_on{};
 
 	/// <summary>
 	/// </summary>
-	Vector recent_path[MAX_RECENT_PATH];
+	Vector recent_path[MAX_RECENT_PATH]{};
 
 	/// <summary>
 	/// </summary>
-	float idle_check_time;
+	float idle_check_time{};
 
 	/// <summary>
 	/// </summary>
-	float radio_time;
+	float radio_time{};
 
 	/// <summary>
 	/// </summary>
-	int radio_messages;
+	int radio_messages{};
 
 	/// <summary>
 	/// </summary>
-	bool ignore_radio;
+	bool ignore_radio{};
 
 	/// <summary>
 	/// </summary>
-	bool has_c4;
+	bool has_c4{};
 
 	/// <summary>
 	/// </summary>
-	bool has_defuser;
+	bool has_defuser{};
 
 	/// <summary>
 	/// </summary>
-	bool killed_by_bomb;
+	bool killed_by_bomb{};
 
 	/// <summary>
 	/// </summary>
-	Vector blast_vector;
+	Vector blast_vector{};
 
 	/// <summary>
 	/// </summary>
-	bool killed_by_grenade;
+	bool killed_by_grenade{};
 
 	/// <summary>
 	/// </summary>
-	HintMessageQueue hint_message_queue;
+	HintMessageQueue hint_message_queue{};
 
 	/// <summary>
 	/// </summary>
-	int display_history;
+	int display_history{};
 
 	/// <summary>
 	/// </summary>
-	MenuName menu;
+	MenuName menu{};
 
 	/// <summary>
 	/// </summary>
-	qboolean chase_target;
+	qboolean chase_target{};
 
 	/// <summary>
 	/// </summary>
-	EntityBase* chase_target_entity;
+	EntityBase* chase_target_entity{};
 
 	/// <summary>
 	/// </summary>
-	float cam_switch;
+	float cam_switch{};
 
 	/// <summary>
 	/// </summary>
-	bool escaped;
+	bool escaped{};
 
 	/// <summary>
 	/// </summary>
-	bool is_vip;
+	bool is_vip{};
 
 	/// <summary>
 	/// </summary>
-	float next_radar_update;
+	float next_radar_update{};
 
 	/// <summary>
 	/// </summary>
-	Vector last_origin;
+	Vector last_origin{};
 
 	/// <summary>
 	/// </summary>
-	int current_kick_vote;
+	int current_kick_vote{};
 
 	/// <summary>
 	/// </summary>
-	float next_vote_time;
+	float next_vote_time{};
 
 	/// <summary>
 	/// </summary>
-	bool just_killed_teammate;
+	bool just_killed_teammate{};
 
 	/// <summary>
 	/// </summary>
-	int hostages_killed;
+	int hostages_killed{};
 
 	/// <summary>
 	/// </summary>
-	int map_vote;
+	int map_vote{};
 
 	/// <summary>
 	/// </summary>
-	bool can_shoot;
+	bool can_shoot{};
 
 	/// <summary>
 	/// </summary>
-	float last_fired;
+	float last_fired{};
 
 	/// <summary>
 	/// </summary>
-	float last_attacked_teammate;
+	float last_attacked_teammate{};
 
 	/// <summary>
 	/// </summary>
-	bool headshot_killed;
+	bool headshot_killed{};
 
 	/// <summary>
 	/// </summary>
-	bool punished_for_tk;
+	bool punished_for_tk{};
 
 	/// <summary>
 	/// </summary>
-	bool receives_no_money_next_round;
+	bool receives_no_money_next_round{};
 
 	/// <summary>
 	/// </summary>
-	int time_check_allowed;
+	int time_check_allowed{};
 
 	/// <summary>
 	/// </summary>
-	bool has_changed_name;
+	bool has_changed_name{};
 
 	/// <summary>
 	/// </summary>
-	char new_name[MAX_PLAYER_NAME_LENGTH];
+	char new_name[MAX_PLAYER_NAME_LENGTH]{};
 
 	/// <summary>
 	/// </summary>
-	bool is_defusing;
+	bool is_defusing{};
 
 	/// <summary>
 	/// </summary>
-	float handle_signals;
+	float handle_signals{};
 
 	/// <summary>
 	/// </summary>
-	UnifiedSignals signals;
+	UnifiedSignals signals{};
 
 	/// <summary>
 	/// </summary>
-	Edict* cur_bomb_target;
+	Edict* cur_bomb_target{};
 
 	/// <summary>
 	/// </summary>
-	int player_sound;
+	int player_sound{};
 
 	/// <summary>
 	/// </summary>
-	int target_volume;
+	int target_volume{};
 
 	/// <summary>
 	/// </summary>
-	int weapon_volume;
+	int weapon_volume{};
 
 	/// <summary>
 	/// </summary>
-	int extra_sound_types;
+	int extra_sound_types{};
 
 	/// <summary>
 	/// </summary>
-	int weapon_flash;
+	int weapon_flash{};
 
 	/// <summary>
 	/// </summary>
-	float stop_extra_sound_time;
+	float stop_extra_sound_time{};
 
 	/// <summary>
 	/// </summary>
-	float flash_light_time;
+	float flash_light_time{};
 
 	/// <summary>
 	/// </summary>
-	int flash_battery;
+	int flash_battery{};
 
 	/// <summary>
 	/// </summary>
-	int button_last;
+	int button_last{};
 
 	/// <summary>
 	/// </summary>
-	int button_pressed;
+	int button_pressed{};
 
 	/// <summary>
 	/// </summary>
-	int button_released;
+	int button_released{};
 
 	/// <summary>
 	/// </summary>
-	Edict* snd_last;
+	Edict* snd_last{};
 
 	/// <summary>
 	/// </summary>
-	float snd_room_type;
+	float snd_room_type{};
 
 	/// <summary>
 	/// </summary>
-	float snd_range;
+	float snd_range{};
 
 	/// <summary>
 	/// </summary>
-	float fall_velocity;
+	float fall_velocity{};
 
 	/// <summary>
 	/// </summary>
-	int items[MAX_ITEMS];
+	int items[MAX_ITEMS]{};
 
 	/// <summary>
 	/// </summary>
-	int new_ammo;
+	int new_ammo{};
 
 	/// <summary>
 	/// </summary>
-	unsigned int physics_flags;
+	unsigned int physics_flags{};
 
 	/// <summary>
 	/// </summary>
-	float next_suicide_time;
+	float next_suicide_time{};
 
 	/// <summary>
 	/// </summary>
-	float time_step_sound;
+	float time_step_sound{};
 
 	/// <summary>
 	/// </summary>
-	float time_weapon_idle;
+	float time_weapon_idle{};
 
 	/// <summary>
 	/// </summary>
-	float swim_time;
+	float swim_time{};
 
 	/// <summary>
 	/// </summary>
-	float duck_time;
+	float duck_time{};
 
 	/// <summary>
 	/// </summary>
-	float wall_jump_time;
+	float wall_jump_time{};
 
 	/// <summary>
 	/// </summary>
-	float suit_update;
+	float suit_update{};
 
 	/// <summary>
 	/// </summary>
-	int suit_play_list[MAX_SUIT_PLAYLIST];
+	int suit_play_list[MAX_SUIT_PLAYLIST]{};
 
 	/// <summary>
 	/// </summary>
-	int suit_play_next;
+	int suit_play_next{};
 
 	/// <summary>
 	/// </summary>
-	int suit_no_repeat[MAX_SUIT_NO_REPEAT];
+	int suit_no_repeat[MAX_SUIT_NO_REPEAT]{};
 
 	/// <summary>
 	/// </summary>
-	float suit_no_repeat_time[MAX_SUIT_NO_REPEAT];
+	float suit_no_repeat_time[MAX_SUIT_NO_REPEAT]{};
 
 	/// <summary>
 	/// </summary>
-	int last_damage_amount;
+	int last_damage_amount{};
 
 	/// <summary>
 	/// </summary>
-	float time_based_damage_prev;
+	float time_based_damage_prev{};
 
 	/// <summary>
 	/// </summary>
-	float geiger_range;
+	float geiger_range{};
 
 	/// <summary>
 	/// </summary>
-	float geiger_delay;
+	float geiger_delay{};
 
 	/// <summary>
 	/// </summary>
-	int geiger_range_prev;
+	int geiger_range_prev{};
 
 	/// <summary>
 	/// </summary>
-	int step_left;
+	int step_left{};
 
 	/// <summary>
 	/// </summary>
-	char texture_name[MAX_TEXTURE_NAME_LENGTH];
+	char texture_name[MAX_TEXTURE_NAME_LENGTH]{};
 
 	/// <summary>
 	/// </summary>
-	char texture_type;
+	char texture_type{};
 
 	/// <summary>
 	/// </summary>
-	int drown_dmg;
+	int drown_dmg{};
 
 	/// <summary>
 	/// </summary>
-	int drown_restored;
+	int drown_restored{};
 
 	/// <summary>
 	/// </summary>
-	int hud_damage;
+	int hud_damage{};
 
 	/// <summary>
 	/// </summary>
-	qboolean init_hud;
+	qboolean init_hud{};
 
 	/// <summary>
 	/// </summary>
-	qboolean game_hud_initialized;
+	qboolean game_hud_initialized{};
 
 	/// <summary>
 	/// </summary>
-	int train;
+	int train{};
 
 	/// <summary>
 	/// </summary>
-	qboolean weapon;
+	qboolean weapon{};
 
 	/// <summary>
 	/// </summary>
-	EntityHandle<> tank;
+	EntityHandle<> tank{};
 
 	/// <summary>
 	/// </summary>
-	float dead_time;
+	float dead_time{};
 
 	/// <summary>
 	/// </summary>
-	qboolean no_player_sound;
+	qboolean no_player_sound{};
 
 	/// <summary>
 	/// </summary>
-	qboolean long_jump;
+	qboolean long_jump{};
 
 	/// <summary>
 	/// </summary>
-	float sneaking;
+	float sneaking{};
 
 	/// <summary>
 	/// </summary>
-	int update_time;
+	int update_time{};
 
 	/// <summary>
 	/// </summary>
-	int client_health;
+	int client_health{};
 
 	/// <summary>
 	/// </summary>
-	int client_battery;
+	int client_battery{};
 
 	/// <summary>
 	/// </summary>
-	int hide_hud;
+	int hide_hud{};
 
 	/// <summary>
 	/// </summary>
-	int client_hide_hud;
+	int client_hide_hud{};
 
 	/// <summary>
 	/// </summary>
-	int fov;
+	int fov{};
 
 	/// <summary>
 	/// </summary>
-	int client_fov;
+	int client_fov{};
 
 	/// <summary>
 	/// </summary>
-	int num_spawns;
+	int num_spawns{};
 
 	/// <summary>
 	/// </summary>
-	EntityBase* observer;
+	EntityBase* observer{};
 
 	/// <summary>
 	/// </summary>
-	PlayerItemBase* player_items[MAX_ITEM_TYPES];
+	PlayerItemBase* player_items[MAX_ITEM_TYPES]{};
 
 	/// <summary>
 	/// </summary>
-	PlayerItemBase* active_item;
+	PlayerItemBase* active_item{};
 
 	/// <summary>
 	/// </summary>
-	PlayerItemBase* client_active_item;
+	PlayerItemBase* client_active_item{};
 
 	/// <summary>
 	/// </summary>
-	PlayerItemBase* last_item;
+	PlayerItemBase* last_item{};
 
 	/// <summary>
 	/// </summary>
-	int ammo[MAX_AMMO_SLOTS];
+	int ammo[MAX_AMMO_SLOTS]{};
 
 	/// <summary>
 	/// </summary>
-	int ammo_last[MAX_AMMO_SLOTS];
+	int ammo_last[MAX_AMMO_SLOTS]{};
 
 	/// <summary>
 	/// </summary>
-	Vector auto_aim;
+	Vector auto_aim{};
 
 	/// <summary>
 	/// </summary>
-	qboolean on_target;
+	qboolean on_target{};
 
 	/// <summary>
 	/// </summary>
-	int deaths;
+	int deaths{};
 
 	/// <summary>
 	/// </summary>
-	int sbar_state[static_cast<int>(SBarData::End)];
+	int sbar_state[static_cast<int>(SBarData::End)]{};
 
 	/// <summary>
 	/// </summary>
-	float next_sbar_update_time;
+	float next_sbar_update_time{};
 
 	/// <summary>
 	/// </summary>
-	float status_bar_disappear_delay;
+	float status_bar_disappear_delay{};
 
 	/// <summary>
 	/// </summary>
-	char sbar_string0[MAX_SBAR_STRING];
+	char sbar_string0[MAX_SBAR_STRING]{};
 
 	/// <summary>
 	/// </summary>
-	int last_x;
+	int last_x{};
 
 	/// <summary>
 	/// </summary>
-	int last_y;
+	int last_y{};
 
 	/// <summary>
 	/// </summary>
-	int custom_spray_frames;
+	int custom_spray_frames{};
 
 	/// <summary>
 	/// </summary>
-	float next_decal_time;
+	float next_decal_time{};
 
 	/// <summary>
 	/// </summary>
-	char team_name_string[MAX_TEAM_NAME_LENGTH];
+	char team_name_string[MAX_TEAM_NAME_LENGTH]{};
 
 	/// <summary>
 	/// </summary>
-	int model_index_player;
+	int model_index_player{};
 
 	/// <summary>
 	/// </summary>
-	char anim_extension[32];
+	char anim_extension[32]{};
 
 	/// <summary>
 	/// </summary>
-	int gait_sequence;
+	int gait_sequence{};
 
 	/// <summary>
 	/// </summary>
-	float gait_frame;
+	float gait_frame{};
 
 	/// <summary>
 	/// </summary>
-	float gait_yaw;
+	float gait_yaw{};
 
 	/// <summary>
 	/// </summary>
-	Vector prev_gait_origin;
+	Vector prev_gait_origin{};
 
 	/// <summary>
 	/// </summary>
-	float pitch;
+	float pitch{};
 
 	/// <summary>
 	/// </summary>
-	float yaw;
+	float yaw{};
 
 	/// <summary>
 	/// </summary>
-	float gait_movement;
+	float gait_movement{};
 
 	/// <summary>
 	/// </summary>
-	int auto_wep_switch;
+	int auto_wep_switch{};
 
 	/// <summary>
 	/// </summary>
-	bool vgui_menus;
+	bool vgui_menus{};
 
 	/// <summary>
 	/// </summary>
-	bool show_hints;
+	bool show_hints{};
 
 	/// <summary>
 	/// </summary>
-	bool shield_drawn;
+	bool shield_drawn{};
 
 	/// <summary>
 	/// </summary>
-	bool owns_shield;
+	bool owns_shield{};
 
 	/// <summary>
 	/// </summary>
-	bool was_following;
+	bool was_following{};
 
 	/// <summary>
 	/// </summary>
-	float next_follow_time;
+	float next_follow_time{};
 
 	/// <summary>
 	/// </summary>
-	float yaw_modifier;
+	float yaw_modifier{};
 
 	/// <summary>
 	/// </summary>
-	float blind_until_time;
+	float blind_until_time{};
 
 	/// <summary>
 	/// </summary>
-	float blind_start_time;
+	float blind_start_time{};
 
 	/// <summary>
 	/// </summary>
-	float blind_hold_time;
+	float blind_hold_time{};
 
 	/// <summary>
 	/// </summary>
-	float blind_fade_time;
+	float blind_fade_time{};
 
 	/// <summary>
 	/// </summary>
-	int blind_alpha;
+	int blind_alpha{};
 
 	/// <summary>
 	/// </summary>
-	float allow_auto_follow_time;
+	float allow_auto_follow_time{};
 
 	/// <summary>
 	/// </summary>
-	char auto_buy_string[MAX_AUTO_BUY_LENGTH];
+	char auto_buy_string[MAX_AUTO_BUY_LENGTH]{};
 
 	/// <summary>
 	/// </summary>
-	char* rebuy_string;
+	char* rebuy_string{};
 
 	/// <summary>
 	/// </summary>
-	RebuyStruct rebuy_struct;
+	RebuyStruct rebuy_struct{};
 
 	/// <summary>
 	/// </summary>
-	bool is_in_rebuy;
+	bool is_in_rebuy{};
 
 	/// <summary>
 	/// </summary>
-	float last_update_time;
+	float last_update_time{};
 
 	/// <summary>
 	/// </summary>
-	char last_location[MAX_LOCATION_LEN];
+	char last_location[MAX_LOCATION_LEN]{};
 
 	/// <summary>
 	/// </summary>
-	float progress_start;
+	float progress_start{};
 
 	/// <summary>
 	/// </summary>
-	float progress_end;
+	float progress_end{};
 
 	/// <summary>
 	/// </summary>
-	bool observer_auto_director;
+	bool observer_auto_director{};
 
 	/// <summary>
 	/// </summary>
-	bool can_switch_observer_modes;
+	bool can_switch_observer_modes{};
 
 	/// <summary>
 	/// </summary>
-	float heart_beat_time;
+	float heart_beat_time{};
 
 	/// <summary>
 	/// </summary>
-	float intense_timestamp;
+	float intense_timestamp{};
 
 	/// <summary>
 	/// </summary>
-	float silent_timestamp;
+	float silent_timestamp{};
 
 	/// <summary>
 	/// </summary>
-	MusicState music_state;
+	MusicState music_state{};
 
 	/// <summary>
 	/// </summary>
-	float last_command_time[static_cast<int>(TrackCommands::CommandsToTrack)];
+	float last_command_time[static_cast<int>(TrackCommands::CommandsToTrack)]{};
 
 	/// <summary>
 	/// </summary>
-	int last_account;
+	int last_account{};
 
 	/// <summary>
 	/// </summary>
-	int last_client_health;
+	int last_client_health{};
 
 	/// <summary>
 	/// </summary>
-	float next_account_health_update;
+	float next_account_health_update{};
 
 #ifdef REGAMEDLL_API
 	/// <summary>
@@ -1069,8 +1068,9 @@ public:
 		auto item = player_items[static_cast<int>(slot)];
 
 		while (item) {
-			if (func(static_cast<T*>(item)))
+			if (func(static_cast<T*>(item))) {
 				return static_cast<T*>(item);
+			}
 
 			item = item->next;
 		}
@@ -1085,8 +1085,9 @@ public:
 	{
 		for (auto item : player_items) {
 			while (item) {
-				if (func(static_cast<T*>(item)))
+				if (func(static_cast<T*>(item))) {
 					return static_cast<T*>(item);
+				}
 
 				item = item->next;
 			}
@@ -1100,13 +1101,15 @@ public:
 	template <typename T = PlayerItemBase, typename Functor>
 	T* for_each_item(const char* item_name, const Functor& func) const
 	{
-		if (!item_name)
+		if (!item_name) {
 			return nullptr;
+		}
 
 		for (auto item : player_items) {
 			while (item) {
-				if (item->vars->class_name == item_name && func(static_cast<T*>(item)))
+				if (item->vars->class_name == item_name && func(static_cast<T*>(item))) {
 					return static_cast<T*>(item);
+				}
 
 				item = item->next;
 			}

@@ -32,8 +32,18 @@ Compiler with C++17 support ([Visual Studio](https://visualstudio.microsoft.com)
 ```sh
   rm -rf build && CC=icc CXX=icpc cmake -B build && cmake --build build
 ```
+&nbsp;&nbsp;&nbsp;For compile with *Clang* run the following command:<br/>
+```sh
+  rm -rf build && CC=clang CXX=clang++ cmake -B build && cmake --build build
+```
 
 ## Release History
+* 1.1.0
+    * Updated SDKs.
+    * Updated CMake scripts.
+    * Updated toml11 library.
+    * Added Clang compiler support.
+    * Minor code fixes.
 * 1.0.1
     * Code refactoring.
     * Linux version compiled with new version of GCC (10.1).

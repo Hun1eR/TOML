@@ -54,7 +54,9 @@ int export_dll_hooks(DllFuncPointers* function_table, int* interface_version)
 		return false;
 	}
 
-	std::memcpy(function_table, GameDllHooks::dll_hooks_, sizeof(DllFuncPointers));
+	if (GameDllHooks::dll_hooks_) {
+		std::memcpy(function_table, GameDllHooks::dll_hooks_, sizeof(DllFuncPointers));
+	}
 
 	delete GameDllHooks::dll_hooks_;
 	GameDllHooks::dll_hooks_ = function_table;
@@ -87,7 +89,9 @@ int export_dll_post_hooks(DllFuncPointers* function_table, int* interface_versio
 		return false;
 	}
 
-	std::memcpy(function_table, GameDllHooks::dll_post_hooks_, sizeof(DllFuncPointers));
+	if (GameDllHooks::dll_post_hooks_) {
+		std::memcpy(function_table, GameDllHooks::dll_post_hooks_, sizeof(DllFuncPointers));
+	}
 
 	delete GameDllHooks::dll_post_hooks_;
 	GameDllHooks::dll_post_hooks_ = function_table;
@@ -120,7 +124,9 @@ int export_dll_new_hooks(DllNewFuncPointers* function_table, int* interface_vers
 		return false;
 	}
 
-	std::memcpy(function_table, GameDllNewHooks::dll_new_hooks_, sizeof(DllNewFuncPointers));
+	if (GameDllNewHooks::dll_new_hooks_) {
+		std::memcpy(function_table, GameDllNewHooks::dll_new_hooks_, sizeof(DllNewFuncPointers));
+	}
 
 	delete GameDllNewHooks::dll_new_hooks_;
 	GameDllNewHooks::dll_new_hooks_ = function_table;
@@ -153,7 +159,9 @@ int export_dll_new_post_hooks(DllNewFuncPointers* function_table, int* interface
 		return false;
 	}
 
-	std::memcpy(function_table, GameDllNewHooks::dll_new_post_hooks_, sizeof(DllNewFuncPointers));
+	if (GameDllNewHooks::dll_new_post_hooks_) {
+		std::memcpy(function_table, GameDllNewHooks::dll_new_post_hooks_, sizeof(DllNewFuncPointers));
+	}
 
 	delete GameDllNewHooks::dll_new_post_hooks_;
 	GameDllNewHooks::dll_new_post_hooks_ = function_table;

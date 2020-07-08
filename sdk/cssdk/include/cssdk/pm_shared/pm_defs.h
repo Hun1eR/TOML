@@ -75,7 +75,7 @@ struct PhysEntity {
 	/// <summary>
 	/// <para>Model's origin in world coordinates.</para>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// <para>Only for bsp models.</para>
@@ -90,12 +90,12 @@ struct PhysEntity {
 	/// <summary>
 	/// <para>Only for non-bsp models.</para>
 	/// </summary>
-	Vector min_size;
+	Vector min_size{};
 
 	/// <summary>
 	/// <para>Only for non-bsp models.</para>
 	/// </summary>
-	Vector max_size;
+	Vector max_size{};
 
 	/// <summary>
 	/// <para>For client or server to use to identify (index into edicts or cl_entities).</para>
@@ -105,7 +105,7 @@ struct PhysEntity {
 	/// <summary>
 	/// <para>Rotated entities need this info for hull testing to work.</para>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 
 	/// <summary>
 	/// <para>Triggers and func_door type WATER brushes are <c>SolidType::NotSolid</c>.</para>
@@ -192,19 +192,19 @@ struct PhysEntity {
 
 	/// <summary>
 	/// </summary>
-	Vector v_user1;
+	Vector v_user1{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user2;
+	Vector v_user2{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user3;
+	Vector v_user3{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user4;
+	Vector v_user4{};
 };
 
 /// <summary>
@@ -233,43 +233,43 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	Vector forward;
+	Vector forward{};
 
 	/// <summary>
 	/// </summary>
-	Vector right;
+	Vector right{};
 
 	/// <summary>
 	/// </summary>
-	Vector up;
+	Vector up{};
 
 	/// <summary>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 
 	/// <summary>
 	/// </summary>
-	Vector old_angles;
+	Vector old_angles{};
 
 	/// <summary>
 	/// </summary>
-	Vector velocity;
+	Vector velocity{};
 
 	/// <summary>
 	/// </summary>
-	Vector move_direction;
+	Vector move_direction{};
 
 	/// <summary>
 	/// </summary>
-	Vector base_velocity;
+	Vector base_velocity{};
 
 	/// <summary>
 	/// </summary>
-	Vector view_ofs;
+	Vector view_ofs{};
 
 	/// <summary>
 	/// </summary>
@@ -293,7 +293,7 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	Vector punch_angle;
+	Vector punch_angle{};
 
 	/// <summary>
 	/// </summary>
@@ -413,19 +413,19 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	Vector v_user1;
+	Vector v_user1{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user2;
+	Vector v_user2{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user3;
+	Vector v_user3{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user4;
+	Vector v_user4{};
 
 	/// <summary>
 	/// </summary>
@@ -433,7 +433,7 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	PhysEntity phys_ents[MAX_PHYS_ENTS];
+	PhysEntity phys_ents[MAX_PHYS_ENTS]{};
 
 	/// <summary>
 	/// </summary>
@@ -441,7 +441,7 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	PhysEntity move_ents[MAX_MOVE_ENTS];
+	PhysEntity move_ents[MAX_MOVE_ENTS]{};
 
 	/// <summary>
 	/// </summary>
@@ -449,11 +449,11 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	PhysEntity vis_ents[MAX_PHYS_ENTS];
+	PhysEntity vis_ents[MAX_PHYS_ENTS]{};
 
 	/// <summary>
 	/// </summary>
-	UserCmd cmd;
+	UserCmd cmd{};
 
 	/// <summary>
 	/// </summary>
@@ -461,7 +461,7 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	PmTrace touch_index[MAX_PHYS_ENTS];
+	PmTrace touch_index[MAX_PHYS_ENTS]{};
 
 	/// <summary>
 	/// </summary>
@@ -473,11 +473,11 @@ struct PlayerMove {
 
 	/// <summary>
 	/// </summary>
-	Vector player_min_size[MAX_MAP_HULLS];
+	Vector player_min_size[MAX_MAP_HULLS]{};
 
 	/// <summary>
 	/// </summary>
-	Vector player_max_size[MAX_MAP_HULLS];
+	Vector player_max_size[MAX_MAP_HULLS]{};
 
 	//
 	// Common functions.
@@ -595,7 +595,7 @@ struct PlayerMove {
 	/// <summary>
 	/// </summary>
 	void (*pm_playback_event_full)(int flags, int client_index, unsigned short event_index, float delay, Vector& origin, Vector& angles,
-		float f_param1, float f_param2, int i_param1, int i_param2, qboolean b_param1, qboolean b_param2){};
+	                               float f_param1, float f_param2, int i_param1, int i_param2, qboolean b_param1, qboolean b_param2){};
 
 	/// <summary>
 	/// </summary>

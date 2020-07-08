@@ -121,8 +121,12 @@ SetDateTimeCommand::SetDateTimeCommand(const cell handle, const char* key, const
 
 	set_datetime_ = [datetime, offset](toml_t& toml)
 	{
-		if (offset) set_datetime_offset(toml, datetime);
-		else set_datetime(toml, datetime);
+		if (offset) {
+			set_datetime_offset(toml, datetime);
+		}
+		else {
+			set_datetime(toml, datetime);
+		}
 	};
 }
 
@@ -138,8 +142,12 @@ SetDateTimeCommand::SetDateTimeCommand(const cell handle, cell index, const Toml
 
 	set_datetime_ = [datetime, offset](toml_t& toml)
 	{
-		if (offset) set_datetime_offset(toml, datetime);
-		else set_datetime(toml, datetime);
+		if (offset) {
+			set_datetime_offset(toml, datetime);
+		}
+		else {
+			set_datetime(toml, datetime);
+		}
 	};
 }
 
@@ -174,7 +182,7 @@ cell AMX_NATIVE_CALL toml_set_local_date(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_set_local_date(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_set_local_date(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Index, Year, Month, Day };
 
@@ -207,7 +215,7 @@ cell AMX_NATIVE_CALL toml_set_local_time(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_set_local_time(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_set_local_time(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Index, Hour, Minute, Second, Millisecond };
 

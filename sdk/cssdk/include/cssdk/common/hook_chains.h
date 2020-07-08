@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -12,14 +12,14 @@
 #include <cssdk/common/hook_chain_priority.h>
 
 /// <summary>
-/// Class HookChain.
+/// Class IHookChain.
 /// </summary>
 template <typename TRet, typename ...TArgs>
-class HookChain {
+class IHookChain {
 protected:
 	/// <summary>
 	/// </summary>
-	virtual ~HookChain() = default;
+	virtual ~IHookChain() = default;
 
 public:
 	/// <summary>
@@ -32,14 +32,14 @@ public:
 };
 
 /// <summary>
-/// Class HookChainVoid.
+/// Class IHookChainVoid.
 /// </summary>
 template <typename ...TArgs>
-class HookChainVoid {
+class IHookChainVoid {
 protected:
 	/// <summary>
 	/// </summary>
-	virtual ~HookChainVoid() = default;
+	virtual ~IHookChainVoid() = default;
 
 public:
 	/// <summary>
@@ -52,14 +52,14 @@ public:
 };
 
 /// <summary>
-/// Class HookChainClass.
+/// Class IHookChainClass.
 /// </summary>
 template <typename TRet, typename TClass, typename ...TArgs>
-class HookChainClass {
+class IHookChainClass {
 protected:
 	/// <summary>
 	/// </summary>
-	virtual ~HookChainClass() = default;
+	virtual ~IHookChainClass() = default;
 
 public:
 	/// <summary>
@@ -75,11 +75,11 @@ public:
 /// <para>Hook chain registry(for hooks [un]registration).</para>
 /// </summary>
 template <typename TRet, typename ...TArgs>
-class HookChainRegistry {
+class IHookChainRegistry {
 public:
 	/// <summary>
 	/// </summary>
-	using HookFunc = TRet(*)(HookChain<TRet, TArgs...>*, TArgs ...);
+	using HookFunc = TRet(*)(IHookChain<TRet, TArgs...>*, TArgs ...);
 
 	/// <summary>
 	/// </summary>
@@ -94,11 +94,11 @@ public:
 /// <para>Hook chain registry(for hooks [un]registration).</para>
 /// </summary>
 template <typename ...TArgs>
-class HookChainVoidRegistry {
+class IHookChainVoidRegistry {
 public:
 	/// <summary>
 	/// </summary>
-	using HookFunc = void (*)(HookChainVoid<TArgs...>*, TArgs ...);
+	using HookFunc = void (*)(IHookChainVoid<TArgs...>*, TArgs ...);
 
 	/// <summary>
 	/// </summary>
@@ -113,11 +113,11 @@ public:
 /// <para>Hook chain registry(for hooks [un]registration).</para>
 /// </summary>
 template <typename TRet, typename TClass, typename ...TArgs>
-class HookChainClassRegistry {
+class IHookChainClassRegistry {
 public:
 	/// <summary>
 	/// </summary>
-	using HookFunc = TRet(*)(HookChainClass<TRet, TClass, TArgs...>*, TClass*, TArgs ...);
+	using HookFunc = TRet(*)(IHookChainClass<TRet, TClass, TArgs...>*, TClass*, TArgs ...);
 
 	/// <summary>
 	/// </summary>

@@ -16,7 +16,7 @@ InitFloatingCommand::InitFloatingCommand(const cell handle, const char* key, con
 	{
 		auto& toml = toml_find(holder, key, false);
 		auto& table = toml.as_table();
-		table[get_key_from_composite(key)] = toml::floating{amx_ctof(value)};
+		table[get_key_from_composite(key)] = static_cast<toml::floating>(amx_ctof(value));
 
 		return 1;
 	};
@@ -29,10 +29,10 @@ InitFloatingCommand::InitFloatingCommand(const cell handle, const cell value) : 
 	toml_init_ = [value](TomlHolder*& holder)
 	{
 		auto& array = holder->toml()->as_array();
-		array.emplace_back(toml::floating{amx_ctof(value)});
+		array.emplace_back(static_cast<toml::floating>(amx_ctof(value)));
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 
@@ -60,7 +60,7 @@ cell AMX_NATIVE_CALL toml_init_float(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_init_float(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_init_float(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Value };
 

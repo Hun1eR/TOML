@@ -11,6 +11,7 @@
 
 #include <cssdk/dll/ammo.h>
 #include <cssdk/dll/items.h>
+#include <cssdk/game_shared/voice_manager.h>
 
 /// <summary>
 /// </summary>
@@ -226,6 +227,26 @@ constexpr auto SCENARIO_BLOCK_TEAM_EXTERMINATION = 1 << 5;
 /// <para>Flag "g".</para>
 /// </summary>
 constexpr auto SCENARIO_BLOCK_HOSTAGE_RESCUE = 1 << 6;
+
+/// <summary>
+/// <para>Flag "h".</para>
+/// </summary>
+constexpr auto SCENARIO_BLOCK_VIP_ESCAPE_TIME = 1 << 7;
+
+/// <summary>
+/// <para>Flag "i".</para>
+/// </summary>
+constexpr auto SCENARIO_BLOCK_PRISON_ESCAPE_TIME = 1 << 8;
+
+/// <summary>
+/// <para>Flag "j".</para>
+/// </summary>
+constexpr auto SCENARIO_BLOCK_BOMB_TIME = 1 << 9;
+
+/// <summary>
+/// <para>Flag "k".</para>
+/// </summary>
+constexpr auto SCENARIO_BLOCK_HOSTAGE_RESCUE_TIME = 1 << 10;
 
 /// <summary>
 /// Enum WinStatus
@@ -721,7 +742,7 @@ public:
 	// 
 
 	/// <summary>
-	/// <para>The player is touching an CBasePlayerItem, do I give it to him?</para>
+	/// <para>The player is touching an PlayerItemBase, do I give it to him?</para>
 	/// </summary>
 	virtual qboolean can_have_player_item(PlayerBase* player, PlayerItemBase* item) = 0;
 
@@ -931,18 +952,992 @@ public:
 	/// <summary>
 	/// <para>TRUE at beginning of round, set to FALSE when the period expires.</para>
 	/// </summary>
-	qboolean freeze_period;
+	qboolean freeze_period{};
 
 	/// <summary>
 	/// </summary>
-	qboolean bomb_dropped;
+	qboolean bomb_dropped{};
 
 	/// <summary>
 	/// </summary>
-	char* game_desc;
+	char* game_desc{};
 
 	/// <summary>
 	/// <para>Intermission or finale.</para>
 	/// </summary>
-	bool is_game_over;
+	bool is_game_over{};
+};
+
+/// <summary>
+/// Class HalfLifeRules.
+/// </summary>
+class HalfLifeRules : public GameRules {
+public:
+	/// <summary>
+	/// </summary>
+	~HalfLifeRules() override = 0;
+
+	/// <summary>
+	/// </summary>
+	void think() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_allowed_to_spawn(EntityBase* entity) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean allow_flashlight() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean should_switch_weapon(PlayerBase* player, PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean get_next_best_weapon(PlayerBase* player, PlayerItemBase* current_weapon) override = 0;
+
+	//
+	// Functions to verify the single/multiplayer status of a game.
+	// 
+
+	/// <summary>
+	/// </summary>
+	qboolean is_multiplayer() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_deathmatch() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_coop() override = 0;
+
+	//
+	// Client connection/disconnection.
+	// 
+
+	/// <summary>
+	/// </summary>
+	qboolean client_connected(Edict* entity, const char* name, const char* address, char reject_reason[128]) override = 0;
+
+	/// <summary>
+	/// <para>The client dll is ready for updating.</para>
+	/// </summary>
+	void init_hud(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void client_disconnected(Edict* client) override = 0;
+
+	//
+	// Client damage rules.
+	// 
+
+	/// <summary>
+	/// </summary>
+	float player_fall_damage(PlayerBase* player) override = 0;
+
+	//
+	// Client spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	void player_spawn(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_think(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean player_can_respawn(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float player_spawn_time(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Edict* get_player_spawn_spot(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean allow_auto_target_crosshair() override = 0;
+
+	//
+	// Client kills/scoring.
+	// 
+
+	/// <summary>
+	/// </summary>
+	int points_for_kill(PlayerBase* attacker, PlayerBase* killed) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_killed(PlayerBase* victim, EntityVars* killer, EntityVars* inflictor) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void death_notice(PlayerBase* victim, EntityVars* killer, EntityVars* inflictor) override = 0;
+
+	//
+	// Weapon retrieval.
+	// 
+
+	/// <summary>
+	/// </summary>
+	void player_got_weapon(PlayerBase* player, PlayerItemBase* weapon) override = 0;
+
+	//
+	// Weapon spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode weapon_should_respawn(PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float weapon_respawn_time(PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float weapon_try_respawn(PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Vector weapon_respawn_spot(PlayerItemBase* weapon) override = 0;
+
+	//
+	// Item retrieval.
+	// 
+
+	/// <summary>
+	/// </summary>
+	qboolean can_have_item(PlayerBase* player, Item* item) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_got_item(PlayerBase* player, Item* item) override = 0;
+
+	//
+	// Item spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode item_should_respawn(Item* item) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float item_respawn_time(Item* item) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Vector item_respawn_spot(Item* item) override = 0;
+
+	//
+	// Ammo retrieval.
+	// 
+
+	/// <summary>
+	/// </summary>
+	void player_got_ammo(PlayerBase* player, char* name, int count) override = 0;
+
+	//
+	// Ammo spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode ammo_should_respawn(PlayerAmmoBase* ammo) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float ammo_respawn_time(PlayerAmmoBase* ammo) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Vector ammo_respawn_spot(PlayerAmmoBase* ammo) override = 0;
+
+	//
+	// Health charger respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	float health_charger_recharge_time() override = 0;
+
+	//
+	// What happens to a dead player's weapons.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode dead_player_weapons(PlayerBase* player) override = 0;
+
+	//
+	// What happens to a dead player's ammo.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode dead_player_ammo(PlayerBase* player) override = 0;
+
+	//
+	// Teamplay stuff.
+	// 
+
+	/// <summary>
+	/// </summary>
+	const char* get_team_id(EntityBase* entity) override = 0;
+
+	/// <summary>
+	/// </summary>
+	PlayerRelationship player_relationship(PlayerBase* player, EntityBase* target) override = 0;
+
+	//
+	// Monsters.
+	// 
+
+	/// <summary>
+	/// </summary>
+	qboolean allow_monsters() override = 0;
+};
+
+/// <summary>
+/// Class HalfLifeMultiplay.
+/// </summary>
+class HalfLifeMultiplay : public GameRules {
+public:
+	/// <summary>
+	/// </summary>
+	~HalfLifeMultiplay() override = 0;
+
+	/// <summary>
+	/// </summary>
+	void refresh_skill_data() override = 0;
+
+	/// <summary>
+	/// </summary>
+	void think() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_allowed_to_spawn(EntityBase* entity) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean allow_flashlight() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean should_switch_weapon(PlayerBase* player, PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean get_next_best_weapon(PlayerBase* player, PlayerItemBase* current_weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_multiplayer() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_deathmatch() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean is_coop() override = 0;
+
+	//
+	// Client connection/disconnection.
+	// 
+
+	/// <summary>
+	/// <para>If <c>client_connected</c> returns <c>FALSE</c>, the connection is rejected and the user is provided the reason specified in <c>reject_reason</c>.<br/>
+	/// Only the client's name and remote address are provided to the dll for verification.
+	/// </para>
+	/// </summary>
+	qboolean client_connected(Edict* entity, const char* name, const char* address, char reject_reason[128]) override = 0;
+
+	/// <summary>
+	/// <para>The client dll is ready for updating.</para>
+	/// </summary>
+	void init_hud(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void client_disconnected(Edict* client) override = 0;
+
+	/// <summary>
+	/// <para>The client needs to be informed of the current game mode.</para>
+	/// </summary>
+	void update_game_mode(PlayerBase* player) override = 0;
+
+	//
+	// Client damage rules.
+	//
+
+	/// <summary>
+	/// </summary>
+	float player_fall_damage(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean player_can_take_damage(PlayerBase* player, EntityBase* attacker) override = 0;
+
+	//
+	// Client spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	void player_spawn(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_think(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean player_can_respawn(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float player_spawn_time(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Edict* get_player_spawn_spot(PlayerBase* player) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean allow_auto_target_crosshair() override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean client_command_dead_or_alive(PlayerBase* player, const char* cmd) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean client_command(PlayerBase* player, const char* cmd) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void client_user_info_changed(PlayerBase* player, char* info_buffer) override = 0;
+
+	//
+	// Client kills/scoring.
+	// 
+
+	/// <summary>
+	/// </summary>
+	int points_for_kill(PlayerBase* attacker, PlayerBase* killed) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_killed(PlayerBase* victim, EntityVars* killer, EntityVars* inflictor) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void death_notice(PlayerBase* victim, EntityVars* killer, EntityVars* inflictor) override = 0;
+
+	//
+	// Weapon retrieval.
+	// 
+
+	/// <summary>
+	/// <para>The player is touching an PlayerItemBase, do I give it to him?</para>
+	/// </summary>
+	qboolean can_have_player_item(PlayerBase* player, PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_got_weapon(PlayerBase* player, PlayerItemBase* weapon) override = 0;
+
+	//
+	// Weapon spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode weapon_should_respawn(PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float weapon_respawn_time(PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float weapon_try_respawn(PlayerItemBase* weapon) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Vector weapon_respawn_spot(PlayerItemBase* weapon) override = 0;
+
+	//
+	// Item retrieval.
+	// 
+
+	/// <summary>
+	/// </summary>
+	qboolean can_have_item(PlayerBase* player, Item* item) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void player_got_item(PlayerBase* player, Item* item) override = 0;
+
+	//
+	// Item spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode item_should_respawn(Item* item) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float item_respawn_time(Item* item) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Vector item_respawn_spot(Item* item) override = 0;
+
+	//
+	// Ammo retrieval.
+	// 
+
+	/// <summary>
+	/// </summary>
+	void player_got_ammo(PlayerBase* player, char* name, int count) override = 0;
+
+	//
+	// Ammo spawn/respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode ammo_should_respawn(PlayerAmmoBase* ammo) override = 0;
+
+	/// <summary>
+	/// </summary>
+	float ammo_respawn_time(PlayerAmmoBase* ammo) override = 0;
+
+	/// <summary>
+	/// </summary>
+	Vector ammo_respawn_spot(PlayerAmmoBase* ammo) override = 0;
+
+	//
+	// Health charger respawn control.
+	// 
+
+	/// <summary>
+	/// </summary>
+	float health_charger_recharge_time() override = 0;
+
+	/// <summary>
+	/// </summary>
+	float hev_charger_recharge_time() override = 0;
+
+	//
+	// What happens to a dead player's weapons.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode dead_player_weapons(PlayerBase* player) override = 0;
+
+	//
+	// What happens to a dead player's ammo.
+	// 
+
+	/// <summary>
+	/// </summary>
+	WeaponRespawnCode dead_player_ammo(PlayerBase* player) override = 0;
+
+	//
+	// Teamplay stuff.
+	// 
+
+	/// <summary>
+	/// </summary>
+	const char* get_team_id(EntityBase* entity) override = 0;
+
+	/// <summary>
+	/// </summary>
+	PlayerRelationship player_relationship(PlayerBase* player, EntityBase* target) override = 0;
+
+	/// <summary>
+	/// </summary>
+	void change_player_team(PlayerBase* player, const char* team_name, qboolean kill, qboolean gib) override = 0;
+
+	/// <summary>
+	/// </summary>
+	qboolean play_texture_sounds() override = 0;
+
+	//
+	// Monsters.
+	// 
+
+	/// <summary>
+	/// </summary>
+	qboolean allow_monsters() override = 0;
+
+	//
+	// Immediately end a multiplayer game.
+	// 
+
+	/// <summary>
+	/// </summary>
+	void end_multiplayer_game() override = 0;
+
+	/// <summary>
+	/// </summary>
+	void server_deactivate() override = 0;
+
+	/// <summary>
+	/// </summary>
+	void check_map_conditions() override = 0;
+
+	//
+	// Recreate all the map entities from the map data (preserving their indices), then remove everything else except the players.
+	// Also get rid of all world decals.
+	// 
+
+	/// <summary>
+	/// </summary>
+	virtual void clean_up_map() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void restart_round() = 0;
+
+	//
+	// Check if the scenario has been won/lost.
+	// 
+
+	/// <summary>
+	/// </summary>
+	virtual void check_win_conditions() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void remove_guns() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void give_c4() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void change_level() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void go_to_intermission() = 0;
+
+#ifdef REGAMEDLL_ADD
+	/// <summary>
+	/// </summary>
+	virtual void initialize_player_counts(int& num_alive_terrorist, int& num_alive_ct, int& num_dead_terrorist, int& num_dead_ct) = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void balance_teams() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void swap_all_players() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void update_team_scores() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void end_round_message(const char* sentence, ScenarioEventEndRound event) = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual void set_account_rules(RewardRules rules, int amount) = 0;
+
+	/// <summary>
+	/// </summary>
+	[[nodiscard]] virtual int get_account_rules(RewardRules rules) const = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual qboolean is_there_a_bomber() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual qboolean is_there_a_bomb() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual TeamName select_default_team() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual bool has_round_time_expired() = 0;
+
+	/// <summary>
+	/// </summary>
+	virtual bool is_bomb_planted() = 0;
+#endif
+
+	/// <summary>
+	/// </summary>
+	VoiceGameMgr voice_manager;
+
+	/// <summary>
+	/// <para>The global time when the round is supposed to end, if this is not 0 (deprecated name <c>team_count</c>).</para>
+	/// </summary>
+	float restart_round_time;
+
+	/// <summary>
+	/// </summary>
+	float win_conditions;
+
+	/// <summary>
+	/// <para>Time round has started (deprecated name <c>round_count</c>).</para>
+	/// </summary>
+	float round_start_time;
+
+	/// <summary>
+	/// <para>(From mp_roundtime) - How many seconds long this round is.</para>
+	/// </summary>
+	int round_time;
+
+	/// <summary>
+	/// </summary>
+	int round_time_secs;
+
+	/// <summary>
+	/// <para>(From mp_freezetime) - How many seconds long the intro round (when players are frozen) is.</para>
+	/// </summary>
+	int intro_round_time;
+
+	/// <summary>
+	/// <para>The global time when the intro round ends and the real one starts
+	/// wrote the original "RoundTime" comment for this variable).</para>
+	/// </summary>
+	float round_start_time_real;
+
+	/// <summary>
+	/// </summary>
+	int account_terrorist;
+
+	/// <summary>
+	/// </summary>
+	int account_ct;
+
+	/// <summary>
+	/// <para>The number of terrorists on the team (this is generated at the end of a round).</para>
+	/// </summary>
+	int num_terrorist;
+
+	/// <summary>
+	/// <para>The number of CTs on the team (this is generated at the end of a round).</para>
+	/// </summary>
+	int num_ct;
+
+	/// <summary>
+	/// </summary>
+	int num_spawnable_terrorist;
+
+	/// <summary>
+	/// </summary>
+	int num_spawnable_ct;
+
+	/// <summary>
+	/// <para>Number of Terrorist spawn points.</para>
+	/// </summary>
+	int spawn_point_count_terrorist;
+
+	/// <summary>
+	/// <para>Number of CT spawn points.</para>
+	/// </summary>
+	int spawn_point_count_ct;
+
+	/// <summary>
+	/// </summary>
+	int hostages_rescued;
+
+	/// <summary>
+	/// </summary>
+	int hostages_touched;
+
+	/// <summary>
+	/// </summary>
+	WinStatus round_win_status;
+
+	/// <summary>
+	/// </summary>
+	short num_ct_wins;
+
+	/// <summary>
+	/// </summary>
+	short num_terrorist_wins;
+
+	/// <summary>
+	/// <para>Whether or not the bomb has been bombed.</para>
+	/// </summary>
+	bool target_bombed;
+
+	/// <summary>
+	/// <para>Whether or not the bomb has been defused.</para>
+	/// </summary>
+	bool bomb_defused;
+
+	/// <summary>
+	/// </summary>
+	bool map_has_bomb_target;
+
+	/// <summary>
+	/// </summary>
+	bool map_has_bomb_zone;
+
+	/// <summary>
+	/// </summary>
+	bool map_has_buy_zone;
+
+	/// <summary>
+	/// </summary>
+	bool map_has_rescue_zone;
+
+	/// <summary>
+	/// </summary>
+	bool map_has_escape_zone;
+
+	/// <summary>
+	/// <para>TRUE = has VIP safety zone, FALSE = does not have VIP safety zone.</para>
+	/// </summary>
+	qboolean map_has_vip_safety_zone;
+
+	/// <summary>
+	/// </summary>
+	qboolean map_has_cameras;
+
+	/// <summary>
+	/// </summary>
+	int c4_timer;
+
+	/// <summary>
+	/// <para>The current Terrorist who has the C4.</para>
+	/// </summary>
+	int c4_guy;
+
+	/// <summary>
+	/// <para>The amount of money the losing team gets. This scales up as they lose more rounds in a row.</para>
+	/// </summary>
+	int loser_bonus;
+
+	/// <summary>
+	/// <para>The number of rounds the CTs have lost in a row.</para>
+	/// </summary>
+	int num_consecutive_ct_loses;
+
+	/// <summary>
+	/// <para>The number of rounds the Terrorists have lost in a row.</para>
+	/// </summary>
+	int num_consecutive_terrorist_loses;
+
+	/// <summary>
+	/// <para>For the idle kick functionality. This is tha max amount of time that the player has to be idle before being kicked.</para>
+	/// </summary>
+	float max_idle_period;
+
+	/// <summary>
+	/// </summary>
+	int limit_teams;
+
+	/// <summary>
+	/// </summary>
+	bool level_initialized;
+
+	/// <summary>
+	/// </summary>
+	bool round_terminating;
+
+	/// <summary>
+	/// <para>Set to TRUE to have the scores reset next time round restarts.</para>
+	/// </summary>
+	bool complete_reset;
+
+	/// <summary>
+	/// </summary>
+	float required_escape_ratio;
+
+	/// <summary>
+	/// </summary>
+	int num_escapers;
+
+	/// <summary>
+	/// </summary>
+	int have_escaped;
+
+	/// <summary>
+	/// </summary>
+	bool ct_cant_buy;
+
+	/// <summary>
+	/// </summary>
+	bool t_cant_buy;
+
+	/// <summary>
+	/// </summary>
+	float bomb_radius;
+
+	/// <summary>
+	/// </summary>
+	int consecutive_vip;
+
+	/// <summary>
+	/// </summary>
+	int total_gun_count;
+
+	/// <summary>
+	/// </summary>
+	int total_grenade_count;
+
+	/// <summary>
+	/// </summary>
+	int total_armour_count;
+
+	/// <summary>
+	/// <para>Keeps track of the # of consecutive rounds that have gone by where one team outnumbers the other team by more than 2.</para>
+	/// </summary>
+	int unbalanced_rounds;
+
+	/// <summary>
+	/// <para>Keeps track of the # of consecutive rounds of escape played. Teams will be swapped after 8 rounds</para>
+	/// </summary>
+	int num_escape_rounds;
+
+	/// <summary>
+	/// </summary>
+	int map_votes[MAX_VOTE_MAPS];
+
+	/// <summary>
+	/// </summary>
+	int last_pick;
+
+	/// <summary>
+	/// </summary>
+	int max_map_time;
+
+	/// <summary>
+	/// </summary>
+	int max_rounds;
+
+	/// <summary>
+	/// </summary>
+	int total_rounds_played;
+
+	/// <summary>
+	/// </summary>
+	int max_rounds_won;
+
+	/// <summary>
+	/// </summary>
+	int stored_spect_value;
+
+	/// <summary>
+	/// </summary>
+	float force_camera_value;
+
+	/// <summary>
+	/// </summary>
+	float force_chase_cam_value;
+
+	/// <summary>
+	/// </summary>
+	float fade_to_black_value;
+
+	/// <summary>
+	/// </summary>
+	PlayerBase* vip;
+
+	/// <summary>
+	/// </summary>
+	PlayerBase* vip_queue[MAX_VIP_QUEUES];
+
+//protected:
+	/// <summary>
+	/// </summary>
+	float intermission_end_time_;
+
+	/// <summary>
+	/// </summary>
+	float intermission_start_time_;
+
+	/// <summary>
+	/// </summary>
+	qboolean end_intermission_button_hit_;
+
+	/// <summary>
+	/// </summary>
+	float next_periodic_think_;
+
+	/// <summary>
+	/// <para>TRUE = the game commencing when there is at least one CT and T,
+	/// FALSE = scoring will not start until both teams have players (deprecated name <c>first_connected</c>).</para>
+	/// </summary>
+	bool game_started_;
+
+	/// <summary>
+	/// </summary>
+	bool in_career_game_;
+
+	/// <summary>
+	/// </summary>
+	float career_round_menu_time_;
+
+	/// <summary>
+	/// </summary>
+	int career_match_wins_;
+
+	/// <summary>
+	/// </summary>
+	int round_win_difference_;
+
+	/// <summary>
+	/// </summary>
+	float career_match_menu_time_;
+
+	/// <summary>
+	/// </summary>
+	bool skip_spawn_;
+
+	//
+	// Custom.
+	// 
+
+	/// <summary>
+	/// </summary>
+	bool skip_show_menu_;
+
+	/// <summary>
+	/// </summary>
+	bool needed_players_;
+
+	/// <summary>
+	/// </summary>
+	float escape_ratio_;
+
+	/// <summary>
+	/// </summary>
+	float time_limit_;
+
+	/// <summary>
+	/// </summary>
+	float game_start_time_;
+
+	/// <summary>
+	/// </summary>
+	bool team_balanced_;
 };

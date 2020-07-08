@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Русский (Россия) resources
+// Russian (Russia) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
 LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
@@ -69,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "the_hunter"
             VALUE "FileDescription", "AMXX module"
-            VALUE "FileVersion", "1.0.1"
+            VALUE "FileVersion", "1.1.0"
             VALUE "InternalName", "toml_amxx.dll"
             VALUE "LegalCopyright", "© the_hunter"
             VALUE "OriginalFilename", "toml_amxx.dll"
             VALUE "ProductName", "TOML"
-            VALUE "ProductVersion", "1.0.1"
+            VALUE "ProductVersion", "1.1.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -83,7 +83,7 @@ BEGIN
     END
 END
 
-#endif    // Русский (Россия) resources
+#endif    // Russian (Russia) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

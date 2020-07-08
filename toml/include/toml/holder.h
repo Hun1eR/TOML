@@ -20,7 +20,7 @@ public:
 	/// <summary>
 	/// </summary>
 	explicit TomlHolder(toml_t* toml)
-		: handle_(cell(toml)), toml_(toml) {}
+		: handle_(reinterpret_cast<cell>(toml)), toml_(toml) {}
 
 	/// <summary>
 	/// </summary>

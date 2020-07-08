@@ -32,7 +32,7 @@ InitStringCommand::InitStringCommand(const cell handle, const char* value) : han
 		array.emplace_back(toml::string{value});
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 

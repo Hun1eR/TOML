@@ -197,7 +197,7 @@ struct MPlane {
 	/// <summary>
 	/// <para>Surface normal.</para>
 	/// </summary>
-	Vector normal;
+	Vector normal{};
 
 	/// <summary>
 	/// <para>Closest approach to origin.</para>
@@ -431,7 +431,7 @@ struct MLeaf {
 struct MVertex {
 	/// <summary>
 	/// </summary>
-	Vector position;
+	Vector position{};
 };
 
 /// <summary>
@@ -469,11 +469,11 @@ struct Hull {
 
 	/// <summary>
 	/// </summary>
-	Vector clip_min_size;
+	Vector clip_min_size{};
 
 	/// <summary>
 	/// </summary>
-	Vector clip_max_size;
+	Vector clip_max_size{};
 };
 
 /// <summary>
@@ -519,11 +519,11 @@ struct Model {
 
 	/// <summary>
 	/// </summary>
-	Vector min_size;
+	Vector min_size{};
 
 	/// <summary>
 	/// </summary>
-	Vector max_size;
+	Vector max_size{};
 
 	/// <summary>
 	/// </summary>
@@ -632,7 +632,7 @@ struct Model {
 
 	/// <summary>
 	/// </summary>
-	Hull hulls[MAX_MAP_HULLS];
+	Hull hulls[MAX_MAP_HULLS]{};
 
 	/// <summary>
 	/// </summary>
@@ -661,5 +661,5 @@ struct Model {
 	/// <summary>
 	/// <para>Only access through <c>Mod_Extradata</c></para>
 	/// </summary>
-	CacheUser cache;
+	CacheUser cache{};
 };

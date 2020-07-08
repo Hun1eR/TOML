@@ -37,13 +37,13 @@ cell GetIntegerCommand::execute()
 
 	switch (value.type()) {
 	case toml::value_t::boolean:
-		return cell(value.as_boolean());
+		return static_cast<cell>(value.as_boolean());
 
 	case toml::value_t::floating:
-		return cell(value.as_floating());
+		return static_cast<cell>(value.as_floating());
 
 	default:
-		return cell(value.as_integer());
+		return static_cast<cell>(value.as_integer());
 	}
 }
 

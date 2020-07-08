@@ -21,7 +21,7 @@ cell IsValidCommand::execute()
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_is_valid(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_is_valid(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle };
 

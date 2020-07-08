@@ -18,7 +18,7 @@
 #include <amxx/game_configs.h>
 #endif
 
-#if defined USE_METAMOD
+#ifdef USE_METAMOD
 #include <cssdk/engine/edict.h>
 #include <metamod/os_dep.h>
 #else
@@ -28,17 +28,33 @@
 #elif !defined(WINAPI)
 #define WINAPI
 #endif
-#if defined _WIN32
+#undef DLLEXPORT
+#undef NOINLINE
+#undef FASTCALL
+#undef FORCEINLINE_STATIC
+#ifdef _WIN32
 #define DLLEXPORT __declspec(dllexport)  // NOLINT(cppcoreguidelines-macro-usage)
+#elif defined __clang__
+#define DLLEXPORT __attribute__((visibility ("default")))  // NOLINT(cppcoreguidelines-macro-usage)
 #else
-#define DLLEXPORT __attribute__ ((visibility ("default"), externally_visible))
+#define DLLEXPORT __attribute__((visibility ("default"), externally_visible))  // NOLINT(cppcoreguidelines-macro-usage)
 #endif
 #ifdef _WIN32
 #define NOINLINE __declspec(noinline)  // NOLINT(cppcoreguidelines-macro-usage)
+#else
+#define NOINLINE __attribute__((noinline))  // NOLINT(cppcoreguidelines-macro-usage)
+#endif
+#ifdef _WIN32
 #define FASTCALL __fastcall  // NOLINT(cppcoreguidelines-macro-usage)
 #else
-#define NOINLINE __attribute__ ((noinline))
-#define FASTCALL
+#define FASTCALL  // NOLINT(cppcoreguidelines-macro-usage)
+#endif
+#ifdef _WIN32
+#define FORCEINLINE_STATIC FORCEINLINE static  // NOLINT(cppcoreguidelines-macro-usage)
+#else
+#undef FORCEINLINE
+#define FORCEINLINE __attribute__((always_inline)) inline  // NOLINT(cppcoreguidelines-macro-usage)
+#define FORCEINLINE_STATIC __attribute__((always_inline)) static inline  // NOLINT(cppcoreguidelines-macro-usage)
 #endif
 #endif
 
@@ -74,6 +90,11 @@ constexpr auto BLOCK_SET = 2;
 /// Enum AmxxStatus
 /// </summary>
 enum class AmxxStatus : int {
+	/// <summary>
+	/// <para>Something went wrong.</para>
+	/// </summary>
+	Failed = -1,
+
 	/// <summary>
 	/// <para>No error.</para>
 	/// </summary>
@@ -372,7 +393,7 @@ struct AmxxApiFuncPointers {
 	int (*get_player_keys)(int id){};
 	int (*is_player_alive)(int id){};
 	int (*get_player_frags)(int id){};
-	int (*is_player_connecting)(int id){};
+	int (*is_player_connected)(int id){};
 	int (*is_player_hltv)(int id){};
 	int (*get_player_armor)(int id){};
 	int (*get_player_health)(int id){};
@@ -381,7 +402,7 @@ struct AmxxApiFuncPointers {
 #else
 	void* (*get_player_edict)(int id){};
 #endif
-	void* (*player_prop_address)(int id, int prop){};
+	void* (*player_prop_address)(int id, PlayerProp prop){};
 	int (*amx_exec)(Amx* amx, cell* return_val, int index){};
 	int (*amx_exec_v)(Amx* amx, cell* return_val, int index, int num_params, cell params[]){};
 	int (*amx_allot)(Amx* amx, int length, cell* amx_address, cell** phys_address){};
@@ -753,9 +774,9 @@ public:
 
 	/// <summary>
 	/// </summary>
-	static int is_player_connecting(const int id)
+	static int is_player_connected(const int id)
 	{
-		return amxx_api_funcs_.is_player_connecting(id);
+		return amxx_api_funcs_.is_player_connected(id);
 	}
 
 	/// <summary>
@@ -797,7 +818,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	static void* player_prop_address(const int id, const int prop)
+	static void* player_prop_address(const int id, const PlayerProp prop)
 	{
 		return amxx_api_funcs_.player_prop_address(id, prop);
 	}
@@ -1037,6 +1058,19 @@ public:
 		return amxx_api_funcs_.set_amx_string_utf8_char(amx, amx_address, source, source_len, max_len);
 	}
 #endif
+
+	/// <summary>
+	/// </summary>
+	static int read_flags(const char* string)
+	{
+		auto flags = 0;
+
+		while (*string) {
+			flags |= 1 << (*string++ - 'a');
+		}
+
+		return flags;
+	}
 };
 
 #ifdef AMXX_QUERY

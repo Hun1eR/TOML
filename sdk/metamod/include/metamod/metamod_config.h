@@ -16,7 +16,7 @@
  * -------------------------------------------------------------------------------------------
  */
 constexpr auto META_PLUGIN_NAME = "TOML";
-constexpr auto META_PLUGIN_VERSION = "1.0.1";
+constexpr auto META_PLUGIN_VERSION = "1.1.0";
 constexpr auto META_PLUGIN_AUTHOR = "the_hunter";
 constexpr auto META_PLUGIN_LOG_TAG = "TOML";
 constexpr auto META_PLUGIN_URL = "https://dev-cs.ru";

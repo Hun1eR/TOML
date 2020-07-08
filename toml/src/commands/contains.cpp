@@ -18,7 +18,7 @@ cell ContainsCommand::execute()
 {
 	auto* holder = Storage::get(handle_);
 	const auto& toml = toml_find(holder, key_, false);
-	
+
 	return toml.contains(get_key_from_composite(key_));
 }
 

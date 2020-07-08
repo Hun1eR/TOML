@@ -42,9 +42,9 @@ struct Consistency {
 
 	/// <summary>
 	/// </summary>
-	Vector min_size;
+	Vector min_size{};
 
 	/// <summary>
 	/// </summary>
-	Vector max_size;
+	Vector max_size{};
 };

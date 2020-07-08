@@ -63,8 +63,9 @@ cell AMX_NATIVE_CALL toml_get_string(Amx* amx, cell* params)
 
 	const auto buf_size = params[BufferSize];
 
-	if (!check_string_buffer_size(amx, buf_size, __func__))
+	if (!check_string_buffer_size(amx, buf_size, __func__)) {
 		return 0;
+	}
 
 	const auto handle = params[Handle];
 	auto* const key = AmxxApi::get_amx_string(amx, params[Key]);
@@ -73,8 +74,9 @@ cell AMX_NATIVE_CALL toml_get_string(Amx* amx, cell* params)
 
 	const auto result = execute(command, amx, -1, params[ThrowError], __func__);
 
-	if (result != -1)
+	if (result != -1) {
 		return result;
+	}
 
 	return AmxxApi::set_amx_string(amx, params[Buffer], AmxxApi::get_amx_string(amx, params[DefaultValue]), buf_size);
 }
@@ -87,8 +89,9 @@ cell AMX_NATIVE_CALL toml_array_get_string(Amx* amx, cell* params)
 
 	const auto buf_size = params[BufferSize];
 
-	if (!check_string_buffer_size(amx, buf_size, __func__))
+	if (!check_string_buffer_size(amx, buf_size, __func__)) {
 		return 0;
+	}
 
 	const auto handle = params[Handle];
 	const auto index = params[Index];
@@ -97,8 +100,9 @@ cell AMX_NATIVE_CALL toml_array_get_string(Amx* amx, cell* params)
 
 	const auto result = execute(command, amx, -1, params[ThrowError], __func__);
 
-	if (result != -1)
+	if (result != -1) {
 		return result;
+	}
 
 	return AmxxApi::set_amx_string(amx, params[Buffer], AmxxApi::get_amx_string(amx, params[DefaultValue]), buf_size);
 }

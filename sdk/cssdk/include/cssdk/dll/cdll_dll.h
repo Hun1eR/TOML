@@ -80,26 +80,6 @@ constexpr auto STATUS_ICON_FLASH = 2;
 
 /// <summary>
 /// </summary>
-constexpr auto HUD_PRINT_NOTIFY = 1;
-
-/// <summary>
-/// </summary>
-constexpr auto HUD_PRINT_CONSOLE = 2;
-
-/// <summary>
-/// </summary>
-constexpr auto HUD_PRINT_TALK = 3;
-
-/// <summary>
-/// </summary>
-constexpr auto HUD_PRINT_CENTER = 4;
-
-/// <summary>
-/// </summary>
-constexpr auto HUD_PRINT_RADIO = 5;
-
-/// <summary>
-/// </summary>
 constexpr auto STATUS_NIGHT_VISION_ON = 1;
 
 /// <summary>
@@ -216,6 +196,31 @@ constexpr auto WEAPON_SUIT = 31;
 constexpr auto WEAPON_ALL_WEAPONS = ~(1 << WEAPON_SUIT);
 
 /// <summary>
+/// Enum HudPrint
+/// </summary>
+enum class HudPrint {
+	/// <summary>
+	/// </summary>
+	Notify = 1,
+
+	/// <summary>
+	/// </summary>
+	Console,
+
+	/// <summary>
+	/// </summary>
+	Talk,
+
+	/// <summary>
+	/// </summary>
+	Center,
+
+	/// <summary>
+	/// </summary>
+	Radio
+};
+
+/// <summary>
 /// Enum VguiMenu
 /// </summary>
 enum class VguiMenu {
@@ -299,4 +304,70 @@ enum class VguiMenuSlot {
 	/// <summary>
 	/// </summary>
 	BuyItem
+};
+
+/// <summary>
+/// Enum BuyItemMenuSlot
+/// </summary>
+enum class BuyItemMenuSlot {
+	/// <summary>
+	/// </summary>
+	Vest = 1,
+
+	/// <summary>
+	/// </summary>
+	VestHelm,
+
+	/// <summary>
+	/// </summary>
+	FlashGrenade,
+
+	/// <summary>
+	/// </summary>
+	HeGrenade,
+
+	/// <summary>
+	/// </summary>
+	SmokeGrenade,
+
+	/// <summary>
+	/// </summary>
+	NightVision,
+
+	/// <summary>
+	/// </summary>
+	DefuseKit,
+
+	/// <summary>
+	/// </summary>
+	Shield
+};
+
+/// <summary>
+/// Enum ChooseTeamMenuSlot
+/// </summary>
+enum class ChooseTeamMenuSlot {
+	/// <summary>
+	/// </summary>
+	Undefined = -1,
+
+	/// <summary>
+	/// </summary>
+	Terrorist = 1,
+
+	/// <summary>
+	/// </summary>
+	Ct,
+
+	/// <summary>
+	/// </summary>
+	Vip,
+
+	/// <summary>
+	/// </summary>
+	Random = 5,
+
+	/// <summary>
+	/// </summary>
+	Spectator
 };

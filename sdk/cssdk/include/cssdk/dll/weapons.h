@@ -373,7 +373,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	ArmouryItemPack item;
+	ArmouryItemPack item{};
 
 	/// <summary>
 	/// </summary>
@@ -439,99 +439,99 @@ public:
 
 	/// <summary>
 	/// </summary>
-	bool start_defuse;
+	bool start_defuse{};
 
 	/// <summary>
 	/// </summary>
-	bool is_c4;
+	bool is_c4{};
 
 	/// <summary>
 	/// </summary>
-	EntityHandle<PlayerBase> bomb_defuser;
+	EntityHandle<PlayerBase> bomb_defuser{};
 
 	/// <summary>
 	/// </summary>
-	float defuse_count_down;
+	float defuse_count_down{};
 
 	/// <summary>
 	/// </summary>
-	float c4_blow;
+	float c4_blow{};
 
 	/// <summary>
 	/// </summary>
-	float next_freq_interval;
+	float next_freq_interval{};
 
 	/// <summary>
 	/// </summary>
-	float next_beep;
+	float next_beep{};
 
 	/// <summary>
 	/// </summary>
-	float next_freq;
+	float next_freq{};
 
 	/// <summary>
 	/// </summary>
-	char* beep_name;
+	char* beep_name{};
 
 	/// <summary>
 	/// </summary>
-	float attenuation;
+	float attenuation{};
 
 	/// <summary>
 	/// </summary>
-	float next_blink;
+	float next_blink{};
 
 	/// <summary>
 	/// </summary>
-	float next_defuse;
+	float next_defuse{};
 
 	/// <summary>
 	/// </summary>
-	bool just_blew;
+	bool just_blew{};
 
 	/// <summary>
 	/// </summary>
-	TeamName team;
+	TeamName team{};
 
 	/// <summary>
 	/// </summary>
-	int cur_wave;
+	int cur_wave{};
 
 	/// <summary>
 	/// </summary>
-	Edict* cur_bomb_target;
+	Edict* cur_bomb_target{};
 
 	/// <summary>
 	/// </summary>
-	int sg_smoke;
+	int sg_smoke{};
 
 	/// <summary>
 	/// </summary>
-	int angle;
+	int angle{};
 
 	/// <summary>
 	/// </summary>
-	unsigned short event;
+	unsigned short event{};
 
 	/// <summary>
 	/// </summary>
-	bool light_smoke;
+	bool light_smoke{};
 
 	/// <summary>
 	/// </summary>
-	bool detonated;
+	bool detonated{};
 
 	/// <summary>
 	/// </summary>
-	Vector smoke_detonate;
+	Vector smoke_detonate{};
 
 	/// <summary>
 	/// </summary>
-	int bounce_count;
+	int bounce_count{};
 
 	/// <summary>
 	/// </summary>
-	qboolean registered_sound;
+	qboolean registered_sound{};
 };
 
 //
@@ -659,7 +659,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	WeaponId id;
+	WeaponId id{};
 
 #ifdef REGAMEDLL_API
 	/// <summary>
@@ -889,11 +889,11 @@ public:
 
 	/// <summary>
 	/// </summary>
-	Vector aiming;
+	Vector aiming{};
 
 	/// <summary>
 	/// </summary>
-	Strind model_name;
+	Strind model_name{};
 
 	/// <summary>
 	/// <para>Time to shoot the remaining bullets of the Glock18 burst fire.</para>
@@ -2463,6 +2463,26 @@ constexpr auto KNIFE_MAX_SPEED = 250.0f;
 constexpr auto KNIFE_MAX_SPEED_SHIELD = 180.0f;
 
 /// <summary>
+/// </summary>
+constexpr auto KNIFE_STAB_DAMAGE = 65.0f;
+
+/// <summary>
+/// </summary>
+constexpr auto KNIFE_SWING_DAMAGE = 15.0f;
+
+/// <summary>
+/// </summary>
+constexpr auto KNIFE_SWING_DAMAGE_FAST = 20.0f;
+
+/// <summary>
+/// </summary>
+constexpr auto KNIFE_STAB_DISTANCE = 32.0f;
+
+/// <summary>
+/// </summary>
+constexpr auto KNIFE_SWING_DISTANCE = 48.0f;
+
+/// <summary>
 /// Enum KnifeAnimSeq
 /// </summary>
 enum class KnifeAnimSeq {
@@ -2587,11 +2607,31 @@ public:
 
 	/// <summary>
 	/// </summary>
-	TraceResult trace_hit;
+	TraceResult trace_hit{};
 
 	/// <summary>
 	/// </summary>
 	unsigned short event_knife{};
+
+	/// <summary>
+	/// </summary>
+	float stab_base_damage{};
+
+	/// <summary>
+	/// </summary>
+	float swing_base_damage{};
+
+	/// <summary>
+	/// </summary>
+	float swing_base_damage_fast{};
+
+	/// <summary>
+	/// </summary>
+	float stab_distance{};
+
+	/// <summary>
+	/// </summary>
+	float swing_distance{};
 };
 
 //

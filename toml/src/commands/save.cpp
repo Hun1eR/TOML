@@ -24,7 +24,7 @@ cell SaveCommand::execute()
 	out << serial;
 	out.close();
 
-	return cell(serial.length());
+	return static_cast<cell>(serial.length());
 }
 
 /// <summary>

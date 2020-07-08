@@ -15,7 +15,7 @@ using namespace std::chrono;
 /// </summary>
 inline cell to_seconds(const system_clock::time_point& time_point)
 {
-	return cell(time_point.time_since_epoch().count() / 10000000);
+	return static_cast<cell>(time_point.time_since_epoch().count() / 10000000);
 }
 
 /// <summary>
@@ -92,8 +92,8 @@ static cell to_datetime(const toml_t& value, TomlDateTime* datetime)
 		datetime->minute = offset_datetime.time.minute;
 		datetime->second = offset_datetime.time.second;
 		datetime->millisecond = offset_datetime.time.millisecond;
-		datetime->offset_hour = offset_datetime.offset.hour;
-		datetime->offset_minute = offset_datetime.offset.minute;
+		datetime->offset_hour = offset_datetime.offset.hour; // NOLINT
+		datetime->offset_minute = offset_datetime.offset.minute; // NOLINT
 		datetime->unix_timestamp = to_seconds(offset_datetime);
 		break;
 	}
@@ -106,15 +106,17 @@ static cell to_datetime(const toml_t& value, TomlDateTime* datetime)
 /// </summary>
 static cell to_datetime(const toml_t& value, cell* offset_hour, cell* offset_minute)
 {
-	if (value.type() == toml::value_t::local_time)
+	if (value.type() == toml::value_t::local_time) {
 		return to_seconds(value.as_local_time());
+	}
 
-	if (value.type() != toml::value_t::offset_datetime)
+	if (value.type() != toml::value_t::offset_datetime) {
 		return to_seconds(toml::get<system_clock::time_point>(value));
+	}
 
 	const auto& datetime = value.as_offset_datetime();
-	*offset_hour = datetime.offset.hour;
-	*offset_minute = datetime.offset.minute;
+	*offset_hour = datetime.offset.hour; // NOLINT
+	*offset_minute = datetime.offset.minute; // NOLINT
 
 	return to_seconds(datetime);
 }

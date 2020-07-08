@@ -29,12 +29,14 @@ TomlHolder* Storage::get(const cell handle, const bool throw_error)
 	for (auto& toml_holder : g_holders) {
 		auto* holder = toml_holder.find(handle);
 
-		if (holder)
+		if (holder) {
 			return holder;
+		}
 	}
 
-	if (!throw_error)
+	if (!throw_error) {
 		return nullptr;
+	}
 
 	throw std::invalid_argument("Invalid TOML handle provided (" + std::to_string(handle) + ").");
 }
@@ -43,8 +45,9 @@ TomlHolder* Storage::get(const cell handle, const bool throw_error)
 /// </summary>
 void Storage::remove(const cell handle)
 {
-	if (handle == TOML_INVALID_HANDLE)
+	if (handle == TOML_INVALID_HANDLE) {
 		return;
+	}
 
 	const auto& it = std::find(g_holders.begin(), g_holders.end(), handle);
 
@@ -57,8 +60,9 @@ void Storage::remove(const cell handle)
 	}
 
 	for (auto& holder : g_holders) {
-		if (holder.remove(handle))
+		if (holder.remove(handle)) {
 			break;
+		}
 	}
 }
 
@@ -66,8 +70,9 @@ void Storage::remove(const cell handle)
 /// </summary>
 void Storage::clear()
 {
-	for (const auto& holder : g_holders)
+	for (const auto& holder : g_holders) {
 		delete holder.toml();
+	}
 
 	g_holders.clear();
 }

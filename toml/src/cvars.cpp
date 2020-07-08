@@ -21,8 +21,9 @@ static std::vector<CVar*> g_cvar_cache{};
 static CVar* cvar_cache_lookup(const char* cvar_name)
 {
 	for (auto const& cvar : g_cvar_cache) {
-		if (!std::strcmp(cvar->name, cvar_name))
+		if (!std::strcmp(cvar->name, cvar_name)) {
 			return cvar;
+		}
 	}
 
 	return nullptr;
@@ -34,8 +35,9 @@ static CVar* register_cvar(CVar* new_cvar)
 {
 	auto* cvar = cvar_cache_lookup(new_cvar->name);
 
-	if (cvar)
+	if (cvar) {
 		return cvar;
+	}
 
 	cvar = Engine::cvar_get_pointer(new_cvar->name);
 
@@ -60,7 +62,7 @@ static CVar* register_cvar(CVar* new_cvar)
 /// </summary>
 bool register_cvars()
 {
-	static CVar cvar_toml_debug{"toml_debug", "0", 0, 0.0f, nullptr};
+	static CVar cvar_toml_debug{"toml_debug", "0", 0, 0.0F, nullptr};
 	toml_debug = register_cvar(&cvar_toml_debug);
 
 	return toml_debug;

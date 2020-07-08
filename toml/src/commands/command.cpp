@@ -30,12 +30,12 @@ void split_string(const std::string& string, const char delimiter, std::vector<s
 	auto current = string.find(delimiter);
 
 	while (current != std::string::npos) {
-		result.push_back(string.substr(previous, current - previous));
+		result.emplace_back(string.substr(previous, current - previous));
 		previous = current + 1;
 		current = string.find(delimiter, previous);
 	}
 
-	result.push_back(string.substr(previous, current - previous));
+	result.emplace_back(string.substr(previous, current - previous));
 }
 
 /// <summary>
@@ -57,8 +57,9 @@ const char* get_key_from_composite(const char* composite_key)
 /// </summary>
 toml_t& toml_find(TomlHolder*& holder, const char* composite_key, const bool find_value)
 {
-	if (!std::strchr(composite_key, '.'))
+	if (!std::strchr(composite_key, '.')) {
 		return find_value ? toml::find(*holder->toml(), composite_key) : *holder->toml();
+	}
 
 	std::vector<std::string> keys;
 	split_string(composite_key, '.', keys);
@@ -88,12 +89,14 @@ cell execute(ITomlCommand& command, Amx* amx, const cell default_value, const ce
 		return command.execute();
 	}
 	catch (const std::exception& ex) {
-		if (throw_error)
+		if (throw_error) {
 			AmxxApi::log_error(amx, AmxError::Native, "%s: %s", func, ex.what());
+		}
 	}
 	catch (...) {
-		if (throw_error)
+		if (throw_error) {
 			AmxxApi::log_error(amx, AmxError::Native, "%s: Unknown error.", func);
+		}
 	}
 
 	return default_value;

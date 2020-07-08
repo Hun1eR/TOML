@@ -100,7 +100,9 @@ extern MetaGlobals* g_meta_globals;
 /// </summary>
 inline void set_meta_result(const MetaResult result)
 {
-	g_meta_globals->result = result;
+	if (g_meta_globals->result < result) {
+		g_meta_globals->result = result;
+	}
 }
 
 /// <summary>

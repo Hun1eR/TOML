@@ -12,8 +12,9 @@
 /// </summary>
 AmxxStatus on_amxx_attach()
 {
-	if (!register_cvars())
+	if (!register_cvars()) {
 		return AmxxStatus::InterfaceMismatch;
+	}
 
 	Storage::clear();
 

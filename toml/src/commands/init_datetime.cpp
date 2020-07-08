@@ -69,7 +69,7 @@ InitDateTimeCommand::InitDateTimeCommand(const cell handle, cell year, cell mont
 		array.emplace_back(create_local_date(year, month, day));
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 
@@ -99,7 +99,7 @@ InitDateTimeCommand::InitDateTimeCommand(const cell handle, cell hour, cell minu
 		array.emplace_back(create_local_time(hour, minute, second, millisecond));
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 
@@ -113,10 +113,12 @@ InitDateTimeCommand::InitDateTimeCommand(const cell handle, const char* key, con
 		auto& toml = toml_find(holder, key, false);
 		auto& table = toml.as_table();
 
-		if (offset)
+		if (offset) {
 			table[get_key_from_composite(key)] = create_offset_datetime(datetime);
-		else
+		}
+		else {
 			table[get_key_from_composite(key)] = create_local_datetime(datetime);
+		}
 
 		return 1;
 	};
@@ -131,14 +133,16 @@ InitDateTimeCommand::InitDateTimeCommand(const cell handle, const TomlDateTime* 
 	{
 		auto& array = holder->toml()->as_array();
 
-		if (offset)
+		if (offset) {
 			array.emplace_back(create_offset_datetime(datetime));
-		else
+		}
+		else {
 			array.emplace_back(create_local_datetime(datetime));
+		}
 
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 
@@ -168,7 +172,7 @@ cell AMX_NATIVE_CALL toml_init_local_date(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_init_local_date(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_init_local_date(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Year, Month, Day };
 
@@ -200,7 +204,7 @@ cell AMX_NATIVE_CALL toml_init_local_time(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_init_local_time(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_init_local_time(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Hour, Minute, Second, Millisecond };
 

@@ -9,36 +9,21 @@
 #pragma once
 
 #include <cssdk/engine/eiface.h>
-#include <metamod/os_dep.h>
 
-struct MetaGlobals;
-struct MetaDllFuncsTables;
-struct MetaHookExportFuncs;
-enum class MetamodStatus;
-enum class MetaPluginLoadTime;
-
-/// <summary>
-/// </summary>
-extern "C" MetamodStatus DLLEXPORT Meta_Attach(MetaPluginLoadTime, MetaHookExportFuncs*, MetaGlobals*, MetaDllFuncsTables*);
+extern DllFuncPointers* g_dll_funcs;
+extern DllNewFuncPointers* g_dll_new_funcs;
 
 /// <summary>
 /// Class GameDll.
 /// </summary>
 class GameDll {
-	friend MetamodStatus DLLEXPORT Meta_Attach(MetaPluginLoadTime, MetaHookExportFuncs*, MetaGlobals*, MetaDllFuncsTables*);
-
-	/// <summary>
-	/// <para>DLL functions table.</para>
-	/// </summary>
-	static const DllFuncPointers* dll_funcs_;
-
 public:
 	/// <summary>
 	/// <para>Called when the game loads this DLL.<br/></para>
 	/// </summary>
 	static void game_init()
 	{
-		dll_funcs_->game_init();
+		g_dll_funcs->game_init();
 	}
 
 	/// <summary>
@@ -54,7 +39,7 @@ public:
 	/// </returns>
 	static int spawn(Edict* entity)
 	{
-		return dll_funcs_->spawn(entity);
+		return g_dll_funcs->spawn(entity);
 	}
 
 	/// <summary>
@@ -66,7 +51,7 @@ public:
 	/// </param>
 	static void think(Edict* entity)
 	{
-		dll_funcs_->think(entity);
+		g_dll_funcs->think(entity);
 	}
 
 	/// <summary>
@@ -78,7 +63,7 @@ public:
 	/// </remarks>
 	static void use(Edict* entity_used, Edict* entity_other)
 	{
-		dll_funcs_->use(entity_used, entity_other);
+		g_dll_funcs->use(entity_used, entity_other);
 	}
 
 	/// <summary>
@@ -86,7 +71,7 @@ public:
 	/// </summary>
 	static void touch(Edict* entity_touched, Edict* entity_other)
 	{
-		dll_funcs_->touch(entity_touched, entity_other);
+		g_dll_funcs->touch(entity_touched, entity_other);
 	}
 
 	/// <summary>
@@ -94,7 +79,7 @@ public:
 	/// </summary>
 	static void blocked(Edict* entity_blocked, Edict* entity_other)
 	{
-		dll_funcs_->blocked(entity_blocked, entity_other);
+		g_dll_funcs->blocked(entity_blocked, entity_other);
 	}
 
 	/// <summary>
@@ -102,7 +87,7 @@ public:
 	/// </summary>
 	static void key_value(Edict* entity_key_value, KeyValueData* data)
 	{
-		dll_funcs_->key_value(entity_key_value, data);
+		g_dll_funcs->key_value(entity_key_value, data);
 	}
 
 	/// <summary>
@@ -110,7 +95,7 @@ public:
 	/// </summary>
 	static void save(Edict* entity, SaveRestoreData* save_data)
 	{
-		dll_funcs_->save(entity, save_data);
+		g_dll_funcs->save(entity, save_data);
 	}
 
 	/// <summary>
@@ -128,7 +113,7 @@ public:
 	/// </param>
 	static int restore(Edict* entity, SaveRestoreData* save_data, const qboolean global_entity)
 	{
-		return dll_funcs_->restore(entity, save_data, global_entity);
+		return g_dll_funcs->restore(entity, save_data, global_entity);
 	}
 
 	/// <summary>
@@ -140,7 +125,7 @@ public:
 	/// </param>
 	static void set_abs_box(Edict* entity)
 	{
-		dll_funcs_->set_abs_box(entity);
+		g_dll_funcs->set_abs_box(entity);
 	}
 
 	/// <summary>
@@ -164,7 +149,7 @@ public:
 	/// </param>
 	static void save_write_fields(SaveRestoreData* save_data, const char* name, void* base_data, TypeDescription* fields, const int field_count)
 	{
-		dll_funcs_->save_write_fields(save_data, name, base_data, fields, field_count);
+		g_dll_funcs->save_write_fields(save_data, name, base_data, fields, field_count);
 	}
 
 	/// <summary>
@@ -188,7 +173,7 @@ public:
 	/// </param>
 	static void save_read_fields(SaveRestoreData* save_data, const char* name, void* base_data, TypeDescription* fields, const int field_count)
 	{
-		dll_funcs_->save_read_fields(save_data, name, base_data, fields, field_count);
+		g_dll_funcs->save_read_fields(save_data, name, base_data, fields, field_count);
 	}
 
 	/// <summary>
@@ -196,7 +181,7 @@ public:
 	/// </summary>
 	static void save_global_state(SaveRestoreData* save_data)
 	{
-		dll_funcs_->save_global_state(save_data);
+		g_dll_funcs->save_global_state(save_data);
 	}
 
 	/// <summary>
@@ -204,7 +189,7 @@ public:
 	/// </summary>
 	static void restore_global_state(SaveRestoreData* save_data)
 	{
-		dll_funcs_->restore_global_state(save_data);
+		g_dll_funcs->restore_global_state(save_data);
 	}
 
 	/// <summary>
@@ -212,7 +197,7 @@ public:
 	/// </summary>
 	static void reset_global_state()
 	{
-		dll_funcs_->reset_global_state();
+		g_dll_funcs->reset_global_state();
 	}
 
 	/// <summary>
@@ -242,7 +227,7 @@ public:
 	/// </remarks>
 	static qboolean client_connect(Edict* client, const char* name, const char* address, char reject_reason[128])
 	{
-		return dll_funcs_->client_connect(client, name, address, reject_reason);
+		return g_dll_funcs->client_connect(client, name, address, reject_reason);
 	}
 
 	/// <summary>
@@ -255,7 +240,7 @@ public:
 	/// </param>
 	static void client_disconnect(Edict* client)
 	{
-		dll_funcs_->client_disconnect(client);
+		g_dll_funcs->client_disconnect(client);
 	}
 
 	/// <summary>
@@ -268,7 +253,7 @@ public:
 	/// </param>
 	static void client_kill(Edict* client)
 	{
-		dll_funcs_->client_kill(client);
+		g_dll_funcs->client_kill(client);
 	}
 
 	/// <summary>
@@ -281,7 +266,7 @@ public:
 	/// </param>
 	static void client_put_in_server(Edict* client)
 	{
-		dll_funcs_->client_put_in_server(client);
+		g_dll_funcs->client_put_in_server(client);
 	}
 
 	/// <summary>
@@ -297,7 +282,7 @@ public:
 	/// </remarks>
 	static void client_command(Edict* client)
 	{
-		dll_funcs_->client_command(client);
+		g_dll_funcs->client_command(client);
 	}
 
 	/// <summary>
@@ -306,7 +291,7 @@ public:
 	/// </summary>
 	static void client_user_info_changed(Edict* client, char* info_buffer)
 	{
-		dll_funcs_->client_user_info_changed(client, info_buffer);
+		g_dll_funcs->client_user_info_changed(client, info_buffer);
 	}
 
 	/// <summary>
@@ -324,7 +309,7 @@ public:
 	/// </param>
 	static void server_activate(Edict* edict_list, const int edict_count, const int client_max)
 	{
-		dll_funcs_->server_activate(edict_list, edict_count, client_max);
+		g_dll_funcs->server_activate(edict_list, edict_count, client_max);
 	}
 
 	/// <summary>
@@ -332,7 +317,7 @@ public:
 	/// </summary>
 	static void server_deactivate()
 	{
-		dll_funcs_->server_deactivate();
+		g_dll_funcs->server_deactivate();
 	}
 
 	/// <summary>
@@ -344,7 +329,7 @@ public:
 	/// </param>
 	static void player_pre_think(Edict* client)
 	{
-		dll_funcs_->player_pre_think(client);
+		g_dll_funcs->player_pre_think(client);
 	}
 
 	/// <summary>
@@ -356,7 +341,7 @@ public:
 	/// </param>
 	static void player_post_think(Edict* client)
 	{
-		dll_funcs_->player_post_think(client);
+		g_dll_funcs->player_post_think(client);
 	}
 
 	/// <summary>
@@ -364,7 +349,7 @@ public:
 	/// </summary>
 	static void start_frame()
 	{
-		dll_funcs_->start_frame();
+		g_dll_funcs->start_frame();
 	}
 
 	/// <summary>
@@ -372,7 +357,7 @@ public:
 	/// </summary>
 	static void params_new_level()
 	{
-		dll_funcs_->params_new_level();
+		g_dll_funcs->params_new_level();
 	}
 
 	/// <summary>
@@ -381,7 +366,7 @@ public:
 	/// </summary>
 	static void params_change_level()
 	{
-		dll_funcs_->params_change_level();
+		g_dll_funcs->params_change_level();
 	}
 
 	/// <summary>
@@ -389,7 +374,7 @@ public:
 	/// </summary>
 	static const char* get_game_description()
 	{
-		return dll_funcs_->get_game_description();
+		return g_dll_funcs->get_game_description();
 	}
 
 	/// <summary>
@@ -397,7 +382,7 @@ public:
 	/// </summary>
 	static void player_customization(Edict* client, Customization* custom)
 	{
-		dll_funcs_->player_customization(client, custom);
+		g_dll_funcs->player_customization(client, custom);
 	}
 
 	/// <summary>
@@ -405,7 +390,7 @@ public:
 	/// </summary>
 	static void spectator_connect(Edict* client)
 	{
-		dll_funcs_->spectator_connect(client);
+		g_dll_funcs->spectator_connect(client);
 	}
 
 	/// <summary>
@@ -413,7 +398,7 @@ public:
 	/// </summary>
 	static void spectator_disconnect(Edict* client)
 	{
-		dll_funcs_->spectator_disconnect(client);
+		g_dll_funcs->spectator_disconnect(client);
 	}
 
 	/// <summary>
@@ -421,7 +406,7 @@ public:
 	/// </summary>
 	static void spectator_think(Edict* client)
 	{
-		dll_funcs_->spectator_think(client);
+		g_dll_funcs->spectator_think(client);
 	}
 
 	/// <summary>
@@ -430,7 +415,7 @@ public:
 	/// </summary>
 	static void sys_error(const char* error_string)
 	{
-		dll_funcs_->sys_error(error_string);
+		g_dll_funcs->sys_error(error_string);
 	}
 
 	/// <summary>
@@ -445,7 +430,7 @@ public:
 	/// </param>
 	static void pm_move(PlayerMove* move, const qboolean server)
 	{
-		dll_funcs_->pm_move(move, server);
+		g_dll_funcs->pm_move(move, server);
 	}
 
 	/// <summary>
@@ -453,7 +438,7 @@ public:
 	/// </summary>
 	static void pm_init(PlayerMove* move)
 	{
-		dll_funcs_->pm_init(move);
+		g_dll_funcs->pm_init(move);
 	}
 
 	/// <summary>
@@ -473,7 +458,7 @@ public:
 	/// </remarks>
 	static char pm_find_texture_type(char* name)
 	{
-		return dll_funcs_->pm_find_texture_type(name);
+		return g_dll_funcs->pm_find_texture_type(name);
 	}
 
 	/// <summary>
@@ -494,7 +479,7 @@ public:
 	/// </param>
 	static void setup_visibility(Edict* view_entity, Edict* client, unsigned char** pvs, unsigned char** pas)
 	{
-		dll_funcs_->setup_visibility(view_entity, client, pvs, pas);
+		g_dll_funcs->setup_visibility(view_entity, client, pvs, pas);
 	}
 
 	/// <summary>
@@ -512,7 +497,7 @@ public:
 	/// </param>
 	static void update_client_data(const Edict* client, const qboolean send_weapons, ClientData* data)
 	{
-		dll_funcs_->update_client_data(client, send_weapons, data);
+		g_dll_funcs->update_client_data(client, send_weapons, data);
 	}
 
 	/// <summary>
@@ -541,9 +526,9 @@ public:
 	///		The PVS provided by <c>setup_visibility</c>
 	/// </param>
 	static int add_to_full_pack(EntityState* state, const int entity_index, Edict* entity, Edict* host, const int host_flags, const qboolean player,
-		unsigned char* set)
+	                            unsigned char* set)
 	{
-		return dll_funcs_->add_to_full_pack(state, entity_index, entity, host, host_flags, player, set);
+		return g_dll_funcs->add_to_full_pack(state, entity_index, entity, host, host_flags, player, set);
 	}
 
 	/// <summary>
@@ -572,9 +557,9 @@ public:
 	///		Array of the player maximum bounds for each hull.<br/>
 	/// </param>
 	static void create_baseline(const qboolean client, const int entity_index, EntityState* baseline, Edict* entity, const int player_model_index,
-		const Vector player_min_size, const Vector player_max_size)
+	                            const Vector& player_min_size, const Vector& player_max_size)
 	{
-		dll_funcs_->create_baseline(client, entity_index, baseline, entity, player_model_index, player_min_size, player_max_size);
+		g_dll_funcs->create_baseline(client, entity_index, baseline, entity, player_model_index, player_min_size, player_max_size);
 	}
 
 	/// <summary>
@@ -582,7 +567,7 @@ public:
 	/// </summary>
 	static void register_encoders()
 	{
-		dll_funcs_->register_encoders();
+		g_dll_funcs->register_encoders();
 	}
 
 	/// <summary>
@@ -601,7 +586,7 @@ public:
 	/// </returns>
 	static qboolean get_weapon_data(Edict* client, WeaponData* info)
 	{
-		return dll_funcs_->get_weapon_data(client, info);
+		return g_dll_funcs->get_weapon_data(client, info);
 	}
 
 	/// <summary>
@@ -619,7 +604,7 @@ public:
 	/// </param>
 	static void cmd_start(const Edict* client, const UserCmd* cmd, const unsigned int random_seed)
 	{
-		dll_funcs_->cmd_start(client, cmd, random_seed);
+		g_dll_funcs->cmd_start(client, cmd, random_seed);
 	}
 
 	/// <summary>
@@ -631,7 +616,7 @@ public:
 	/// </param>
 	static void cmd_end(const Edict* client)
 	{
-		dll_funcs_->cmd_end(client);
+		g_dll_funcs->cmd_end(client);
 	}
 
 	/// <summary>
@@ -662,7 +647,7 @@ public:
 	/// </remarks>
 	static qboolean connectionless_packet(const NetAddress* net_from, const char* args, char* response_buffer, int* response_buffer_size)
 	{
-		return dll_funcs_->connectionless_packet(net_from, args, response_buffer, response_buffer_size);
+		return g_dll_funcs->connectionless_packet(net_from, args, response_buffer, response_buffer_size);
 	}
 
 	/// <summary>
@@ -684,7 +669,7 @@ public:
 	/// </returns>
 	static qboolean get_hull_bounds(const int hull_number, Vector& min_size, Vector& max_size)
 	{
-		return dll_funcs_->get_hull_bounds(hull_number, min_size, max_size);
+		return g_dll_funcs->get_hull_bounds(hull_number, min_size, max_size);
 	}
 
 	/// <summary>
@@ -692,7 +677,7 @@ public:
 	/// </summary>
 	static void create_instanced_baselines()
 	{
-		dll_funcs_->create_instanced_baselines();
+		g_dll_funcs->create_instanced_baselines();
 	}
 
 	/// <summary>
@@ -702,7 +687,7 @@ public:
 	/// </summary>
 	static qboolean inconsistent_file(const Edict* client, const char* file_name, char* disconnect_message)
 	{
-		return dll_funcs_->inconsistent_file(client, file_name, disconnect_message);
+		return g_dll_funcs->inconsistent_file(client, file_name, disconnect_message);
 	}
 
 	/// <summary>
@@ -711,7 +696,7 @@ public:
 	/// </summary>
 	static qboolean allow_lag_compensation()
 	{
-		return dll_funcs_->allow_lag_compensation();
+		return g_dll_funcs->allow_lag_compensation();
 	}
 };
 
@@ -719,13 +704,6 @@ public:
 /// Class GameDllNew.
 /// </summary>
 class GameDllNew {
-	friend MetamodStatus DLLEXPORT Meta_Attach(MetaPluginLoadTime, MetaHookExportFuncs*, MetaGlobals*, MetaDllFuncsTables*);
-
-	/// <summary>
-	/// <para>New DLL functions table.</para>
-	/// </summary>
-	static const DllNewFuncPointers* dll_new_funcs_;
-
 public:
 	/// <summary>
 	/// <para>Called when an entity is freed by the engine, right before the object's memory is freed.<br/>
@@ -737,7 +715,7 @@ public:
 	/// </param>
 	static void free_entity_private_data(Edict* entity)
 	{
-		dll_new_funcs_->free_entity_private_data(entity);
+		g_dll_new_funcs->free_entity_private_data(entity);
 	}
 
 	/// <summary>
@@ -745,7 +723,7 @@ public:
 	/// </summary>
 	static void game_shutdown()
 	{
-		dll_new_funcs_->game_shutdown();
+		g_dll_new_funcs->game_shutdown();
 	}
 
 	/// <summary>
@@ -764,7 +742,7 @@ public:
 	/// </returns>
 	static qboolean should_collide(Edict* entity_touched, Edict* entity_other)
 	{
-		return dll_new_funcs_->should_collide(entity_touched, entity_other);
+		return g_dll_new_funcs->should_collide(entity_touched, entity_other);
 	}
 
 	/// <summary>
@@ -779,7 +757,7 @@ public:
 	/// </param>
 	static void cvar_value(const Edict* client, const char* value)
 	{
-		dll_new_funcs_->cvar_value(client, value);
+		g_dll_new_funcs->cvar_value(client, value);
 	}
 
 	/// <summary>
@@ -800,6 +778,6 @@ public:
 	/// </param>
 	static void cvar_value2(const Edict* client, const int request_id, const char* cvar_name, const char* value)
 	{
-		dll_new_funcs_->cvar_value2(client, request_id, cvar_name, value);
+		g_dll_new_funcs->cvar_value2(client, request_id, cvar_name, value);
 	}
 };

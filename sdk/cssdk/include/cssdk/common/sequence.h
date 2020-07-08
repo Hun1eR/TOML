@@ -129,7 +129,7 @@ struct SequenceCommandLine {
 	/// <summary>
 	/// <para>Text HUD message struct.</para>
 	/// </summary>
-	ClientTextMessage client_message;
+	ClientTextMessage client_message{};
 
 	/// <summary>
 	/// <para>Target name of speaking entity.</para>

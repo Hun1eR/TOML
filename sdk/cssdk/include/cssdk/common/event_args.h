@@ -37,15 +37,15 @@ struct EventArgs {
 
 	/// <summary>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 
 	/// <summary>
 	/// </summary>
-	Vector velocity;
+	Vector velocity{};
 
 	/// <summary>
 	/// </summary>

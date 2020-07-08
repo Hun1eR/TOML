@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -83,6 +83,10 @@ constexpr auto FCUST_WIPE_DATA = 1 << 1;
 /// <summary>
 /// </summary>
 constexpr auto FCUST_IGNORE_INIT = 1 << 2;
+
+/// <summary>
+/// </summary>
+constexpr auto FCUST_VALIDATED = 1 << 3;
 
 /// <summary>
 /// Enum ResourceType
@@ -205,7 +209,7 @@ struct Resource {
 #else
 	/// <summary>
 	/// </summary>
-	unsigned char* data;
+	unsigned char* data{};
 #endif // !defined(HLTV)
 };
 
@@ -221,7 +225,7 @@ struct Customization {
 	/// <summary>
 	/// <para>The resource for this customization.</para>
 	/// </summary>
-	Resource resource;
+	Resource resource{};
 
 	/// <summary>
 	/// <para>Has the raw data been translated into a useable format?<br/>

@@ -18,7 +18,7 @@ public:
 	/// <summary>
 	/// </summary>
 	InitRootCommand() = default;
-	
+
 	/// <summary>
 	/// </summary>
 	cell execute() override;

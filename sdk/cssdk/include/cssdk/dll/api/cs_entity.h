@@ -39,12 +39,12 @@ public:
 	/// <summary>
 	/// </summary>
 	virtual void fire_bullets(int shots, Vector& src, Vector& dir_shooting, Vector& spread, float distance,
-		int bullet_type, int tracer_freq, int damage, EntityVars* attacker) = 0;
+	                          int bullet_type, int tracer_freq, int damage, EntityVars* attacker) = 0;
 
 	/// <summary>
 	/// </summary>
 	virtual Vector fire_bullets3(Vector& src, Vector& dir_shooting, float spread, float distance, int penetration, int bullet_type,
-		int damage, float range_modifier, EntityVars* attacker, bool pistol, int shared_rand) = 0;
+	                             int damage, float range_modifier, EntityVars* attacker, bool pistol, int shared_rand) = 0;
 
 	/// <summary>
 	/// </summary>

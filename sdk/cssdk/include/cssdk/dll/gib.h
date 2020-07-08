@@ -1,38 +1,38 @@
 // ***********************************************************************
-// Created          : 04-01-2020
+// Created          : 06-02-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
 
 #pragma once
 
-#include <cssdk/dll/api/cs_entity.h>
-#include <cssdk/dll/weapons.h>
+#include <cssdk/dll/entity_base.h>
 
 /// <summary>
-/// Class CsPlayerItem.
+/// Class Gib.
 /// </summary>
-class CsPlayerItem : public CsAnimating {
+class Gib : public EntityBase {
 public:
 	/// <summary>
 	/// </summary>
-	virtual void set_item_info(ItemInfo* info) = 0;
+	int object_caps() override = 0;
 
 	/// <summary>
 	/// </summary>
-	virtual int get_item_info(ItemInfo* info) = 0;
+	int blood_color{};
 
 	/// <summary>
 	/// </summary>
-	ItemInfo item_info{};
+	int blood_decals{};
 
 	/// <summary>
 	/// </summary>
-	[[nodiscard]] PlayerItemBase* player_item_base() const
-	{
-		return reinterpret_cast<PlayerItemBase*>(this->containing_entity);
-	}
+	int material{};
+
+	/// <summary>
+	/// </summary>
+	float life_time{};
 };

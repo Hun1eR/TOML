@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -175,7 +175,7 @@ struct TraceResult {
 	/// <summary>
 	/// <para>Final position.</para>
 	/// </summary>
-	Vector end_position;
+	Vector end_position{};
 
 	/// <summary>
 	/// <para>Distance from origin that the plane is positioned at.<br/>
@@ -186,7 +186,7 @@ struct TraceResult {
 	/// <summary>
 	/// <para>Surface normal at impact.</para>
 	/// </summary>
-	Vector plane_normal;
+	Vector plane_normal{};
 
 	/// <summary>
 	/// <para>Entity the surface is on.</para>
@@ -395,13 +395,13 @@ struct EngineFuncPointers {
 	/// <para>Performs a trace between a starting and ending position, using the given entity's min size and max size.</para>
 	/// </summary>
 	qboolean (*trace_monster_hull)(Edict* entity, const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, Edict* entity_to_ignore,
-		TraceResult* result){};
+	                               TraceResult* result){};
 
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position, using the specified hull.</para>
 	/// </summary>
 	void (*trace_hull)(const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, int hull_number, Edict* entity_to_ignore,
-		TraceResult* result){};
+	                   TraceResult* result){};
 
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position.<br/>
@@ -420,7 +420,7 @@ struct EngineFuncPointers {
 	/// <para>Not implemented. Triggers a sys error.</para>
 	/// </summary>
 	void (*trace_sphere)(const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, float radius, Edict* entity_to_ignore,
-		TraceResult* result){};
+	                     TraceResult* result){};
 
 	/// <summary>
 	/// <para>Get the aim vector for the given entity.<br/>
@@ -565,12 +565,12 @@ struct EngineFuncPointers {
 	/// <summary>
 	/// <para>Gets the string assigned to the index.</para>
 	/// </summary>
-	const char* (*sz_from_index)(Strind string){};
+	const char* (*sz_from_index)(unsigned int string){};
 
 	/// <summary>
 	/// <para>Allocates a string in the string pool.</para>
 	/// </summary>
-	Strind (*alloc_string)(const char* value){};
+	unsigned int (*alloc_string)(const char* value){};
 
 	/// <summary>
 	/// <para>Gets the <c>EntityVars</c> instance assigned to the given entity instance.</para>
@@ -756,7 +756,7 @@ struct EngineFuncPointers {
 	/// <para>Runs client movement for a fake client.</para>
 	/// </summary>
 	void (*run_player_move)(Edict* fake_client, const Vector& view_angles, float forward_move, float side_move,
-		float up_move, unsigned short buttons, byte impulse, byte msec){};
+	                        float up_move, unsigned short buttons, byte impulse, byte msec){};
 
 	/// <summary>
 	/// <para>Computes the total number of entities currently in existence.</para>
@@ -807,7 +807,7 @@ struct EngineFuncPointers {
 	/// <para>Builds a sound message to send to a client.</para>
 	/// </summary>
 	void (*build_sound_msg)(Edict* entity, int channel, const char* sample, float volume, float attenuation, int flags, int pitch,
-		MessageType msg_type, int msg_id, const Vector& origin, Edict* client){};
+	                        MessageType msg_type, int msg_id, const Vector& origin, Edict* client){};
 
 	/// <summary>
 	/// </summary>
@@ -850,7 +850,7 @@ struct EngineFuncPointers {
 	/// <summary>
 	/// </summary>
 	void (*playback_event)(int flags, const Edict* invoker, unsigned short event_index, float delay, Vector& origin, Vector& angles,
-		float f_param1, float f_param2, int i_param1, int i_param2, qboolean b_param1, qboolean b_param2){};
+	                       float f_param1, float f_param2, int i_param1, int i_param2, qboolean b_param1, qboolean b_param2){};
 
 	/// <summary>
 	/// <para>Sets the fat potentially visible set buffer to contain data based on the given origin.</para>
@@ -881,7 +881,7 @@ struct EngineFuncPointers {
 	/// <para>Adds a delta encoder.</para>
 	/// </summary>
 	void (*delta_add_encoder)(const char* name,
-		void (*conditional_encode)(struct delta* fields, const unsigned char* from, const unsigned char* to)){};
+	                          void (*conditional_encode)(struct delta* fields, const unsigned char* from, const unsigned char* to)){};
 
 	/// <summary>
 	/// </summary>
@@ -1237,7 +1237,7 @@ struct DllFuncPointers {
 	/// <para>Called by the engine to create a baseline for the given entity.</para>
 	/// </summary>
 	void (*create_baseline)(qboolean client, int entity_index, EntityState* baseline, Edict* entity, int player_model_index, Vector player_min_size,
-		Vector player_max_size){};
+	                        Vector player_max_size){};
 
 	/// <summary>
 	/// <para>Called by the engine to allow the server to register delta encoders.</para>
@@ -1319,3 +1319,35 @@ struct DllNewFuncPointers {
 	/// </summary>
 	void (*cvar_value2)(const Edict* client, int request_id, const char* cvar_name, const char* value){};
 };
+
+#ifdef CSSDK_STANDALONE
+/// <summary>
+/// <para>Dummy (just for compile without dependencies).</para>
+/// </summary>
+inline EngineFuncPointers g_engine_funcs{};
+
+/// <summary>
+/// <para>Dummy (just for compile without dependencies).</para>
+/// </summary>
+inline DllFuncPointers* g_dll_funcs{};
+
+/// <summary>
+/// <para>Dummy (just for compile without dependencies).</para>
+/// </summary>
+inline DllNewFuncPointers* g_dll_new_funcs{};
+#else
+/// <summary>
+/// <para>Must be provided by user of this code (usually in Metamod SDK).</para>
+/// </summary>
+extern EngineFuncPointers g_engine_funcs;
+
+/// <summary>
+/// <para>Must be provided by user of this code (usually in Metamod SDK).</para>
+/// </summary>
+extern DllFuncPointers* g_dll_funcs;
+
+/// <summary>
+/// <para>Must be provided by user of this code (usually in Metamod SDK).</para>
+/// </summary>
+extern DllNewFuncPointers* g_dll_new_funcs;
+#endif

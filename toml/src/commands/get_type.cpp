@@ -36,17 +36,17 @@ cell GetTypeCommand::execute()
 	const auto& value = find_value_(holder);
 
 	switch (value.type()) {
-	case toml::value_t::table: return cell(TomlType::Table);
-	case toml::value_t::array: return cell(TomlType::Array);
-	case toml::value_t::string: return cell(TomlType::String);
-	case toml::value_t::integer: return cell(TomlType::Integer);
-	case toml::value_t::boolean: return cell(TomlType::Boolean);
-	case toml::value_t::floating: return cell(TomlType::Floating);
-	case toml::value_t::local_date: return cell(TomlType::LocalDate);
-	case toml::value_t::local_time: return cell(TomlType::LocalTime);
-	case toml::value_t::local_datetime: return cell(TomlType::LocalDateTime);
-	case toml::value_t::offset_datetime: return cell(TomlType::OffsetDateTime);
-	default: return cell(TomlType::Empty);
+	case toml::value_t::table: return static_cast<cell>(TomlType::Table);
+	case toml::value_t::array: return static_cast<cell>(TomlType::Array);
+	case toml::value_t::string: return static_cast<cell>(TomlType::String);
+	case toml::value_t::integer: return static_cast<cell>(TomlType::Integer);
+	case toml::value_t::boolean: return static_cast<cell>(TomlType::Boolean);
+	case toml::value_t::floating: return static_cast<cell>(TomlType::Floating);
+	case toml::value_t::local_date: return static_cast<cell>(TomlType::LocalDate);
+	case toml::value_t::local_time: return static_cast<cell>(TomlType::LocalTime);
+	case toml::value_t::local_datetime: return static_cast<cell>(TomlType::LocalDateTime);
+	case toml::value_t::offset_datetime: return static_cast<cell>(TomlType::OffsetDateTime);
+	default: return static_cast<cell>(TomlType::Empty);
 	}
 }
 
@@ -60,7 +60,7 @@ cell AMX_NATIVE_CALL toml_get_type(Amx* amx, cell* params)
 	auto* const key = AmxxApi::get_amx_string(amx, params[Key]);
 	GetTypeCommand command(handle, key);
 
-	return execute(command, amx, cell(TomlType::Empty), params[ThrowError], __func__);
+	return execute(command, amx, static_cast<cell>(TomlType::Empty), params[ThrowError], __func__);
 }
 
 /// <summary>
@@ -73,5 +73,5 @@ cell AMX_NATIVE_CALL toml_array_get_type(Amx* amx, cell* params)
 	const auto index = params[Index];
 	GetTypeCommand command(handle, index);
 
-	return execute(command, amx, cell(TomlType::Empty), params[ThrowError], __func__);
+	return execute(command, amx, static_cast<cell>(TomlType::Empty), params[ThrowError], __func__);
 }

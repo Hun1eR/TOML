@@ -16,10 +16,11 @@ namespace amx
 	static char* init(const cell* const address, const ucell max_length)
 	{
 		auto* const string = new char[max_length + 1];
-		ucell i;
+		ucell i = 0;
 
-		for (i = 0; i < max_length && address[i]; ++i)
+		for (; i < max_length && address[i]; ++i) {
 			string[i] = static_cast<char>(address[i]);
+		}
 
 		string[i] = '\0';
 
@@ -30,28 +31,35 @@ namespace amx
 	/// </summary>
 	static int check_valid_char(const char* c) // Stolen from AMXX Mod X
 	{
-		int count;
-		int byte_count;
+		auto count = 1;
+		auto byte_count = 0;
 
-		for (count = 1; (*c & 0xC0) == 0x80; count++)
+		for (; (*c & 0xC0) == 0x80; count++) {
 			c--;
+		}
 
 		switch (*c & 0xF0) {
 		case 0xC0:
 		case 0xD0:
 			byte_count = 2;
 			break;
+
 		case 0xE0:
 			byte_count = 3;
 			break;
+
 		case 0xF0:
 			byte_count = 4;
 			break;
-		default: byte_count = 1;
+
+		default:
+			byte_count = 1;
+			break;
 		}
 
-		if (byte_count != count)
+		if (byte_count != count) {
 			return count;
+		}
 
 		return 0;
 	}
@@ -92,8 +100,8 @@ namespace amx
 	}
 
 #ifdef __INTEL_COMPILER
-	#pragma warning(push)
-	#pragma warning(disable: 2017)
+#pragma warning(push)
+#pragma warning(disable: 2017)
 #endif
 
 	/// <summary>
@@ -104,7 +112,7 @@ namespace amx
 	}
 
 #ifdef __INTEL_COMPILER
-	#pragma warning(pop)
+#pragma warning(pop)
 #endif
 
 	/// <summary>
@@ -171,7 +179,7 @@ namespace amx
 			}
 
 			i -= check_valid_char(&c_str_[i - 1]);
-			address_[i] = c_str_[i] = '\0';
+			address_[i] = c_str_[i] = '\0'; // NOLINT(bugprone-signed-char-misuse)
 		}
 
 		return *this;

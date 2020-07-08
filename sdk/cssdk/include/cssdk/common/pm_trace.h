@@ -19,7 +19,7 @@
 struct PmPlane {
 	/// <summary>
 	/// </summary>
-	Vector normal;
+	Vector normal{};
 
 	/// <summary>
 	/// </summary>
@@ -58,12 +58,12 @@ struct PmTrace {
 	/// <summary>
 	/// <para>Final position.</para>
 	/// </summary>
-	Vector end_pos;
+	Vector end_pos{};
 
 	/// <summary>
 	/// <para>Surface normal at impact.</para>
 	/// </summary>
-	PmPlane plane;
+	PmPlane plane{};
 
 	/// <summary>
 	/// <para>Entity at impact.</para>
@@ -73,7 +73,7 @@ struct PmTrace {
 	/// <summary>
 	/// <para>Change in player's velocity caused by impact.</para>
 	/// </summary>
-	Vector delta_velocity;
+	Vector delta_velocity{};
 
 	/// <summary>
 	/// <para>Hit specific body part.</para>

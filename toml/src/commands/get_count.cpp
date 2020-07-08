@@ -19,7 +19,7 @@ cell GetCountCommand::execute()
 	auto* const holder = Storage::get(handle_);
 	const auto& array = holder->toml()->as_array();
 
-	return cell(array.size());
+	return static_cast<cell>(array.size());
 }
 
 /// <summary>

@@ -198,77 +198,77 @@ public:
 	/// <summary>
 	/// <para>What the monster is doing (animation).</para>
 	/// </summary>
-	Activity cur_activity;
+	Activity cur_activity{};
 
 	/// <summary>
 	/// <para>Monster should switch to this activity.</para>
 	/// </summary>
-	Activity ideal_activity;
+	Activity ideal_activity{};
 
 	/// <summary>
 	/// <para>The last body region that took damage.</para>
 	/// </summary>
-	HitBoxGroup last_hit_group;
+	HitBoxGroup last_hit_group{};
 
 	/// <summary>
 	/// <para>What types of damage has monster (player) taken.</para>
 	/// </summary>
-	int damage_type;
+	int damage_type{};
 
 	/// <summary>
 	/// </summary>
-	byte time_based_damage[static_cast<int>(TimeBasedDamage::End)];
+	byte time_based_damage[static_cast<int>(TimeBasedDamage::End)]{};
 
 	/// <summary>
 	/// <para>Monster's current state.</para>
 	/// </summary>
-	MonsterState monster_state;
+	MonsterState monster_state{};
 
 	/// <summary>
 	/// <para>Monster should change to this state.</para>
 	/// </summary>
-	MonsterState ideal_monster_state;
+	MonsterState ideal_monster_state{};
 
 	/// <summary>
 	/// </summary>
-	int conditions;
+	int conditions{};
 
 	/// <summary>
 	/// </summary>
-	int memory;
+	int memory{};
 
 	/// <summary>
 	/// <para>Cannot attack again until this time.</para>
 	/// </summary>
-	float next_attack;
+	float next_attack{};
 
 	/// <summary>
 	/// <para>The entity that the monster is fighting.</para>
 	/// </summary>
-	EntityHandle<> enemy;
+	EntityHandle<> enemy{};
 
 	/// <summary>
 	/// <para>The entity that the monster is trying to reach.</para>
 	/// </summary>
-	EntityHandle<> target_ent;
+	EntityHandle<> target_ent{};
 
 	/// <summary>
 	/// <para>Width of monster's field of view (dot product).</para>
 	/// </summary>
-	float field_of_view;
+	float field_of_view{};
 
 	/// <summary>
 	/// <para>Color of blood particles.</para>
 	/// </summary>
-	int blood_color;
+	int blood_color{};
 
 	/// <summary>
 	/// <para>HACK until we can query end of gun.</para>
 	/// </summary>
-	Vector hacked_gun_pos;
+	Vector hacked_gun_pos{};
 
 	/// <summary>
 	/// <para>Last known position of enemy (enemy's origin).</para>
 	/// </summary>
-	Vector enemy_last_known_position;
+	Vector enemy_last_known_position{};
 };

@@ -32,7 +32,7 @@ InitIntegerCommand::InitIntegerCommand(const cell handle, const cell value) : ha
 		array.emplace_back(toml::integer{value});
 		holder->clear();
 
-		return cell(array.size() - 1);
+		return static_cast<cell>(array.size() - 1);
 	};
 }
 
@@ -60,7 +60,7 @@ cell AMX_NATIVE_CALL toml_init_int(Amx* amx, cell* params)
 
 /// <summary>
 /// </summary>
-cell AMX_NATIVE_CALL toml_array_init_int(Amx* amx, cell* params)
+cell AMX_NATIVE_CALL toml_array_init_int(Amx* amx, cell* params)  // NOLINT(readability-non-const-parameter)
 {
 	enum Args { Count, Handle, Value };
 

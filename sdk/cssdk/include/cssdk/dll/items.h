@@ -242,7 +242,7 @@ public:
 
 	/// <summary>
 	/// </summary>
-	int type;
+	int type{};
 };
 
 /// <summary>

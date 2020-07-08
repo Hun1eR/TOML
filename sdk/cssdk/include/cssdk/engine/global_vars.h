@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 05-25-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -62,15 +62,15 @@ struct GlobalVars {
 
 	/// <summary>
 	/// </summary>
-	Vector vec_forward;
+	Vector vec_forward{};
 
 	/// <summary>
 	/// </summary>
-	Vector vec_up;
+	Vector vec_up{};
 
 	/// <summary>
 	/// </summary>
-	Vector vec_right;
+	Vector vec_right{};
 
 	/// <summary>
 	/// </summary>
@@ -86,11 +86,11 @@ struct GlobalVars {
 
 	/// <summary>
 	/// </summary>
-	Vector trace_end_pos;
+	Vector trace_end_pos{};
 
 	/// <summary>
 	/// </summary>
-	Vector trace_plane_normal;
+	Vector trace_plane_normal{};
 
 	/// <summary>
 	/// </summary>
@@ -142,5 +142,17 @@ struct GlobalVars {
 
 	/// <summary>
 	/// </summary>
-	Vector landmark_offset;
+	Vector landmark_offset{};
 };
+
+#ifdef CSSDK_STANDALONE
+/// <summary>
+/// <para>Dummy (just for compile without dependencies).</para>
+/// </summary>
+inline GlobalVars* g_global_vars = new GlobalVars{};
+#else
+/// <summary>
+/// <para>Must be provided by user of this code (usually in Metamod SDK).</para>
+/// </summary>
+extern GlobalVars* g_global_vars;
+#endif

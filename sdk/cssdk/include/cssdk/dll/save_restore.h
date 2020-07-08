@@ -192,7 +192,7 @@ struct LevelList {
 	/// <summary>
 	/// <para>Landmark origin in this map.</para>
 	/// </summary>
-	Vector landmark_origin;
+	Vector landmark_origin{};
 };
 
 /// <summary>
@@ -227,7 +227,7 @@ struct EntityTable {
 	/// <summary>
 	/// <para>Entity class name.</para>
 	/// </summary>
-	Strind class_name;
+	Strind class_name{};
 };
 
 /// <summary>
@@ -292,7 +292,7 @@ struct SaveRestoreData {
 	/// <summary>
 	/// <para>List of connections from this level.</para>
 	/// </summary>
-	LevelList lvl_list[MAX_LEVEL_CONNECTIONS];
+	LevelList lvl_list[MAX_LEVEL_CONNECTIONS]{};
 
 	/// <summary>
 	/// <para>Smooth transition.</para>
@@ -307,7 +307,7 @@ struct SaveRestoreData {
 	/// <summary>
 	/// <para>For landmark transitions.</para>
 	/// </summary>
-	Vector landmark_offset;
+	Vector landmark_offset{};
 
 	/// <summary>
 	/// <para>Game time when the save game was written.</para>

@@ -12,14 +12,16 @@
 /// </summary>
 TomlHolder* TomlHolder::find(const cell handle)
 {
-	if (handle_ == handle)
+	if (handle_ == handle) {
 		return this;
+	}
 
 	for (auto& child : children_) {
 		auto* const holder = child.find(handle);
 
-		if (holder)
+		if (holder) {
 			return holder;
+		}
 	}
 
 	return nullptr;
@@ -29,14 +31,16 @@ TomlHolder* TomlHolder::find(const cell handle)
 /// </summary>
 TomlHolder* TomlHolder::add(toml_t& toml)
 {
-	if (std::addressof(toml) == toml_)
+	if (std::addressof(toml) == toml_) {
 		return this;
+	}
 
 	TomlHolder holder(toml);
 	const auto& it = std::find(children_.begin(), children_.end(), holder.handle_);
 
-	if (it != children_.end())
+	if (it != children_.end()) {
 		return std::addressof(*it);
+	}
 
 	children_.push_back(std::move(holder));
 	return std::addressof(children_.back());
@@ -54,8 +58,9 @@ bool TomlHolder::remove(const cell handle)
 	}
 
 	for (auto& child : children_) {
-		if (child.remove(handle))
+		if (child.remove(handle)) {
 			return true;
+		}
 	}
 
 	return false;
@@ -73,8 +78,9 @@ bool TomlHolder::remove(const toml_t& toml)
 	}
 
 	for (auto& child : children_) {
-		if (child.remove(toml))
+		if (child.remove(toml)) {
 			return true;
+		}
 	}
 
 	return false;

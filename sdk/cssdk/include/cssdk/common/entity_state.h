@@ -52,11 +52,11 @@ struct EntityState {
 
 	/// <summary>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector angles;
+	Vector angles{};
 
 	/// <summary>
 	/// </summary>
@@ -104,7 +104,7 @@ struct EntityState {
 
 	/// <summary>
 	/// </summary>
-	Color24 render_color;
+	Color24 render_color{};
 
 	/// <summary>
 	/// </summary>
@@ -136,15 +136,15 @@ struct EntityState {
 
 	/// <summary>
 	/// </summary>
-	Vector velocity;
+	Vector velocity{};
 
 	/// <summary>
 	/// </summary>
-	Vector min_size;
+	Vector min_size{};
 
 	/// <summary>
 	/// </summary>
-	Vector max_size;
+	Vector max_size{};
 
 	/// <summary>
 	/// </summary>
@@ -192,7 +192,7 @@ struct EntityState {
 	/// <summary>
 	/// <para>If standing on conveyor, e.g.</para>
 	/// </summary>
-	Vector base_velocity;
+	Vector base_velocity{};
 
 	/// <summary>
 	/// <para>Use the crouched hull, or the regular player hull.</para>
@@ -228,11 +228,11 @@ struct EntityState {
 
 	/// <summary>
 	/// </summary>
-	Vector start_pos;
+	Vector start_pos{};
 
 	/// <summary>
 	/// </summary>
-	Vector end_pos;
+	Vector end_pos{};
 
 	/// <summary>
 	/// </summary>
@@ -276,19 +276,19 @@ struct EntityState {
 
 	/// <summary>
 	/// </summary>
-	Vector v_user1;
+	Vector v_user1{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user2;
+	Vector v_user2{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user3;
+	Vector v_user3{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user4;
+	Vector v_user4{};
 };
 
 /// <summary>
@@ -297,11 +297,11 @@ struct EntityState {
 struct ClientData {
 	/// <summary>
 	/// </summary>
-	Vector origin;
+	Vector origin{};
 
 	/// <summary>
 	/// </summary>
-	Vector velocity;
+	Vector velocity{};
 
 	/// <summary>
 	/// </summary>
@@ -309,7 +309,7 @@ struct ClientData {
 
 	/// <summary>
 	/// </summary>
-	Vector punch_angle;
+	Vector punch_angle{};
 
 	/// <summary>
 	/// </summary>
@@ -325,7 +325,7 @@ struct ClientData {
 
 	/// <summary>
 	/// </summary>
-	Vector view_ofs;
+	Vector view_ofs{};
 
 	/// <summary>
 	/// </summary>
@@ -441,17 +441,17 @@ struct ClientData {
 
 	/// <summary>
 	/// </summary>
-	Vector v_user1;
+	Vector v_user1{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user2;
+	Vector v_user2{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user3;
+	Vector v_user3{};
 
 	/// <summary>
 	/// </summary>
-	Vector v_user4;
+	Vector v_user4{};
 };

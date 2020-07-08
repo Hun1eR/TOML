@@ -2,7 +2,7 @@
 // Created          : 04-01-2020
 //
 // Last Modified By : the_hunter
-// Last Modified On : 04-01-2020
+// Last Modified On : 06-02-2020
 // ***********************************************************************
 //     Copyright (c) 1996-2002, Valve LLC. All rights reserved.
 // ***********************************************************************
@@ -1195,12 +1195,43 @@ enum class SvcMessage : int {
 
 	/// <summary>
 	/// </summary>
-	StartOfUserMessages = SendCvarValue2,
+	Exec,
+
+	/// <summary>
+	/// </summary>
+	Reserve60,
+
+	/// <summary>
+	/// </summary>
+	Reserve61,
+
+	/// <summary>
+	/// </summary>
+	Reserve62,
+
+	/// <summary>
+	/// </summary>
+	Reserve63,
+
+#ifdef REHLDS_FIXES
+	/// <summary>
+	/// </summary>
+	StartOfUserMessages,
+#else
+	/// <summary>
+	/// </summary>
+	StartOfUserMessages = Exec,
+#endif
 
 	/// <summary>
 	/// </summary>
 	EndOfList = 255
 };
+
+#ifdef REHLDS_FIXES
+static_assert(static_cast<int>(SvcMessage::StartOfUserMessages) == 64,
+	"SvcMessage::StartOfUserMessages should be equal to 64 for backward and forward compatibility.");
+#endif
 
 /// <summary>
 /// Enum FixAngleMode
@@ -1419,4 +1450,37 @@ enum class DeathState {
 	/// <para>Not used in the SDK, used by TFC for spies feigning death.</para>
 	/// </summary>
 	DiscardBody
+};
+
+/// <summary>
+/// Enum ObserverMode
+/// </summary>
+enum class ObserverMode {
+	/// <summary>
+	/// </summary>
+	None = 0,
+
+	/// <summary>
+	/// </summary>
+	ChaseLocked,
+
+	/// <summary>
+	/// </summary>
+	ChaseFree,
+
+	/// <summary>
+	/// </summary>
+	Roaming,
+
+	/// <summary>
+	/// </summary>
+	InEye,
+
+	/// <summary>
+	/// </summary>
+	MapFree,
+
+	/// <summary>
+	/// </summary>
+	MapChase
 };

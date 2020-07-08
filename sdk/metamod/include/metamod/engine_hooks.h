@@ -51,11 +51,13 @@ public:
 	/// </summary>
 	static void clear_all_hooks()
 	{
-		if (engine_hooks_ != nullptr)
+		if (engine_hooks_ != nullptr) {
 			std::memset(static_cast<void*>(engine_hooks_), 0, sizeof(EngineFuncPointers));
+		}
 
-		if (engine_post_hooks_ != nullptr)
+		if (engine_post_hooks_ != nullptr) {
 			std::memset(static_cast<void*>(engine_post_hooks_), 0, sizeof(EngineFuncPointers));
+		}
 	}
 
 	/// <summary>
@@ -150,7 +152,7 @@ public:
 	/// <para>Moves the given entity to the given destination.</para>
 	/// </summary>
 	static void move_to_origin(const std::add_pointer_t<void(Edict* entity, const Vector& goal, float distance, MoveTypeNpc move_type)> callback,
-		const bool post = false)
+	                           const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::move_to_origin, callback, post);
 	}
@@ -192,7 +194,7 @@ public:
 	/// <para>Finds an entity in a sphere.</para>
 	/// </summary>
 	static void find_entity_in_sphere(const std::add_pointer_t<Edict*(Edict* edict_start_search_after, const Vector& origin, float radius)> callback,
-		const bool post = false)
+	                                  const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::find_entity_in_sphere, callback, post);
 	}
@@ -225,7 +227,7 @@ public:
 	/// <para>Make direction vectors from angles.</para>
 	/// </summary>
 	static void angle_vectors(const std::add_pointer_t<void(const Vector& angles, Vector& forward, Vector& right, Vector& up)> callback,
-		const bool post = false)
+	                          const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::angle_vectors, callback, post);
 	}
@@ -281,7 +283,7 @@ public:
 	/// <para>Makes the entity walk.</para>
 	/// </summary>
 	static void walk_move(const std::add_pointer_t<qboolean(Edict* entity, float yaw, float dist, WalkMoveMode mode)> callback,
-		const bool post = false)
+	                      const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::walk_move, callback, post);
 	}
@@ -328,7 +330,7 @@ public:
 	/// <para>Traces a toss.</para>
 	/// </summary>
 	static void trace_toss(const std::add_pointer_t<void(Edict* entity, Edict* entity_to_ignore, TraceResult* result)> callback,
-		const bool post = false)
+	                       const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::trace_toss, callback, post);
 	}
@@ -336,8 +338,9 @@ public:
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position, using the given entity's min size and max size.</para>
 	/// </summary>
-	static void trace_monster_hull(const std::add_pointer_t<qboolean(Edict* entity, const Vector& start_pos, const Vector& end_pos,
-		int trace_ignore_flags, Edict* entity_to_ignore, TraceResult* result)> callback, const bool post = false)
+	static void trace_monster_hull(
+		const std::add_pointer_t<qboolean(Edict* entity, const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, Edict* entity_to_ignore, TraceResult* result)> callback,
+		const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::trace_monster_hull, callback, post);
 	}
@@ -345,8 +348,9 @@ public:
 	/// <summary>
 	/// <para>Performs a trace between a starting and ending position, using the specified hull.</para>
 	/// </summary>
-	static void trace_hull(const std::add_pointer_t<void(const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, int hull_number,
-		Edict* entity_to_ignore, TraceResult* result)> callback, const bool post = false)
+	static void trace_hull(
+		const std::add_pointer_t<void(const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, int hull_number, Edict* entity_to_ignore, TraceResult* result)> callback,
+		const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::trace_hull, callback, post);
 	}
@@ -368,7 +372,7 @@ public:
 	/// <para>Used to get texture info.</para>
 	/// </summary>
 	static void trace_texture(const std::add_pointer_t<const char*(Edict* texture_entity, const Vector& start_pos, const Vector& end_pos)> callback,
-		const bool post = false)
+	                          const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::trace_texture, callback, post);
 	}
@@ -377,7 +381,7 @@ public:
 	/// <para>Not implemented. Triggers a sys error.</para>
 	/// </summary>
 	static void trace_sphere(const std::add_pointer_t<void(const Vector& start_pos, const Vector& end_pos, int trace_ignore_flags, float radius,
-		Edict* entity_to_ignore, TraceResult* result)> callback, const bool post = false)
+	                                                       Edict* entity_to_ignore, TraceResult* result)> callback, const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::trace_sphere, callback, post);
 	}
@@ -420,7 +424,7 @@ public:
 	/// <para>Creates a particle effect.</para>
 	/// </summary>
 	static void particle_effect(const std::add_pointer_t<void(const Vector& origin, const Vector& direction, float color, float count)> callback,
-		const bool post = false)
+	                            const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::particle_effect, callback, post);
 	}
@@ -453,7 +457,7 @@ public:
 	/// <para>Begins a new network message.</para>
 	/// </summary>
 	static void message_begin(const std::add_pointer_t<void(MessageType msg_type, int msg_id, const vec_t* origin, Edict* client)> callback,
-		const bool post = false)
+	                          const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::message_begin, callback, post);
 	}
@@ -614,7 +618,7 @@ public:
 	/// <summary>
 	/// <para>Gets the string assigned to the index.</para>
 	/// </summary>
-	static void sz_from_index(const std::add_pointer_t<const char*(Strind string)> callback, const bool post = false)
+	static void sz_from_index(const std::add_pointer_t<const char*(unsigned int string)> callback, const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::sz_from_index, callback, post);
 	}
@@ -622,7 +626,7 @@ public:
 	/// <summary>
 	/// <para>Allocates a string in the string pool.</para>
 	/// </summary>
-	static void alloc_string(const std::add_pointer_t<Strind(const char* value)> callback, const bool post = false)
+	static void alloc_string(const std::add_pointer_t<unsigned int(const char* value)> callback, const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::alloc_string, callback, post);
 	}
@@ -705,7 +709,7 @@ public:
 	/// <para>Gets the bone position and angles for the given entity and bone.</para>
 	/// </summary>
 	static void get_bone_position(const std::add_pointer_t<void(const Edict* entity, int bone, Vector& origin, Vector& angles)> callback,
-		const bool post = false)
+	                              const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::get_bone_position, callback, post);
 	}
@@ -769,7 +773,7 @@ public:
 	/// <para>Gets the attachment origin and angles.</para>
 	/// </summary>
 	static void get_attachment(const std::add_pointer_t<void(const Edict* entity, int attachment, Vector& origin, Vector& angles)> callback,
-		const bool post = false)
+	                           const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::get_attachment, callback, post);
 	}
@@ -873,7 +877,7 @@ public:
 	/// <para>Compares file times.</para>
 	/// </summary>
 	static void compare_file_time(const std::add_pointer_t<qboolean(char* file_name1, char* file_name2, int* compare)> callback,
-		const bool post = false)
+	                              const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::compare_file_time, callback, post);
 	}
@@ -924,8 +928,8 @@ public:
 	/// <para>Runs client movement for a fake client.</para>
 	/// </summary>
 	static void run_player_move(const std::add_pointer_t<void(Edict* fake_client, const Vector& view_angles, float forward_move, float side_move,
-		float up_move,
-		unsigned short buttons, byte impulse, byte msec)> callback, const bool post = false)
+	                                                          float up_move,
+	                                                          unsigned short buttons, byte impulse, byte msec)> callback, const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::run_player_move, callback, post);
 	}
@@ -966,7 +970,7 @@ public:
 	/// <para>Sets the value of the given key in the given buffer.</para>
 	/// </summary>
 	static void set_client_key_value(const std::add_pointer_t<void(int client_index, char* info_buffer, const char* key, const char* value)> callback,
-		const bool post = false)
+	                                 const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::set_client_key_value, callback, post);
 	}
@@ -983,7 +987,7 @@ public:
 	/// <para>Projects a static decal in the world.</para>
 	/// </summary>
 	static void static_decal(const std::add_pointer_t<void(const Vector& origin, int decal_index, int entity_index, int model_index)> callback,
-		const bool post = false)
+	                         const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::static_decal, callback, post);
 	}
@@ -1008,8 +1012,8 @@ public:
 	/// <para>Builds a sound message to send to a client.</para>
 	/// </summary>
 	static void build_sound_msg(const std::add_pointer_t<void(Edict* entity, int channel, const char* sample, float volume, float attenuation,
-		int flags, int pitch, MessageType msg_type, int msg_id,
-		const Vector& origin, Edict* client)> callback, const bool post = false)
+	                                                          int flags, int pitch, MessageType msg_type, int msg_id,
+	                                                          const Vector& origin, Edict* client)> callback, const bool post = false)
 
 	{
 		set_hook(&EngineFuncPointers::build_sound_msg, callback, post);
@@ -1057,7 +1061,7 @@ public:
 	/// <para>Sets the given physics key-value in the given client's buffer.</para>
 	/// </summary>
 	static void set_physics_key_value(const std::add_pointer_t<void(const Edict* client, const char* key, const char* value)> callback,
-		const bool post = false)
+	                                  const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::set_physics_key_value, callback, post);
 	}
@@ -1080,10 +1084,9 @@ public:
 
 	/// <summary>
 	/// </summary>
-	static void playback_event(const std::add_pointer_t<void(int flags, const Edict* invoker, unsigned short event_index, float delay,
-		Vector& origin, Vector& angles, float f_param1, float f_param2, int i_param1, int i_param2,
-		qboolean b_param1, qboolean b_param2)> callback, const bool post = false)
-
+	static void playback_event(
+		const std::add_pointer_t<void(int flags, const Edict* invoker, unsigned short event_index, float delay, Vector& origin, Vector& angles, float f_param1, float f_param2, int i_param1, int i_param2, qboolean b_param1, qboolean b_param2)> callback,
+		const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::playback_event, callback, post);
 	}
@@ -1204,7 +1207,7 @@ public:
 	/// <para>Forces the client and server to be running with the same version of the specified file (e.g., a client model).</para>
 	/// </summary>
 	static void force_unmodified(const std::add_pointer_t<void(ForceType type, Vector& min_size, Vector& max_size, const char* file_name)> callback,
-		const bool post = false)
+	                             const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::force_unmodified, callback, post);
 	}
@@ -1237,7 +1240,7 @@ public:
 	/// <para>Sets whether the given receiver can hear the given sender.</para>
 	/// </summary>
 	static void voice_set_client_listening(const std::add_pointer_t<qboolean(int receiver, int sender, qboolean listen)> callback,
-		const bool post = false)
+	                                       const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::voice_set_client_listening, callback, post);
 	}
@@ -1254,7 +1257,7 @@ public:
 	/// <para>Gets the sequence that has the given entry name.</para>
 	/// </summary>
 	static void sequence_get(const std::add_pointer_t<SequenceEntry *(const char* file_name, const char* entry_name)> callback,
-		const bool post = false)
+	                         const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::sequence_get, callback, post);
 	}
@@ -1263,7 +1266,7 @@ public:
 	/// <para>Picks a sentence from the given group.</para>
 	/// </summary>
 	static void sequence_pick_sentence(const std::add_pointer_t<SentenceEntry *(const char* group_name, int pick_method, int* picked)> callback,
-		const bool post = false)
+	                                   const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::sequence_pick_sentence, callback, post);
 	}
@@ -1350,7 +1353,7 @@ public:
 	/// <para>Queries the given client for a cvar value.</para>
 	/// </summary>
 	static void query_client_cvar_value2(const std::add_pointer_t<void(const Edict* client, const char* cvar_name, int request_id)> callback,
-		const bool post = false)
+	                                     const bool post = false)
 	{
 		set_hook(&EngineFuncPointers::query_client_cvar_value2, callback, post);
 	}

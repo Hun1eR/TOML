@@ -71,7 +71,7 @@ private:
 
 	/// <summary>
 	/// </summary>
-	static const char* get_plugin_name(Amx* amx)
+	static const char* get_plugin_name(const Amx* amx)
 	{
 		static const auto* empty = "";
 		const auto plugin_id = AmxxApi::find_amx_script_by_amx(amx);
