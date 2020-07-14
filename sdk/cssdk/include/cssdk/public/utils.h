@@ -39,9 +39,9 @@ FORCEINLINE bool cssdk_is_valid_entity(const Edict* const entity)
 /// <summary>
 /// </summary>
 template <typename T>
-FORCEINLINE T cssdk_entity_private_data(const Edict* const entity)
+FORCEINLINE T* cssdk_entity_private_data(const Edict* const entity)
 {
-	return entity == nullptr ? T() : static_cast<T>(entity->private_data);
+	return static_cast<T*>(entity->private_data);
 }
 
 /// <summary>

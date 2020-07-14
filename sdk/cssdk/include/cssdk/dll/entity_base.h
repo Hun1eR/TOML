@@ -703,7 +703,7 @@ public:
 	T* operator->()
 	{
 		const auto* edict = get();
-		return cssdk_entity_private_data<T*>(edict);
+		return cssdk_entity_private_data<T>(edict);
 	}
 
 private:

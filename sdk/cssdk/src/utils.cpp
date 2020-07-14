@@ -152,7 +152,7 @@ void cssdk_hud_message(EntityBase* const entity, const HudTextParams& hud_params
 void cssdk_hud_message(Edict* const client, const HudTextParams& hud_params, const char* message)
 {
 	if (client) {
-		auto* entity = cssdk_entity_private_data<EntityBase*>(client);
+		auto* entity = cssdk_entity_private_data<EntityBase>(client);
 		cssdk_hud_message(entity, hud_params, message, client);
 	}
 	else {

@@ -11,6 +11,11 @@
 
 #include <cssdk/dll/player.h>
 
+#ifdef __INTEL_COMPILER
+#pragma warning(push)
+#pragma warning(disable: 2021)
+#endif
+
 /// <summary>
 /// Class IVoiceGameMgrHelper.
 /// </summary>
@@ -50,25 +55,29 @@ public:
 	/// </summary>
 	virtual ~VoiceGameMgr() = default;
 
-//private:
+	//private:
 	/// <summary>
 	/// </summary>
-	int msg_player_voice_mask_{};  // NOLINT(clang-diagnostic-unused-private-field)
+	int msg_player_voice_mask_{}; // NOLINT(clang-diagnostic-unused-private-field)
 
 	/// <summary>
 	/// </summary>
-	int msg_request_state_{};  // NOLINT(clang-diagnostic-unused-private-field)
+	int msg_request_state_{}; // NOLINT(clang-diagnostic-unused-private-field)
 
 	/// <summary>
 	/// </summary>
-	IVoiceGameMgrHelper* helper_{};  // NOLINT(clang-diagnostic-unused-private-field)
+	IVoiceGameMgrHelper* helper_{}; // NOLINT(clang-diagnostic-unused-private-field)
 
 	/// <summary>
 	/// </summary>
-	int max_players_{};  // NOLINT(clang-diagnostic-unused-private-field)
+	int max_players_{}; // NOLINT(clang-diagnostic-unused-private-field)
 
 	/// <summary>
 	/// <para>How long since the last update.</para>
 	/// </summary>
-	double update_interval_{};  // NOLINT(clang-diagnostic-unused-private-field)
+	double update_interval_{}; // NOLINT(clang-diagnostic-unused-private-field)
 };
+
+#ifdef __INTEL_COMPILER
+#pragma warning(pop)
+#endif

@@ -1231,7 +1231,7 @@ struct DllFuncPointers {
 	/// <summary>
 	/// <para>Called by the engine to determine whether the given entity should be added to the given client's list of visible entities.</para>
 	/// </summary>
-	int (*add_to_full_pack)(EntityState* state, int entity_index, Edict* entity, Edict* host, int host_flags, qboolean player, unsigned char* set){};
+	qboolean (*add_to_full_pack)(EntityState* state, int entity_index, Edict* entity, Edict* host, int host_flags, qboolean player, unsigned char* set){};
 
 	/// <summary>
 	/// <para>Called by the engine to create a baseline for the given entity.</para>

@@ -1207,6 +1207,11 @@ public:
 	qboolean allow_monsters() override = 0;
 };
 
+#ifdef __INTEL_COMPILER
+#pragma warning(push)
+#pragma warning(disable: 2021)
+#endif
+
 /// <summary>
 /// Class HalfLifeMultiplay.
 /// </summary>
@@ -1866,7 +1871,7 @@ public:
 	/// </summary>
 	PlayerBase* vip_queue[MAX_VIP_QUEUES];
 
-//protected:
+	//protected:
 	/// <summary>
 	/// </summary>
 	float intermission_end_time_;
@@ -1941,3 +1946,7 @@ public:
 	/// </summary>
 	bool team_balanced_;
 };
+
+#ifdef __INTEL_COMPILER
+#pragma warning(pop)
+#endif
