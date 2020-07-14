@@ -404,7 +404,7 @@ public:
 	/// <para>Called by the engine to determine whether the given entity should be added to the given client's list of visible entities.</para>
 	/// </summary>
 	static void add_to_full_pack(
-		const std::add_pointer_t<int(EntityState* state, int entity_index, Edict* entity, Edict* host, int host_flags, qboolean player, unsigned char* set)> callback,
+		const std::add_pointer_t<qboolean(EntityState* state, int entity_index, Edict* entity, Edict* host, int host_flags, qboolean player, unsigned char* set)> callback,
 		const bool post = false)
 	{
 		set_hook(&DllFuncPointers::add_to_full_pack, callback, post);

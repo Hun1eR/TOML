@@ -9,6 +9,7 @@
 #pragma once
 
 #include <metamod/metamod_config.h>
+#include <metamod/os_dep.h>
 
 /// <summary>
 /// <para>Metamod interface version.</para>
@@ -98,7 +99,7 @@ extern MetaGlobals* g_meta_globals;
 /// <summary>
 /// <para>Sets the meta result (plugin's return flag).</para>
 /// </summary>
-inline void set_meta_result(const MetaResult result)
+FORCEINLINE void set_meta_result(const MetaResult result)
 {
 	if (g_meta_globals->result < result) {
 		g_meta_globals->result = result;
@@ -108,7 +109,7 @@ inline void set_meta_result(const MetaResult result)
 /// <summary>
 /// <para>Gets the meta result status ("highest" return flag so far).</para>
 /// </summary>
-inline MetaResult meta_result_status()
+FORCEINLINE MetaResult meta_result_status()
 {
 	return g_meta_globals->status;
 }
@@ -116,7 +117,7 @@ inline MetaResult meta_result_status()
 /// <summary>
 /// <para>Gets the previous meta result (return flag of the previous plugin called).</para>
 /// </summary>
-inline MetaResult meta_result_previous()
+FORCEINLINE MetaResult meta_result_previous()
 {
 	return g_meta_globals->prev_result;
 }
@@ -125,7 +126,7 @@ inline MetaResult meta_result_previous()
 /// <para>Returns value from "real" function.</para>
 /// </summary>
 template <typename T>
-T meta_result_orig_ret()
+FORCEINLINE T meta_result_orig_ret()
 {
 	return *static_cast<T*>(g_meta_globals->orig_ret);
 }
@@ -134,7 +135,7 @@ T meta_result_orig_ret()
 /// <para>Return value from overriding/superceding plugin.</para>
 /// </summary>
 template <typename T>
-T meta_result_override_ret()
+FORCEINLINE T meta_result_override_ret()
 {
 	return *static_cast<T*>(g_meta_globals->override_ret);
 }

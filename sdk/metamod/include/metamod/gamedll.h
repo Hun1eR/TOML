@@ -525,7 +525,7 @@ public:
 	/// <param name="set">
 	///		The PVS provided by <c>setup_visibility</c>
 	/// </param>
-	static int add_to_full_pack(EntityState* state, const int entity_index, Edict* entity, Edict* host, const int host_flags, const qboolean player,
+	static qboolean add_to_full_pack(EntityState* state, const int entity_index, Edict* entity, Edict* host, const int host_flags, const qboolean player,
 	                            unsigned char* set)
 	{
 		return g_dll_funcs->add_to_full_pack(state, entity_index, entity, host, host_flags, player, set);
