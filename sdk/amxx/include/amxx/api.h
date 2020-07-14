@@ -10,7 +10,6 @@
 
 #include <amxx/amx.h>
 #include <amxx/amxx_config.h>
-#include <cstddef>
 #include <type_traits>
 #include <utility>
 
@@ -420,7 +419,7 @@ struct AmxxApiFuncPointers {
 	void (*register_function)(void* pfn, const char* desc){};
 	int (*amx_push)(Amx* amx, cell value){};
 	int (*set_player_team_info)(int player, int team_id, const char* name){};
-	void (*reg_auth_func)(std::add_pointer_t<void(int player, const char* auth_string)> authorize_func){};
+	void (*register_auth_func)(std::add_pointer_t<void(int player, const char* auth_string)> authorize_func){};
 	void (*unregister_auth_func)(std::add_pointer_t<void(int player, const char* auth_string)> authorize_func){};
 	int (*find_library)(const char* name, LibType type){};
 	std::size_t (*add_libraries)(const char* name, LibType type, void* parent){};
@@ -947,9 +946,9 @@ public:
 
 	/// <summary>
 	/// </summary>
-	static void reg_auth_func(const std::add_pointer_t<void(int player, const char* auth_string)> authorize_func)
+	static void register_auth_func(const std::add_pointer_t<void(int player, const char* auth_string)> authorize_func)
 	{
-		amxx_api_funcs_.reg_auth_func(authorize_func);
+		amxx_api_funcs_.register_auth_func(authorize_func);
 	}
 
 	/// <summary>

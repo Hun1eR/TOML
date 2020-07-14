@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
 
 #if !defined AMX_NATIVE_CALL
@@ -74,7 +75,11 @@ constexpr auto MIN_FILE_VERSION = 6;
 constexpr auto MIN_AMX_VERSION = 8;
 
 /// <summary>
-/// <para>This is always the same for us.</para>
+/// <para>
+/// 0xF1E0 for a 32-bit cell;<br/>
+/// 0xF1E1 for a 64-bit cell;<br/>
+/// 0xF1E2 for a 16-bit cell.<br/>
+/// </para>
 /// </summary>
 constexpr auto AMX_MAGIC = 0xF1E0;
 
@@ -359,89 +364,89 @@ struct AmxFuncStubNt {
 /// </summary>
 struct AmxHeader {
 	/// <summary>
-	/// <para>Size of the "file".</para>
+	/// <para>Size of the memory image, excluding the stack and heap.</para>
 	/// </summary>
-	int32_t size PACKED;
+	std::int32_t size PACKED;
 
 	/// <summary>
-	/// <para>Signature.</para>
+	/// <para>Indicates the format and cell size.</para>
 	/// </summary>
-	uint16_t magic PACKED;
+	std::uint16_t magic PACKED;
 
 	/// <summary>
     /// <para>File format version.</para>
     /// </summary>
-	char file_version;
+	std::byte file_version;
 
 	/// <summary>
-    /// <para>Required version of the AMX.</para>
+    /// <para>Required minimal version of the abstract machine.</para>
     /// </summary>
-	char amx_version;
+	std::byte amx_version;
 
 	/// <summary>
-    /// <para>.</para>
+    /// <para>Flags.</para>
     /// </summary>
-	int16_t flags PACKED;
+	std::int16_t flags PACKED;
 
 	/// <summary>
-    /// <para>Size of a definition record.</para>
+    /// <para>Size of a structure in the "native functions" and the "public functions" tables.</para>
     /// </summary>
-	int16_t definition_size PACKED;
+	std::int16_t definition_size PACKED;
 
 	/// <summary>
-    /// <para>Initial value of COD - code block.</para>
+    /// <para>Offset to the start of the code section.</para>
     /// </summary>
-	int32_t cod PACKED;
+	std::int32_t cod PACKED;
 
 	/// <summary>
-    /// <para>Initial value of DAT - data block.</para>
+    /// <para>Offset to the start of the data section.</para>
     /// </summary>
-	int32_t dat PACKED;
+	std::int32_t dat PACKED;
 
 	/// <summary>
-    /// <para>Initial value of HEA - start of the heap.</para>
+    /// <para>Initial value of the heap, end of the data section.</para>
     /// </summary>
-	int32_t hea PACKED;
+	std::int32_t hea PACKED;
 
 	/// <summary>
-    /// <para>Initial value of STP - stack top.</para>
+    /// <para>Stack top value (the total memory requirements).</para>
     /// </summary>
-	int32_t stp PACKED;
+	std::int32_t stp PACKED;
 
 	/// <summary>
-    /// <para>Initial value of CIP - the instruction pointer.</para>
+    /// <para>Starting address (main() function), -1 if none.</para>
     /// </summary>
-	int32_t cip PACKED;
+	std::int32_t cip PACKED;
 
 	/// <summary>
     /// <para>Offset to the "public functions" table.</para>
     /// </summary>
-	int32_t publics PACKED;
+	std::int32_t publics PACKED;
 
 	/// <summary>
     /// <para>Offset to the "native functions" table.</para>
     /// </summary>
-	int32_t natives PACKED;
+	std::int32_t natives PACKED;
 
 	/// <summary>
     /// <para>Offset to the table of libraries.</para>
     /// </summary>
-	int32_t libraries PACKED;
+	std::int32_t libraries PACKED;
 
 	/// <summary>
-    /// <para>The "public variables" table.</para>
+    /// <para>Offset to the "public variables" table.</para>
     /// </summary>
-	int32_t public_vars PACKED;
+	std::int32_t public_vars PACKED;
 
 	/// <summary>
-    /// <para>The "public tagnames" table.</para>
+    /// <para>Offset to the "public tags" table.</para>
     /// </summary>
-	int32_t tags PACKED;
+	std::int32_t tags PACKED;
 
 	/// <summary>
-    /// <para>Name table.</para>
+    /// <para>Offset to the symbol name table.</para>
     /// </summary>
-	int32_t name_table PACKED;
+	std::int32_t name_table PACKED;
 } PACKED;
 
 /// <summary>
@@ -590,7 +595,7 @@ struct Amx {
 /// </summary>
 inline cell amx_ftoc(const real& value)
 {
-	return *reinterpret_cast<const cell*>(&value);
+	return *reinterpret_cast<const cell*>(&value); // cppcheck-suppress invalidPointerCast
 }
 
 /// <summary>
@@ -598,12 +603,12 @@ inline cell amx_ftoc(const real& value)
 /// </summary>
 inline real amx_ctof(const cell& value)
 {
-	return *reinterpret_cast<const real*>(&value);
+	return *reinterpret_cast<const real*>(&value); // cppcheck-suppress invalidPointerCast
 }
 
 /// <summary>
 /// </summary>
 inline cell* amx_address(const Amx* amx, const ucell address)
 {
-	return reinterpret_cast<cell*>(amx->base + reinterpret_cast<const AmxHeader*>(amx->base)->dat + address);
+	return reinterpret_cast<cell*>(amx->base + reinterpret_cast<const AmxHeader*>(amx->base)->dat + address); // cppcheck-suppress invalidPointerCast
 }
