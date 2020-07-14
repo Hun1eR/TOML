@@ -37,22 +37,22 @@ cell GetStringCommand::execute()
 
 	switch (value.type()) {
 	case toml::value_t::integer:
-		string_ = std::to_string(value.as_integer()).c_str();
+		string_ = std::to_string(value.as_integer()).c_str(); // cppcheck-suppress danglingTemporaryLifetime
 		break;
 
 	case toml::value_t::boolean:
-		string_ = std::to_string(value.as_boolean()).c_str();
+		string_ = std::to_string(value.as_boolean()).c_str(); // cppcheck-suppress danglingTemporaryLifetime
 		break;
 
 	case toml::value_t::floating:
-		string_ = std::to_string(value.as_floating()).c_str();
+		string_ = std::to_string(value.as_floating()).c_str(); // cppcheck-suppress danglingTemporaryLifetime
 		break;
 
 	default:
-		string_ = value.as_string().str.c_str();
+		string_ = value.as_string().str.c_str(); // cppcheck-suppress danglingTemporaryLifetime
 	}
 
-	return string_.length();
+	return string_.length(); // cppcheck-suppress danglingTemporaryLifetime
 }
 
 /// <summary>

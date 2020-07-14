@@ -1,12 +1,12 @@
 #-------------------------------------------------------------------------------------------
 # Compile with GCC:
-#   rm -rf build && CC=gcc CXX=g++ cmake -B build && cmake --build build
+#   rm -rf build && CC=gcc CXX=g++ cmake -B build && cmake --build build --parallel $(nproc)
 #
 # Compile with Intel C++ Compiler:
-#   rm -rf build && CC=icc CXX=icpc cmake -B build && cmake --build build
+#   rm -rf build && CC=icc CXX=icpc cmake -B build && cmake --build build --parallel $(nproc)
 #
 # Compile with Clang:
-#   rm -rf build && CC=clang CXX=clang++ cmake -B build && cmake --build build
+#   rm -rf build && CC=clang CXX=clang++ cmake -B build && cmake --build build --parallel $(nproc)
 #-------------------------------------------------------------------------------------------
 
 
@@ -24,6 +24,7 @@ project("toml")
 option(OPT_DEBUG "Build with debugging information and runtime checks." OFF)
 option(OPT_NO_RTTI "Disable RTTI support." OFF)
 option(OPT_NO_EXCEPTIONS "Disable exception handling table generation." OFF)
+option(OPT_RUN_CPPCHECK "Run Cppcheck (static code analysis tool)." OFF)
 option(OPT_RUN_CLANG_TIDY "Run clang-tidy checks." OFF)
 
 # Linking options
@@ -37,6 +38,7 @@ option(OPT_LINK_LIBSTDC "Static linking with libstdc++ library." ON)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include(Tools)
+include(Cppcheck)
 include(ClangTidy)
 
 # Add a library target to be built from the source files.
